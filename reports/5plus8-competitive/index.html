@@ -1,0 +1,777 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>5+8 Houston Competitive Landscape</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23000'/%3E%3Cpath d='M10 46h44v8H10zM10 10h14v28H10zM30 10h24v8H30zM30 24h24v8H30z' fill='%23E10600'/%3E%3C/svg%3E">
+  <style>
+    :root {
+      --red: #e10600;
+      --black: #000;
+      --dark: #191919;
+      --mid: #666;
+      --light: #f4f4f4;
+      --line: #ddd;
+      --white: #fff;
+      --font: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: var(--font);
+      background: var(--white);
+      color: var(--dark);
+      line-height: 1.45;
+    }
+
+    a { color: inherit; }
+
+    .page {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .hero {
+      min-height: 74vh;
+      display: grid;
+      align-items: end;
+      padding: 72px 0 44px;
+      background:
+        linear-gradient(90deg, rgba(0,0,0,0.97), rgba(0,0,0,0.88)),
+        url("assets/sites/5plus8-site.png") center top / cover no-repeat;
+      color: var(--white);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 22px;
+      color: rgba(255,255,255,0.74);
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 34px;
+      height: 3px;
+      background: var(--red);
+    }
+
+    h1 {
+      max-width: 980px;
+      margin: 0;
+      font-size: clamp(3rem, 6.3vw, 6.2rem);
+      line-height: 0.88;
+      letter-spacing: -0.05em;
+      text-transform: uppercase;
+    }
+
+    .hero p {
+      max-width: 760px;
+      margin: 28px 0 0;
+      color: rgba(255,255,255,0.82);
+      font-size: clamp(1.05rem, 2vw, 1.28rem);
+      font-weight: 500;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255,255,255,0.94);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav .page {
+      display: flex;
+      gap: 18px;
+      overflow-x: auto;
+      padding: 14px 0;
+    }
+
+    .nav a {
+      white-space: nowrap;
+      text-decoration: none;
+      color: var(--mid);
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .nav a:hover,
+    .nav a:focus-visible {
+      color: var(--red);
+    }
+
+    section {
+      padding: 54px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    section.alt {
+      background: var(--light);
+    }
+
+    h2 {
+      margin: 0 0 18px;
+      font-size: clamp(2rem, 3vw, 3.25rem);
+      line-height: 0.94;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+    }
+
+    .lede {
+      max-width: 860px;
+      margin: 0 0 26px;
+      color: var(--mid);
+      font-size: 1.04rem;
+    }
+
+    .summary-grid,
+    .pattern-grid,
+    .signal-grid,
+    .swot-grid,
+    .gallery,
+    .source-grid,
+    .option-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .summary-grid,
+    .pattern-grid,
+    .signal-grid,
+    .swot-grid,
+    .option-grid {
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    }
+
+    .gallery {
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+
+    .source-grid {
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+
+    .card,
+    .source-card {
+      padding: 20px;
+      border: 1px solid var(--line);
+      background: var(--white);
+    }
+
+    .card h3,
+    .source-card h3 {
+      margin: 0 0 10px;
+      font-size: 1rem;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    .card p,
+    .source-card p,
+    .source-card li {
+      margin: 0;
+      color: var(--mid);
+      font-size: 0.95rem;
+    }
+
+    .source-card ul {
+      margin: 0;
+      padding-left: 18px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .matrix {
+      display: grid;
+      gap: 14px;
+    }
+
+    .matrix-row {
+      display: grid;
+      grid-template-columns: minmax(180px, 1.1fr) minmax(260px, 1.5fr) minmax(180px, 1fr) minmax(180px, 1fr);
+      gap: 18px;
+      padding: 18px 0;
+      border-top: 1px solid var(--line);
+      align-items: start;
+    }
+
+    .matrix-row.header {
+      padding-top: 0;
+      border-top: 0;
+      color: var(--mid);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .matrix-row h3 {
+      margin: 0 0 8px;
+      font-size: 1.6rem;
+      line-height: 0.94;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+    }
+
+    .matrix-row p,
+    .matrix-row li {
+      margin: 0;
+      color: var(--mid);
+      font-size: 0.95rem;
+    }
+
+    .matrix-row ul {
+      margin: 0;
+      padding-left: 18px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .badge {
+      display: inline-flex;
+      width: fit-content;
+      margin-bottom: 10px;
+      padding: 6px 8px;
+      border: 1px solid var(--line);
+      color: var(--red);
+      font-size: 0.7rem;
+      font-weight: 900;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .gallery figure {
+      margin: 0;
+      border: 1px solid var(--line);
+      background: var(--white);
+    }
+
+    .gallery img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      object-position: top center;
+      background: #efefef;
+    }
+
+    .gallery figcaption {
+      padding: 12px 14px 15px;
+      border-top: 1px solid var(--line);
+      color: var(--mid);
+      font-size: 0.88rem;
+    }
+
+    .note {
+      margin-top: 16px;
+      color: var(--mid);
+      font-size: 0.9rem;
+    }
+
+    .quote {
+      max-width: 900px;
+      margin: 0;
+      padding-left: 18px;
+      border-left: 4px solid var(--red);
+      font-size: 1.15rem;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    @media (max-width: 940px) {
+      .matrix-row {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .matrix-row.header {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="page">
+      <div class="eyebrow">5+8 / Houston competitive landscape</div>
+      <h1>How 5+8 fits in the Houston agency market</h1>
+      <p>This review maps 5+8 against Houston branding and advertising agencies that a client could realistically compare against in a pitch, referral, or shortlist. The point is not just who exists. The point is how they frame themselves, where they look strongest, and what lane still feels ownable.</p>
+    </div>
+  </header>
+
+  <nav class="nav">
+    <div class="page">
+      <a href="#summary">Summary</a>
+      <a href="#frame">Market Frame</a>
+      <a href="#matrix">Competitors</a>
+      <a href="#channels">Channels</a>
+      <a href="#whitespace">White Space</a>
+      <a href="#swot">SWOT</a>
+      <a href="#options">Story Options</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#sources">Sources</a>
+    </div>
+  </nav>
+
+  <section id="summary">
+    <div class="page">
+      <h2>Executive Summary</h2>
+      <p class="lede">Houston does not have one agency market. It has at least four overlapping ones: large integrated firms built for stakeholder confidence, strategy-heavy brand consultancies, boutique creative shops with stronger taste signals, and outsourced growth partners built around execution and retention. 5+8 sits closest to the boutique creative end, but it can win upstream when the client wants strategic thinking without the corporate drag.</p>
+      <div class="summary-grid">
+        <article class="card">
+          <h3>Biggest Pattern</h3>
+          <p>Most agencies sound more polished than personal. The market is full of "full-service," "results-driven," and "award-winning" language. That creates room for a voice that feels sharper, more human, and less committee-written.</p>
+        </article>
+        <article class="card">
+          <h3>Closest Pressure</h3>
+          <p>BrandExtract, Ell Creative, Design At Work, Love Advertising, and Black Sheep sit closest to 5+8 by feel, buyer overlap, or agency size logic. Adcetera, Versa, and Lopez Negrete apply pressure from larger or more specialized positions.</p>
+        </article>
+        <article class="card">
+          <h3>Channel Reality</h3>
+          <p>LinkedIn is the cleanest public battleground for agency self-promotion in Houston. Websites do the heavy lifting on positioning. Instagram and TikTok show up more often with boutique and culture-driven shops. Public proof of self-promotional PPC was limited in this pass.</p>
+        </article>
+        <article class="card">
+          <h3>Main Opportunity</h3>
+          <p>5+8 can own the lane of senior-level strategy with actual taste and personality. That is different from enterprise-safe, purpose-only, or performance-only positioning.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="frame" class="alt">
+    <div class="page">
+      <h2>Market Frame</h2>
+      <p class="lede">Clients do not buy Houston agencies by category alone. They buy based on the kind of reassurance they need. The same company might shortlist a different set of agencies depending on whether the problem feels like brand, growth, culture, or politics.</p>
+      <div class="pattern-grid">
+        <article class="card">
+          <span class="badge">Enterprise integrated</span>
+          <h3>Stakeholder comfort</h3>
+          <p>Adcetera, Lopez Negrete, and other larger firms sell breadth, process, channel sophistication, and the confidence that they can survive procurement, legal, and cross-functional review.</p>
+        </article>
+        <article class="card">
+          <span class="badge">Brand strategy</span>
+          <h3>Executive clarity</h3>
+          <p>BrandExtract plays here. The pitch is not just creative quality. It is organizational alignment, B2B brand architecture, internal adoption, and measurable business lift.</p>
+        </article>
+        <article class="card">
+          <span class="badge">Creative boutique</span>
+          <h3>Taste and chemistry</h3>
+          <p>5+8, Ell Creative, Love Advertising, and Black Sheep benefit when the client wants an agency that feels real, interesting, and close to the work.</p>
+        </article>
+        <article class="card">
+          <span class="badge">Execution partner</span>
+          <h3>Ongoing output</h3>
+          <p>Design At Work and Versa lean into sustained support, channel execution, and retained partnership. Buyers here want fewer fires, more consistency, and easier day-to-day management.</p>
+        </article>
+      </div>
+      <p class="quote">The most useful way to read this market is not "Who is another branding agency?" It is "What kind of comfort is this buyer trying to purchase?"</p>
+    </div>
+  </section>
+
+  <section id="matrix">
+    <div class="page">
+      <h2>Competitor Matrix</h2>
+      <p class="lede">This is a location-based and category-fit read of Houston agencies that could overlap with 5+8 in referral sets, shortlist conversations, or broader market perception.</p>
+      <div class="matrix">
+        <div class="matrix-row header">
+          <div>Agency</div>
+          <div>Market Position</div>
+          <div>Public Channel Signals</div>
+          <div>What It Means For 5+8</div>
+        </div>
+
+        <div class="matrix-row">
+          <div>
+            <span class="badge">Primary brand</span>
+            <h3>5+8</h3>
+          </div>
+          <div>
+            <p>A small Houston agency with a distinct voice, strong taste signals, and a more personal way of talking about strategy, design, and client work. The site reads warmer and more alive than the category average.</p>
+          </div>
+          <div>
+            <ul>
+              <li>Website voice is a differentiator, not just a brochure.</li>
+              <li>LinkedIn exists and can work as a credibility layer.</li>
+              <li>Social footprint reads more boutique and personality-forward than corporate.</li>
+            </ul>
+          </div>
+          <div>
+            <p>5+8 already feels different. The main job is making that difference look intentional and scalable, not accidental or small.</p>
+          </div>
+        </div>
+
+        <div class="matrix-row">
+          <div>
+            <span class="badge">Closest strategic pressure</span>
+            <h3>BrandExtract</h3>
+          </div>
+          <div>
+            <p>BrandExtract sells B2B brand strategy, internal alignment, brand architecture, and business impact. The language is more executive and operational than emotional.</p>
+          </div>
+          <div>
+            <ul>
+              <li>Strong site and thought leadership footprint.</li>
+              <li>LinkedIn presence reinforces enterprise credibility.</li>
+              <li>Podcast, insights, and newsletter signals a mature content engine.</li>
+            </ul>
+          </div>
+          <div>
+            <p>This is the sharpest challenge when the buyer wants strategy depth and leadership-room confidence. 5+8 should not try to out-corporate them. It should sound sharper, clearer, and more alive.</p>
+          </div>
+        </div>
+
+        <div class="matrix-row">
+          <div>
+            <span class="badge">Boutique overlap</span>
+            <h3>Ell Creative</h3>
+          </div>
+          <div>
+            <p>Ell Creative reads as a smaller creative shop with a more polished lifestyle and brand-forward feel. It signals creative range and human connection more than enterprise process language.</p>
+          </div>
+          <div>
+            <ul>
+              <li>Website presence feels polished, boutique, and intentionally curated.</li>
+              <li>Public story leans toward connection, creative work, and visual confidence.</li>
+              <li>Signal feels contemporary and design-led rather than corporate.</li>
+            </ul>
+          </div>
+          <div>
+            <p>Overlap here is chemistry, visual confidence, and boutique appeal. 5+8 can differentiate with stronger strategic clarity and a more explicit business case.</p>
+          </div>
+        </div>
+
+        <div class="matrix-row">
+          <div>
+            <span class="badge">Retainer competitor</span>
+            <h3>Design At Work</h3>
+          </div>
+          <div>
+            <p>Design At Work positions itself as an outsourced marketing department and growth partner. The tone is practical, retained, and relationship-oriented.</p>
+          </div>
+          <div>
+            <ul>
+              <li>Website frames long-term partnership clearly.</li>
+              <li>LinkedIn and social support the steady-partner image.</li>
+              <li>Messaging is less edgy, more dependable.</li>
+            </ul>
+          </div>
+          <div>
+            <p>This is pressure on accounts that want a partner to stay embedded. 5+8 should decide whether it wants to compete for that retained-operator lane or stay more selective and high-touch.</p>
+          </div>
+        </div>
+
+        <div class="matrix-row">
+          <div>
+            <span class="badge">Scale competitor</span>
+            <h3>Adcetera</h3>
+          </div>
+          <div>
+            <p>Adcetera is a bigger integrated player with digital, media, sports, and emerging AI language woven into the story. It signals breadth and capability.</p>
+          </div>
+          <div>
+            <ul>
+              <li>Strong site polish and service breadth.</li>
+              <li>LinkedIn helps reinforce momentum and authority.</li>
+              <li>Google Premier Partner visibility suggests paid media maturity.</li>
+            </ul>
+          </div>
+          <div>
+            <p>5+8 should not chase them on scale. The smarter move is making small feel like senior, focused, and high-conviction.</p>
+          </div>
+        </div>
+
+        <div class="matrix-row">
+          <div>
+            <span class="badge">Local legacy pressure</span>
+            <h3>Love Advertising</h3>
+          </div>
+          <div>
+            <p>Love Advertising carries local reputation, longevity, awards, and full-service credibility. It feels established and familiar in the Houston market.</p>
+          </div>
+          <div>
+            <ul>
+              <li>Website and about page emphasize history and independence.</li>
+              <li>LinkedIn is a credibility checkpoint more than a personality engine.</li>
+              <li>Public image leans proven, trusted, and rooted.</li>
+            </ul>
+          </div>
+          <div>
+            <p>This is less about sounding newer and more about sounding sharper. 5+8 can win when the client wants conviction and freshness without sacrificing trust.</p>
+          </div>
+        </div>
+
+        <div class="matrix-row">
+          <div>
+            <span class="badge">Purpose-led niche</span>
+            <h3>Black Sheep</h3>
+          </div>
+          <div>
+            <p>The Black Sheep Agency leans hard into values, B Corp credibility, and mission-aligned work. It sells belief as much as capability.</p>
+          </div>
+          <div>
+            <ul>
+              <li>Site language is manifesto-forward.</li>
+              <li>Social and brand signal feel values-first.</li>
+              <li>Strong emotional distinction even without giant scale cues.</li>
+            </ul>
+          </div>
+          <div>
+            <p>This is a reminder that owning a point of view matters. 5+8 does not need to mimic the purpose lane, but it should be equally clear about what it believes and how it works.</p>
+          </div>
+        </div>
+
+        <div class="matrix-row">
+          <div>
+            <span class="badge">Performance pressure</span>
+            <h3>Versa Creative</h3>
+          </div>
+          <div>
+            <p>Versa leans more directly into digital marketing, lead generation, PPC, and measurable growth. The pitch is results-forward and channel-specific.</p>
+          </div>
+          <div>
+            <ul>
+              <li>Website is service and KPI heavy.</li>
+              <li>SEO and paid-media language are more explicit than most boutiques.</li>
+              <li>Good fit for buyers who want output tied to acquisition math.</li>
+            </ul>
+          </div>
+          <div>
+            <p>5+8 should not drift into generic growth-agency language. If performance matters, it needs to connect strategy and creative to commercial outcomes in its own voice.</p>
+          </div>
+        </div>
+
+        <div class="matrix-row">
+          <div>
+            <span class="badge">Multicultural scale</span>
+            <h3>Lopez Negrete</h3>
+          </div>
+          <div>
+            <p>Lopez Negrete occupies a larger multicultural lane with category authority, scale, and enterprise recognition. The story is less boutique and more specialized leadership.</p>
+          </div>
+          <div>
+            <ul>
+              <li>Website and LinkedIn reinforce expertise and category ownership.</li>
+              <li>Public signal is more institutional than intimate.</li>
+              <li>Strongest overlap is when cultural fluency becomes central to the brief.</li>
+            </ul>
+          </div>
+          <div>
+            <p>5+8 does not need to out-scale this lane. It can own a more nimble, more personal version of cultural intelligence when the client wants sharp thinking without a giant-machine feel.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="channels" class="alt">
+    <div class="page">
+      <h2>Channel Review</h2>
+      <p class="lede">The competitive story changes by channel. In Houston, the website is still the main positioning tool, LinkedIn is the strongest public credibility layer, and social tends to separate boutiques from more formal firms.</p>
+      <div class="signal-grid">
+        <article class="card">
+          <span class="badge">Websites</span>
+          <h3>Still the main battlefield</h3>
+          <p>The larger agencies read broader and safer. The stronger boutiques feel more opinionated. 5+8 performs well here because the site sounds like a person wrote it and not an internal committee.</p>
+        </article>
+        <article class="card">
+          <span class="badge">LinkedIn</span>
+          <h3>Authority layer</h3>
+          <p>BrandExtract, Adcetera, Lopez Negrete, and Love use LinkedIn in a way that reinforces confidence, hiring, thought leadership, and momentum. If 5+8 wants more enterprise consideration, LinkedIn matters more than most creative shops want to admit.</p>
+        </article>
+        <article class="card">
+          <span class="badge">Instagram and TikTok</span>
+          <h3>Personality channel</h3>
+          <p>Smaller agencies and more design-led shops signal more life through Instagram, TikTok, and adjacent social surfaces. Ell Creative fits here. This is where 5+8 can look more magnetic than the firms that only feel polished.</p>
+        </article>
+        <article class="card">
+          <span class="badge">PPC</span>
+          <h3>Limited public proof</h3>
+          <p>In this pass, direct public confirmation of self-promotional PPC was limited. Google live checks hit reCAPTCHA and Bing did not render reliable results in automation. The stronger visible pressure appears SEO-led and content-led, not obviously paid-self-promo-led. Adcetera and Versa clearly market paid search capabilities on-site, which signals capability, but not necessarily confirmed spend on their own agency acquisition.</p>
+        </article>
+      </div>
+      <p class="note">Inference note: the PPC read above is directional, not absolute. Public search checks were partially blocked, so this section should be treated as a market signal read rather than a perfect media audit.</p>
+    </div>
+  </section>
+
+  <section id="whitespace">
+    <div class="page">
+      <h2>White Space For 5+8</h2>
+      <p class="lede">The market has plenty of polished agencies. It has plenty of claims about results. What it does not have enough of is strategy and creative that feel unmistakably smart, current, and human at the same time.</p>
+      <div class="pattern-grid">
+        <article class="card">
+          <h3>Own the smart-human lane</h3>
+          <p>There is room for an agency that sounds strategic without sounding airless. 5+8 can make clients feel like they are getting senior thinking from people they actually want to be in a room with.</p>
+        </article>
+        <article class="card">
+          <h3>Make personality look disciplined</h3>
+          <p>The risk for a sharp boutique is reading small. The answer is not becoming blander. It is packaging voice, point of view, and case studies in a way that feels deliberate and repeatable.</p>
+        </article>
+        <article class="card">
+          <h3>Show the business brain</h3>
+          <p>Competitors like BrandExtract and Adcetera win because buyers can see the business logic from across the room. 5+8 should connect its creative strength to clearer strategic and commercial outcomes.</p>
+        </article>
+        <article class="card">
+          <h3>Use LinkedIn as proof, not personality</h3>
+          <p>The website can carry the voice. LinkedIn should carry the trust: smart case-study framing, client wins, points of view, and signs that the agency can hold its own with serious operators.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="swot" class="alt">
+    <div class="page">
+      <h2>SWOT</h2>
+      <div class="swot-grid">
+        <article class="card">
+          <span class="badge">Strengths</span>
+          <h3>Memorable voice</h3>
+          <p>5+8 does not sound generic. That matters. The work feels closer to people, culture, and taste than many Houston competitors.</p>
+        </article>
+        <article class="card">
+          <span class="badge">Weaknesses</span>
+          <h3>Scale perception</h3>
+          <p>The more human and personality-led the brand feels, the more important it becomes to show process, business fluency, and proof that the agency can handle bigger stakes.</p>
+        </article>
+        <article class="card">
+          <span class="badge">Opportunities</span>
+          <h3>Strategic boutique gap</h3>
+          <p>There is room between the enterprise-safe agencies and the purely vibe-driven boutiques. That middle lane is attractive if 5+8 claims it on purpose.</p>
+        </article>
+        <article class="card">
+          <span class="badge">Threats</span>
+          <h3>Bigger comfort brands</h3>
+          <p>BrandExtract, Adcetera, and long-established shops can make nervous buyers feel safer. 5+8 needs a public signal system strong enough to reduce that gap.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="options">
+    <div class="page">
+      <h2>Positioning Options</h2>
+      <p class="lede">Here are a few ways to articulate what 5+8 can own without collapsing into generic agency language.</p>
+      <div class="option-grid">
+        <article class="card">
+          <h3>The sharp boutique</h3>
+          <p>Big enough to think strategically. Small enough to stay close to the work. Better taste, fewer layers, no dead language.</p>
+        </article>
+        <article class="card">
+          <h3>Senior brains, real people</h3>
+          <p>The market has no shortage of polished agencies. What is rarer is an agency that feels smart, direct, and genuinely human.</p>
+        </article>
+        <article class="card">
+          <h3>Strategy that still has a pulse</h3>
+          <p>For brands that need serious thinking but do not want a brand deck that sounds like it was written by twelve stakeholders and a legal team.</p>
+        </article>
+        <article class="card">
+          <h3>Houston fluency without cliches</h3>
+          <p>Local enough to understand the market, sharp enough to avoid the stale ways Houston agencies often talk about themselves.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="gallery" class="alt">
+    <div class="page">
+      <h2>Reference Gallery</h2>
+      <p class="lede">A quick visual check of how these agencies show up across site and LinkedIn. This is useful for tone, polish, and public proof, not just for aesthetics.</p>
+      <div class="gallery">
+        <figure>
+          <img src="assets/sites/5plus8-site.png" alt="5+8 website">
+          <figcaption>5+8 site. Distinct voice and stronger personality than the category average.</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/sites/brandextract-site.png" alt="BrandExtract website">
+          <figcaption>BrandExtract site. Executive and business-forward positioning.</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/sites/ellcreative-site.png" alt="Ell Creative website">
+          <figcaption>Ell Creative site. Boutique polish with a more elevated, human-centered creative frame.</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/sites/designatwork-site.png" alt="Design At Work website">
+          <figcaption>Design At Work site. Retainer-partner framing shows clearly.</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/sites/adcetera-site.png" alt="Adcetera website">
+          <figcaption>Adcetera site. Scale, breadth, and capability are front and center.</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/sites/loveadv-site.png" alt="Love Advertising website">
+          <figcaption>Love Advertising site. Established local credibility and independence.</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/linkedin/5plus8-linkedin-correct.png" alt="5+8 LinkedIn">
+          <figcaption>5+8 LinkedIn. A solid public credibility layer with usable company context visible.</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/linkedin/brandextract-linkedin.png" alt="BrandExtract LinkedIn">
+          <figcaption>BrandExtract LinkedIn. Good example of enterprise-friendly public presence.</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/linkedin/adcetera-linkedin.png" alt="Adcetera LinkedIn">
+          <figcaption>Adcetera LinkedIn. Scale and ongoing momentum read clearly.</figcaption>
+        </figure>
+        <figure>
+          <img src="assets/linkedin/lopez-linkedin.png" alt="Lopez Negrete LinkedIn">
+          <figcaption>Lopez Negrete LinkedIn. Category authority and institutional strength.</figcaption>
+        </figure>
+      </div>
+      <p class="note">Blocked or low-signal captures were intentionally left out of this gallery. That includes Google reCAPTCHA pages and LinkedIn pages that did not surface a usable public view.</p>
+    </div>
+  </section>
+
+  <section id="sources">
+    <div class="page">
+      <h2>Sources</h2>
+      <div class="source-grid">
+        <article class="source-card">
+          <h3>Agency Sites</h3>
+          <ul>
+            <li><a href="https://www.5plus8.com/" target="_blank" rel="noreferrer">5+8</a></li>
+            <li><a href="https://www.brandextract.com/" target="_blank" rel="noreferrer">BrandExtract</a></li>
+            <li><a href="https://ellcreative.com/" target="_blank" rel="noreferrer">Ell Creative</a></li>
+            <li><a href="https://designatwork.com/" target="_blank" rel="noreferrer">Design At Work</a></li>
+            <li><a href="https://www.adcetera.com/" target="_blank" rel="noreferrer">Adcetera</a></li>
+            <li><a href="https://www.loveadv.com/about/" target="_blank" rel="noreferrer">Love Advertising</a></li>
+            <li><a href="https://www.theblacksheepagency.com/about-us" target="_blank" rel="noreferrer">The Black Sheep Agency</a></li>
+            <li><a href="https://versacreative.com/" target="_blank" rel="noreferrer">Versa Creative</a></li>
+            <li><a href="https://www.lopeznegrete.com/" target="_blank" rel="noreferrer">Lopez Negrete</a></li>
+          </ul>
+        </article>
+        <article class="source-card">
+          <h3>LinkedIn Checks</h3>
+          <ul>
+            <li><a href="https://www.linkedin.com/company/5-8/" target="_blank" rel="noreferrer">5+8 on LinkedIn</a></li>
+            <li><a href="https://www.linkedin.com/company/brandextract/" target="_blank" rel="noreferrer">BrandExtract on LinkedIn</a></li>
+            <li><a href="https://www.linkedin.com/company/adcetera/" target="_blank" rel="noreferrer">Adcetera on LinkedIn</a></li>
+            <li><a href="https://www.linkedin.com/company/lopez-negrete-communications/" target="_blank" rel="noreferrer">Lopez Negrete on LinkedIn</a></li>
+          </ul>
+        </article>
+        <article class="source-card">
+          <h3>Search And Social Checks</h3>
+          <ul>
+            <li><a href="https://www.bing.com/search?q=Houston+branding+agency" target="_blank" rel="noreferrer">Bing search: Houston branding agency</a></li>
+            <li><a href="https://www.bing.com/search?q=Houston+advertising+agency" target="_blank" rel="noreferrer">Bing search: Houston advertising agency</a></li>
+            <li><a href="https://www.google.com/search?q=houston+branding+agency" target="_blank" rel="noreferrer">Google search: Houston branding agency</a></li>
+            <li><a href="https://www.google.com/search?q=houston+advertising+agency" target="_blank" rel="noreferrer">Google search: Houston advertising agency</a></li>
+            <li><a href="https://ellcreative.com/" target="_blank" rel="noreferrer">Ell Creative site check</a></li>
+          </ul>
+        </article>
+      </div>
+    </div>
+  </section>
+</body>
+</html>
