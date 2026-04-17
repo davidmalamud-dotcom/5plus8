@@ -1,0 +1,763 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mustang Cat Competitive Landscape</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23000'/%3E%3Cpath d='M10 46h44v8H10zM10 10h14v28H10zM30 10h24v8H30zM30 24h24v8H30z' fill='%23E10600'/%3E%3C/svg%3E">
+  <style>
+    :root {
+      --red: #E10600;
+      --black: #000000;
+      --dark: #1A1A1A;
+      --mid: #666666;
+      --light: #F5F5F5;
+      --line: #DDDDDD;
+      --white: #FFFFFF;
+      --font: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: var(--font);
+      background: var(--white);
+      color: var(--dark);
+      line-height: 1.45;
+    }
+    a { color: inherit; }
+    .page {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+    .hero {
+      min-height: 72vh;
+      display: grid;
+      align-items: end;
+      padding: 72px 0 44px;
+      background:
+        linear-gradient(90deg, rgba(0,0,0,0.97), rgba(0,0,0,0.88)),
+        url("assets/sites/mustang-cat-home.png") center top / cover no-repeat;
+      color: var(--white);
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 22px;
+      color: rgba(255,255,255,0.74);
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before {
+      content: "";
+      width: 34px;
+      height: 3px;
+      background: var(--red);
+    }
+    h1 {
+      max-width: 980px;
+      margin: 0;
+      font-size: clamp(2.5rem, 5.2vw, 5.3rem);
+      line-height: 0.88;
+      letter-spacing: -0.05em;
+      text-transform: uppercase;
+    }
+    .hero p {
+      max-width: 760px;
+      margin: 28px 0 0;
+      color: rgba(255,255,255,0.82);
+      font-size: clamp(1.05rem, 2vw, 1.32rem);
+      font-weight: 500;
+    }
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255,255,255,0.94);
+      backdrop-filter: blur(12px);
+    }
+    .nav .page {
+      display: flex;
+      gap: 18px;
+      overflow-x: auto;
+      padding: 14px 0;
+    }
+    .nav a {
+      white-space: nowrap;
+      color: var(--mid);
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+    section {
+      padding: 76px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .section-title {
+      display: grid;
+      grid-template-columns: minmax(180px, 0.38fr) minmax(0, 1fr);
+      gap: 40px;
+      margin-bottom: 34px;
+      align-items: start;
+    }
+    .kicker {
+      color: var(--red);
+      font-size: 0.74rem;
+      font-weight: 900;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+    h2 {
+      margin: 0;
+      color: var(--black);
+      font-size: clamp(2.1rem, 4vw, 4.2rem);
+      line-height: 0.96;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+    }
+    h3 {
+      margin: 0 0 12px;
+      color: var(--black);
+      font-size: 1.16rem;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      overflow-wrap: anywhere;
+    }
+    p { margin: 0; }
+    .lead {
+      max-width: 860px;
+      color: var(--dark);
+      font-size: clamp(1.15rem, 2.2vw, 1.68rem);
+      line-height: 1.18;
+      letter-spacing: -0.025em;
+      font-weight: 700;
+    }
+    .muted { color: var(--mid); }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+    .stat {
+      min-height: 190px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      background: var(--light);
+    }
+    .stat strong {
+      display: block;
+      margin-bottom: 18px;
+      color: var(--red);
+      font-size: clamp(2.2rem, 5vw, 5rem);
+      line-height: 0.82;
+      letter-spacing: -0.06em;
+    }
+    .stat span {
+      display: block;
+      color: var(--black);
+      font-size: 0.9rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .matrix {
+      display: grid;
+      gap: 14px;
+    }
+    .competitor {
+      display: grid;
+      grid-template-columns: minmax(230px, 0.32fr) minmax(0, 1fr) minmax(230px, 0.34fr);
+      gap: 24px;
+      padding: 24px 0;
+      border-top: 1px solid var(--line);
+    }
+    .competitor:first-child { border-top: 0; }
+    .competitor > * { min-width: 0; }
+    .tag {
+      display: inline-flex;
+      width: fit-content;
+      margin-top: 8px;
+      padding: 6px 9px;
+      border: 1px solid var(--line);
+      color: var(--red);
+      font-size: 0.68rem;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .quote {
+      margin: 0 0 12px;
+      color: var(--black);
+      font-size: 1.02rem;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+    }
+    .note {
+      color: var(--mid);
+      font-size: 0.94rem;
+    }
+    .takeaway {
+      padding-left: 18px;
+      border-left: 4px solid var(--red);
+      color: var(--dark);
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+    .pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .pill {
+      padding: 7px 10px;
+      border: 1px solid var(--line);
+      background: var(--white);
+      color: var(--mid);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .pattern-grid,
+    .gallery,
+    .source-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+    .pattern {
+      min-height: 220px;
+      padding: 26px;
+      border: 1px solid var(--line);
+      background: var(--white);
+    }
+    .pattern .number {
+      display: block;
+      margin-bottom: 22px;
+      color: var(--red);
+      font-size: 0.72rem;
+      font-weight: 900;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+    .recommendations {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      gap: 28px;
+      align-items: stretch;
+    }
+    .red-panel {
+      padding: 34px;
+      background: var(--red);
+      color: var(--white);
+    }
+    .red-panel h2,
+    .red-panel h3 { color: var(--white); }
+    .red-panel p { color: rgba(255,255,255,0.82); }
+    .message-list {
+      display: grid;
+      gap: 14px;
+    }
+    .message {
+      padding: 22px;
+      border: 1px solid var(--line);
+      background: var(--light);
+    }
+    .message b {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--black);
+      font-size: 0.95rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    figure {
+      margin: 0;
+      border: 1px solid var(--line);
+      background: var(--light);
+    }
+    figure img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      object-position: top center;
+      border-bottom: 1px solid var(--line);
+    }
+    figcaption {
+      padding: 14px 16px 16px;
+      color: var(--mid);
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+    .source-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      gap: 10px 24px;
+    }
+    .source-list li {
+      color: var(--mid);
+      font-size: 0.9rem;
+    }
+    .source-list a {
+      color: var(--black);
+      font-weight: 800;
+      text-decoration-color: var(--red);
+      text-underline-offset: 3px;
+    }
+    .footer-note {
+      padding: 36px 0 60px;
+      color: var(--mid);
+      font-size: 0.82rem;
+    }
+    @media (max-width: 860px) {
+      .page { width: min(100% - 28px, 1180px); }
+      .hero { min-height: 64vh; padding: 54px 0 34px; }
+      .section-title,
+      .competitor,
+      .recommendations {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+      .grid-3,
+      .pattern-grid,
+      .gallery,
+      .source-list {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="page">
+      <div class="eyebrow">Competitive landscape / April 17, 2026</div>
+      <h1>Mustang Cat is competing on more than machines. It is competing on breadth, response, and who gets to own the customer relationship.</h1>
+      <p>In Southeast Texas, Mustang Cat sits at the intersection of construction equipment, rental, power systems, parts, service, and jobsite trust. The competitive pressure is coming from brands that either go narrower and deeper or go broader and louder.</p>
+    </div>
+  </header>
+
+  <nav class="nav" aria-label="Report navigation">
+    <div class="page">
+      <a href="#summary">Summary</a>
+      <a href="#lanes">Lanes</a>
+      <a href="#matrix">Competitors</a>
+      <a href="#channels">Channels</a>
+      <a href="#whitespace">White Space</a>
+      <a href="#creative">Creative Angles</a>
+      <a href="#screenshots">Screenshots</a>
+      <a href="#sources">Sources</a>
+    </div>
+  </nav>
+
+  <main>
+    <section id="summary">
+      <div class="page">
+        <div class="section-title">
+          <div class="kicker">Executive read</div>
+          <div>
+            <h2>The market splits into three real fights: dealer authority, rental convenience, and support-led credibility.</h2>
+          </div>
+        </div>
+
+        <p class="lead">Mustang Cat is strongest when buyers want one partner that can cover machine sales, short-term rental, parts and service, and power systems under one name. It gets more vulnerable when the decision narrows to a specific product family, a rental-only need, or a digital-first transaction where scale and speed become the story.</p>
+
+        <div class="grid-3" style="margin-top: 34px;">
+          <div class="stat">
+            <strong>70+</strong>
+            <span>Mustang leads with long tenure and local territory authority in Southeast Texas, which still matters in a trust-heavy category.</span>
+          </div>
+          <div class="stat">
+            <strong>3</strong>
+            <span>The key competitive lanes are dealer rivals, rental superstores, and power or engine specialists with deeper single-category stories.</span>
+          </div>
+          <div class="stat">
+            <strong>17</strong>
+            <span>Mustang's branch and rental footprint is part of the value proposition, not just an operations detail.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="lanes">
+      <div class="page">
+        <div class="section-title">
+          <div class="kicker">Competition lanes</div>
+          <div>
+            <h2>Who is actually pressuring Mustang and why</h2>
+          </div>
+        </div>
+
+        <div class="pattern-grid">
+          <div class="pattern">
+            <span class="number">Lane 01</span>
+            <h3>Dealer-to-dealer pressure</h3>
+            <p class="muted">WPI and ROMCO are the clearest direct threats in equipment and support messaging. They compete by pairing machine brands with service depth, financing, rental access, and local branch coverage.</p>
+          </div>
+          <div class="pattern">
+            <span class="number">Lane 02</span>
+            <h3>Rental-first pressure</h3>
+            <p class="muted">United Rentals, Sunbelt, and Herc come at the market from a different angle. They are not selling dealer territory. They are selling fleet scale, availability, speed, and digital convenience.</p>
+          </div>
+          <div class="pattern">
+            <span class="number">Lane 03</span>
+            <h3>Power and engine pressure</h3>
+            <p class="muted">Mustang's power systems story broadens the battlefield. WPI and HOLT both make it easier for customers to compare generator, engine, and industrial support capability, not just yellow iron.</p>
+          </div>
+          <div class="pattern">
+            <span class="number">Lane 04</span>
+            <h3>Brand benchmark pressure</h3>
+            <p class="muted">HOLT is not the closest geographic rival for Southeast Texas customers, but it is an important benchmark for how a Texas Cat dealer can package rental, support, and used equipment in paid and owned media.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="matrix">
+      <div class="page">
+        <div class="section-title">
+          <div class="kicker">Competitor matrix</div>
+          <div>
+            <h2>What the main players are saying</h2>
+          </div>
+        </div>
+
+        <div class="matrix">
+          <article class="competitor">
+            <div>
+              <h3>Mustang Cat</h3>
+              <span class="tag">Baseline</span>
+            </div>
+            <div>
+              <p class="quote">Quality. Protection. Trust. New and used machines, rentals, power systems, parts and service, and technology across Southeast Texas.</p>
+              <p class="note">Mustang's site pushes breadth hard. The business is framed as a full ecosystem, not only a Cat machine dealer. Rental, power systems, parts, service, and financial services all sit close to the front door.</p>
+              <div class="pills">
+                <span class="pill">Cat authority</span>
+                <span class="pill">Rental</span>
+                <span class="pill">Power systems</span>
+              </div>
+            </div>
+            <p class="takeaway">Mustang wins when the customer wants one accountable partner. The risk is that breadth can look generic if more specialized competitors tell a sharper story in a narrower lane.</p>
+          </article>
+
+          <article class="competitor">
+            <div>
+              <h3>WPI</h3>
+              <span class="tag">Cross-division rival</span>
+            </div>
+            <div>
+              <p class="quote">Construction and mining, engine division, field services, telematics, rentals, used equipment, and power generation under one brand.</p>
+              <p class="note">WPI is a serious pressure point because it mirrors Mustang's breadth in a different brand stack. The company speaks fluently to construction, engines, compression, prime power, and field support.</p>
+              <div class="pills">
+                <span class="pill">Komatsu side</span>
+                <span class="pill">Engine division</span>
+                <span class="pill">Field services</span>
+              </div>
+            </div>
+            <p class="takeaway">WPI's strongest move is making itself feel like a solutions platform, not a single-line dealer. That overlaps with Mustang's best territory.</p>
+          </article>
+
+          <article class="competitor">
+            <div>
+              <h3>ROMCO</h3>
+              <span class="tag">Focused equipment partner</span>
+            </div>
+            <div>
+              <p class="quote">Your full-service partner, serving Texas and New Mexico with premium products and exceptional customer support.</p>
+              <p class="note">ROMCO feels cleaner and more singular than Mustang. The brand is less diversified in the message, which helps it read as a more concentrated equipment partner for construction, paving, and aggregate buyers.</p>
+              <div class="pills">
+                <span class="pill">Volvo dealer</span>
+                <span class="pill">Paving</span>
+                <span class="pill">Aggregate</span>
+              </div>
+            </div>
+            <p class="takeaway">ROMCO benefits from focus. It can sound simpler and more direct because it is not carrying as many storylines into the pitch.</p>
+          </article>
+
+          <article class="competitor">
+            <div>
+              <h3>HOLT CAT</h3>
+              <span class="tag">Texas benchmark</span>
+            </div>
+            <div>
+              <p class="quote">Machines, engines, rental, crane, used equipment, custom packaging, and support solutions as big as Texas.</p>
+              <p class="note">HOLT packages the Cat story with scale and confidence. Rental is separated into Texas First Rentals, and the paid layer visibly supports both HOLT CAT and used inventory messaging.</p>
+              <div class="pills">
+                <span class="pill">Texas scale</span>
+                <span class="pill">Used equipment</span>
+                <span class="pill">Rental spinout</span>
+              </div>
+            </div>
+            <p class="takeaway">Even without direct territory overlap, HOLT sets a bar for how assertively a Cat ecosystem can market itself across channels.</p>
+          </article>
+
+          <article class="competitor">
+            <div>
+              <h3>United Rentals</h3>
+              <span class="tag">Rental heavyweight</span>
+            </div>
+            <div>
+              <p class="quote">The world's largest equipment rental company, combining scale, specialty solutions, digital innovation, and connected jobsites.</p>
+              <p class="note">United is not trying to be a Cat dealer. It is trying to be the easiest large-scale rental answer. The LinkedIn story leans into size, specialty, safety, and technology rather than local equipment intimacy.</p>
+              <div class="pills">
+                <span class="pill">Largest fleet</span>
+                <span class="pill">Digital solutions</span>
+                <span class="pill">Specialty rentals</span>
+              </div>
+            </div>
+            <p class="takeaway">United is strongest where availability, fleet breadth, and digital control matter more than brand-specific machine allegiance.</p>
+          </article>
+
+          <article class="competitor">
+            <div>
+              <h3>Sunbelt Rentals</h3>
+              <span class="tag">Rental experience play</span>
+            </div>
+            <div>
+              <p class="quote">Find the right equipment for your project. Own less, create more.</p>
+              <p class="note">Sunbelt sells the rental experience itself. The digital front door is polished, app-driven, and built to make the transaction feel easy. The broad national brand voice also spills over heavily into LinkedIn.</p>
+              <div class="pills">
+                <span class="pill">App-led</span>
+                <span class="pill">Project fit</span>
+                <span class="pill">National scale</span>
+              </div>
+            </div>
+            <p class="takeaway">Sunbelt is a convenience and interface competitor as much as an equipment competitor. That matters for jobs that begin with search and speed.</p>
+          </article>
+
+          <article class="competitor">
+            <div>
+              <h3>Herc Rentals / H&amp;E legacy footprint</h3>
+              <span class="tag">Post-merger rental pressure</span>
+            </div>
+            <div>
+              <p class="quote">Easy, expert, and efficient rental experience with premium rental equipment and broad branch access.</p>
+              <p class="note">Herc benefits from the H&amp;E integration because it inherits local familiarity while scaling the parent brand. The message is cleaner than a dealer pitch and more operational than a product-line story.</p>
+              <div class="pills">
+                <span class="pill">Rental only</span>
+                <span class="pill">Post-merger scale</span>
+                <span class="pill">Ease</span>
+              </div>
+            </div>
+            <p class="takeaway">Herc is part of the same broader risk set as United and Sunbelt. If the customer only needs fleet access and support, these brands can flatten the dealer advantage.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="channels">
+      <div class="page">
+        <div class="section-title">
+          <div class="kicker">Channel review</div>
+          <div>
+            <h2>What competitors are doing across LinkedIn, Meta, and owned media</h2>
+          </div>
+        </div>
+
+        <div class="recommendations">
+          <div class="red-panel">
+            <h2>The cleanest pattern</h2>
+            <p style="margin-top: 18px;">LinkedIn is much more useful than Meta for understanding category behavior. Mustang, WPI, ROMCO, HOLT, United, and Sunbelt all have clear company-page positioning there. Meta is more mixed, but there are still signals: Mustang, WPI, HOLT, and Herc surfaced visible current ads, while broader rental keywords for national players were noisier and harder to attribute cleanly.</p>
+            <p style="margin-top: 16px;">The practical takeaway is that this market behaves like two media markets at once. LinkedIn is where brands explain who they are. Meta is where they push rentals, inventory, hiring, or product offers more tactically.</p>
+          </div>
+
+          <div class="message-list">
+            <div class="message">
+              <b>Mustang on LinkedIn</b>
+              <p class="muted">Mustang's LinkedIn page reinforces local authority, long tenure, and broad industrial relevance. The visible recent update in search results leaned into community sponsorship, which helps humanize a dealer story that could otherwise feel purely functional.</p>
+            </div>
+            <div class="message">
+              <b>WPI on LinkedIn</b>
+              <p class="muted">WPI's page is active and operational. It highlights construction, energy, technician talent, product launches, field equipment, and event presence. The tone feels more aggressive and busier than Mustang's.</p>
+            </div>
+            <div class="message">
+              <b>ROMCO on LinkedIn</b>
+              <p class="muted">ROMCO reads like a focused equipment company with a cleaner narrative around support and customer partnership. It is less sprawling than Mustang or WPI in the way it presents itself.</p>
+            </div>
+            <div class="message">
+              <b>Rental giants on LinkedIn</b>
+              <p class="muted">United and Sunbelt use LinkedIn to sell scale, technology, safety, specialty capabilities, and national reach. That makes them feel less local but very credible for procurement-minded buyers and talent.</p>
+            </div>
+            <div class="message">
+              <b>Meta signals</b>
+              <p class="muted">Mustang showed active ads around rentals and specific equipment classes. WPI surfaced active ads tied to hiring and product promotions. HOLT showed active ads in Spanish and around used equipment. Herc surfaced broad rental-brand ads. United and Sunbelt exact-keyword results were much noisier because the brand names overlap with unrelated advertisers and generic rental language.</p>
+            </div>
+            <div class="message">
+              <b>Owned-media pattern</b>
+              <p class="muted">Mustang, WPI, and HOLT all lean on the owned website to signal capability depth. Sunbelt and United lean more into transaction flow. ROMCO sits in the middle with a simpler support-led story.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="whitespace">
+      <div class="page">
+        <div class="section-title">
+          <div class="kicker">White space</div>
+          <div>
+            <h2>Where Mustang can sound sharper than the field</h2>
+          </div>
+        </div>
+
+        <div class="pattern-grid">
+          <div class="pattern">
+            <span class="number">Opportunity 01</span>
+            <h3>Own the single-accountable-partner story.</h3>
+            <p class="muted">A lot of competitors talk about service. Fewer make the customer feel like one relationship can truly cover machine, rental, parts, service, and power without handoffs and guesswork.</p>
+          </div>
+          <div class="pattern">
+            <span class="number">Opportunity 02</span>
+            <h3>Make response time a hero claim.</h3>
+            <p class="muted">Rental giants win on speed. Dealer competitors win on support. Mustang has room to connect those two ideas more explicitly and make fast local response part of the identity.</p>
+          </div>
+          <div class="pattern">
+            <span class="number">Opportunity 03</span>
+            <h3>Separate vertical stories more clearly.</h3>
+            <p class="muted">Mustang serves many industries, but the message can flatten when every segment shares the same umbrella language. Sharper vertical narratives would help buyers see themselves faster.</p>
+          </div>
+          <div class="pattern">
+            <span class="number">Opportunity 04</span>
+            <h3>Use people and field proof more aggressively.</h3>
+            <p class="muted">WPI and the rental nationals feel active because they show technicians, field trucks, jobsite context, and current offers. Mustang can do more with that same proof without losing its brand discipline.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="creative">
+      <div class="page">
+        <div class="section-title">
+          <div class="kicker">Creative direction</div>
+          <div>
+            <h2>Campaign angles worth testing</h2>
+          </div>
+        </div>
+
+        <div class="message-list">
+          <div class="message">
+            <b>Angle 01</b>
+            <p class="muted">One call. Machine, rental, parts, service, power. Handled.</p>
+          </div>
+          <div class="message">
+            <b>Angle 02</b>
+            <p class="muted">When the job changes, your equipment partner should not slow you down.</p>
+          </div>
+          <div class="message">
+            <b>Angle 03</b>
+            <p class="muted">Dealer knowledge when you need support. Rental speed when you need iron now.</p>
+          </div>
+          <div class="message">
+            <b>Angle 04</b>
+            <p class="muted">Southeast Texas jobs need local answers, not generic fleet promises.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="screenshots">
+      <div class="page">
+        <div class="section-title">
+          <div class="kicker">Visual reference</div>
+          <div>
+            <h2>Site, LinkedIn, and Meta examples</h2>
+          </div>
+        </div>
+
+        <div class="gallery">
+          <figure>
+            <img src="assets/sites/mustang-cat-home.png" alt="Mustang Cat homepage">
+            <figcaption>Mustang Cat homepage. Breadth and trust are the dominant themes.</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/sites/wpi-home.png" alt="WPI homepage">
+            <figcaption>WPI homepage. Cross-division complexity and product breadth are visible immediately.</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/sites/romco-home.png" alt="ROMCO homepage">
+            <figcaption>ROMCO homepage. Cleaner, tighter, more focused partner language.</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/sites/sunbelt-home.png" alt="Sunbelt homepage">
+            <figcaption>Sunbelt homepage. Rental experience and digital transaction flow are front and center.</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/linkedin/mustang-linkedin.png" alt="Mustang Cat LinkedIn">
+            <figcaption>Mustang LinkedIn. Strong local authority and category fit, even behind the sign-in wall.</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/linkedin/wpi-linkedin.png" alt="WPI LinkedIn">
+            <figcaption>WPI LinkedIn. Broad capabilities and active talent or field storytelling.</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/linkedin/romco-linkedin.png" alt="ROMCO LinkedIn">
+            <figcaption>ROMCO LinkedIn. Focused construction identity and a simpler corporate story.</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/linkedin/united-linkedin.png" alt="United Rentals LinkedIn">
+            <figcaption>United Rentals LinkedIn. Scale, specialty, and digital jobsite language dominate.</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/meta/mustang-meta.png" alt="Mustang Cat Meta Ad Library">
+            <figcaption>Meta Ad Library. Mustang is visibly promoting rentals and equipment-specific offers.</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/meta/wpi-meta.png" alt="WPI Meta Ad Library">
+            <figcaption>Meta Ad Library. WPI is using Meta for both recruiting and product push.</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/meta/holt-meta.png" alt="HOLT CAT Meta Ad Library">
+            <figcaption>Meta Ad Library. HOLT is visibly active with used-equipment and Spanish-language creative.</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/meta/herc-meta.png" alt="Herc Rentals Meta Ad Library">
+            <figcaption>Meta Ad Library. Herc is pushing broad rental-brand awareness and offers.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="sources">
+      <div class="page">
+        <div class="section-title">
+          <div class="kicker">Sources</div>
+          <div>
+            <h2>Pages reviewed for this report</h2>
+          </div>
+        </div>
+
+        <ul class="source-list">
+          <li><a href="https://www.mustangcat.com/" target="_blank" rel="noreferrer">Mustang Cat</a></li>
+          <li><a href="https://www.mustangcat.com/rental/" target="_blank" rel="noreferrer">Mustang Cat Rental</a></li>
+          <li><a href="https://www.linkedin.com/company/mustang-cat" target="_blank" rel="noreferrer">Mustang Cat LinkedIn</a></li>
+          <li><a href="https://www.wpi.com/" target="_blank" rel="noreferrer">WPI</a></li>
+          <li><a href="https://www.linkedin.com/company/waukeshapearce" target="_blank" rel="noreferrer">WPI LinkedIn</a></li>
+          <li><a href="https://www.romco.com/" target="_blank" rel="noreferrer">ROMCO Equipment</a></li>
+          <li><a href="https://www.linkedin.com/company/romco-equipment" target="_blank" rel="noreferrer">ROMCO LinkedIn</a></li>
+          <li><a href="https://www.holtcat.com/" target="_blank" rel="noreferrer">HOLT CAT</a></li>
+          <li><a href="https://www.linkedin.com/company/holt-cat" target="_blank" rel="noreferrer">HOLT CAT LinkedIn</a></li>
+          <li><a href="https://www.unitedrentals.com/" target="_blank" rel="noreferrer">United Rentals</a></li>
+          <li><a href="https://www.linkedin.com/company/united-rentals" target="_blank" rel="noreferrer">United Rentals LinkedIn</a></li>
+          <li><a href="https://www.sunbeltrentals.com/" target="_blank" rel="noreferrer">Sunbelt Rentals</a></li>
+          <li><a href="https://www.linkedin.com/company/sunbelt-rentals" target="_blank" rel="noreferrer">Sunbelt Rentals LinkedIn</a></li>
+          <li><a href="https://www.hercrentals.com/" target="_blank" rel="noreferrer">Herc Rentals</a></li>
+          <li><a href="https://he-equipment.com/" target="_blank" rel="noreferrer">H&amp;E legacy site / Herc transition</a></li>
+          <li><a href="https://www.linkedin.com/company/hercrentalsinc" target="_blank" rel="noreferrer">Herc Rentals LinkedIn</a></li>
+          <li><a href="https://www.facebook.com/ads/library/" target="_blank" rel="noreferrer">Meta Ad Library</a></li>
+        </ul>
+
+        <p class="footer-note">Note: some LinkedIn pages were partially obscured by the sign-in wall, but still provided usable company-level framing and visible positioning. Exact-name Meta searches were cleaner for Mustang, WPI, HOLT, and Herc than for broader generic rental brands.</p>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,3 +1,8 @@
-# Mustang Cat Report
+# 5plus8 Report Hub
 
-Published via GitHub Pages.
+GitHub Pages host for client-facing competitive landscape reports.
+
+Current reports:
+
+- [Mustang Cat Competitive Landscape](./reports/mustang-cat/)
+
