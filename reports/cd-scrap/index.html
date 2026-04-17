@@ -1,0 +1,791 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>C&amp;D Scrap Metal Competitor Report</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23000'/%3E%3Cpath d='M10 46h44v8H10zM10 10h14v28H10zM30 10h24v8H30zM30 24h24v8H30z' fill='%23E10600'/%3E%3C/svg%3E">
+  <style>
+    :root {
+      --red: #E10600;
+      --black: #000000;
+      --dark: #1A1A1A;
+      --mid: #666666;
+      --light: #F5F5F5;
+      --line: #DDDDDD;
+      --white: #FFFFFF;
+      --font: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: var(--font);
+      background: var(--white);
+      color: var(--dark);
+      line-height: 1.45;
+    }
+
+    a { color: inherit; }
+
+    .page {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .hero {
+      min-height: 72vh;
+      display: grid;
+      align-items: end;
+      padding: 72px 0 44px;
+      background:
+        linear-gradient(90deg, rgba(0,0,0,0.97), rgba(0,0,0,0.88)),
+        url("assets/sites/cd-home.png") center top / cover no-repeat;
+      color: var(--white);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 22px;
+      color: rgba(255,255,255,0.74);
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 34px;
+      height: 3px;
+      background: var(--red);
+    }
+
+    h1 {
+      max-width: 940px;
+      margin: 0;
+      font-size: clamp(3rem, 6.6vw, 6.4rem);
+      line-height: 0.88;
+      letter-spacing: -0.05em;
+      text-transform: uppercase;
+    }
+
+    .hero p {
+      max-width: 760px;
+      margin: 28px 0 0;
+      color: rgba(255,255,255,0.82);
+      font-size: clamp(1.05rem, 2vw, 1.32rem);
+      font-weight: 500;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255,255,255,0.94);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav .page {
+      display: flex;
+      gap: 18px;
+      overflow-x: auto;
+      padding: 14px 0;
+    }
+
+    .nav a {
+      white-space: nowrap;
+      color: var(--mid);
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    section {
+      padding: 76px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .section-title {
+      display: grid;
+      grid-template-columns: minmax(180px, 0.38fr) minmax(0, 1fr);
+      gap: 40px;
+      margin-bottom: 34px;
+      align-items: start;
+    }
+
+    .kicker {
+      color: var(--red);
+      font-size: 0.74rem;
+      font-weight: 900;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      margin: 0;
+      color: var(--black);
+      font-size: clamp(2.1rem, 4vw, 4.2rem);
+      line-height: 0.96;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+    }
+
+    h3 {
+      margin: 0 0 12px;
+      color: var(--black);
+      font-size: 1.18rem;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      overflow-wrap: anywhere;
+    }
+
+    p { margin: 0; }
+
+    .lead {
+      max-width: 860px;
+      color: var(--dark);
+      font-size: clamp(1.15rem, 2.2vw, 1.7rem);
+      line-height: 1.18;
+      letter-spacing: -0.025em;
+      font-weight: 700;
+    }
+
+    .muted { color: var(--mid); }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .stat {
+      min-height: 190px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      background: var(--light);
+    }
+
+    .stat strong {
+      display: block;
+      margin-bottom: 18px;
+      color: var(--red);
+      font-size: clamp(2.2rem, 5vw, 5rem);
+      line-height: 0.82;
+      letter-spacing: -0.06em;
+    }
+
+    .stat span {
+      display: block;
+      color: var(--black);
+      font-size: 0.9rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .matrix {
+      display: grid;
+      gap: 14px;
+    }
+
+    .competitor {
+      display: grid;
+      grid-template-columns: minmax(240px, 0.3fr) minmax(0, 1fr) minmax(240px, 0.34fr);
+      gap: 24px;
+      padding: 24px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .competitor:first-child { border-top: 0; }
+    .competitor > * { min-width: 0; }
+
+    .tag {
+      display: inline-flex;
+      width: fit-content;
+      margin-top: 8px;
+      padding: 6px 9px;
+      border: 1px solid var(--line);
+      color: var(--red);
+      font-size: 0.68rem;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .quote {
+      margin: 0 0 12px;
+      color: var(--black);
+      font-size: 1.02rem;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+    }
+
+    .note {
+      color: var(--mid);
+      font-size: 0.94rem;
+    }
+
+    .takeaway {
+      padding-left: 18px;
+      border-left: 4px solid var(--red);
+      color: var(--dark);
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+
+    .pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .pill {
+      padding: 7px 10px;
+      border: 1px solid var(--line);
+      background: var(--white);
+      color: var(--mid);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .pattern-grid,
+    .gallery,
+    .source-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .pattern {
+      min-height: 240px;
+      padding: 26px;
+      border: 1px solid var(--line);
+      background: var(--white);
+    }
+
+    .pattern .number {
+      display: block;
+      margin-bottom: 22px;
+      color: var(--red);
+      font-size: 0.72rem;
+      font-weight: 900;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .recommendations {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .red-panel {
+      padding: 34px;
+      background: var(--red);
+      color: var(--white);
+    }
+
+    .red-panel h2,
+    .red-panel h3 { color: var(--white); }
+
+    .red-panel p { color: rgba(255,255,255,0.82); }
+
+    .message-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .message {
+      padding: 22px;
+      border: 1px solid var(--line);
+      background: var(--light);
+    }
+
+    .message b {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--black);
+      font-size: 0.95rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    figure {
+      margin: 0;
+      border: 1px solid var(--line);
+      background: var(--light);
+    }
+
+    figure img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      object-position: top center;
+      border-bottom: 1px solid var(--line);
+    }
+
+    figcaption {
+      padding: 14px 16px 16px;
+      color: var(--mid);
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+
+    .source-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      gap: 10px 24px;
+    }
+
+    .source-list li {
+      color: var(--mid);
+      font-size: 0.9rem;
+    }
+
+    .source-list a {
+      color: var(--black);
+      font-weight: 800;
+      text-decoration-color: var(--red);
+      text-underline-offset: 3px;
+    }
+
+    .footer-note {
+      padding: 36px 0 60px;
+      color: var(--mid);
+      font-size: 0.82rem;
+    }
+
+    @media (max-width: 860px) {
+      .page { width: min(100% - 28px, 1180px); }
+      .hero { min-height: 64vh; padding: 54px 0 34px; }
+      .section-title,
+      .competitor,
+      .recommendations {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+      .grid-3,
+      .pattern-grid,
+      .gallery,
+      .source-list {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="page">
+      <div class="eyebrow">Competitor review / April 16, 2026</div>
+      <h1>What Houston scrapyards are saying and where they are showing up</h1>
+      <p>Most local yards sound alike. They promise top prices, honest weights, same-day payouts, and clean yards. The interesting part is not the promise itself. It is how each yard packages trust, speed, business service, and local proof across search, Meta, and LinkedIn.</p>
+    </div>
+  </header>
+
+  <nav class="nav" aria-label="Report navigation">
+    <div class="page">
+      <a href="#summary">Summary</a>
+      <a href="#matrix">Competitors</a>
+      <a href="#patterns">Patterns</a>
+      <a href="#channels">Channels</a>
+      <a href="#creative">Creative Angles</a>
+      <a href="#screenshots">Screenshots</a>
+      <a href="#sources">Sources</a>
+    </div>
+  </nav>
+
+  <main>
+    <section id="summary">
+      <div class="page">
+        <div class="section-title">
+          <div class="kicker">Executive read</div>
+          <div>
+            <h2>The market competes on payout and proof. C&amp;D already has a stronger personality than most of it.</h2>
+          </div>
+        </div>
+
+        <p class="lead">Across Houston, the category keeps returning to the same four ideas: top dollar, transparent scales, fast cash, and clean service. That is table stakes. The real difference shows up in tone, channel mix, and how clearly each yard speaks to residential sellers, contractors, and larger commercial accounts.</p>
+
+        <div class="grid-3" style="margin-top: 34px;">
+          <div class="stat">
+            <strong>1979</strong>
+            <span>C&amp;D leads with long local tenure and a four-audience message across homeowners, contractors, commercial, and industrial accounts.</span>
+          </div>
+          <div class="stat">
+            <strong>3+</strong>
+            <span>Gulf Coast appears to be using multiple Houston SEO-style websites with the same phone number and similar messaging to widen search coverage.</span>
+          </div>
+          <div class="stat">
+            <strong>1,367</strong>
+            <span>Texas Port Recycling has the strongest visible LinkedIn company presence in this local set, with a more active corporate publishing cadence.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="matrix">
+      <div class="page">
+        <div class="section-title">
+          <div class="kicker">Competitor matrix</div>
+          <div>
+            <h2>How the local set is positioning itself</h2>
+          </div>
+        </div>
+
+        <div class="matrix">
+          <article class="competitor">
+            <div>
+              <h3>C&amp;D Scrap Metal</h3>
+              <span class="tag">Baseline</span>
+            </div>
+            <div>
+              <p class="quote">Houston's premier destination for scrap metal recycling, with fast friendly service, transparent weighing, top prices, and safe locations.</p>
+              <p class="note">C&amp;D segments the audience more clearly than most local yards. The site speaks to contractors, residential sellers, and commercial or industrial programs without sounding like a single generic landing page.</p>
+              <div class="pills">
+                <span class="pill">Since 1979</span>
+                <span class="pill">4 locations</span>
+                <span class="pill">Transparent weighing</span>
+              </div>
+            </div>
+            <p class="takeaway">The site is trustworthy and broad, but still category-normal in its core claims. The sharper differentiator is brand voice. C&amp;D sounds more like a real business with a point of view once you get to LinkedIn and social.</p>
+          </article>
+
+          <article class="competitor">
+            <div>
+              <h3>Gulf Coast Scrap Metal</h3>
+              <span class="tag">SEO footprint</span>
+            </div>
+            <div>
+              <p class="quote">Highest prices, free pickup, fast and easy process, expert knowledge, and a long list of free services.</p>
+              <p class="note">Gulf Coast appears to be spreading similar messaging across several search-oriented domains, including Houston Scrap Yard, Houston Scrap Metal, and Houston Texas Recycling Center. Shared phone numbers and repeated copy patterns suggest a deliberate search land grab.</p>
+              <div class="pills">
+                <span class="pill">Top dollar</span>
+                <span class="pill">Free pickup</span>
+                <span class="pill">Multiple domains</span>
+              </div>
+            </div>
+            <p class="takeaway">This is the clearest local lesson in search behavior. Gulf Coast is not just competing as a yard. It is competing as a search network built around exact-match intent terms.</p>
+          </article>
+
+          <article class="competitor">
+            <div>
+              <h3>Coastal Metal Recycling</h3>
+              <span class="tag">Clean facility pitch</span>
+            </div>
+            <div>
+              <p class="quote">Houston's leader in metal recycling with top prices, a clean indoor drive-through facility, and free roll-off or pickup service for business accounts.</p>
+              <p class="note">Coastal puts more emphasis on the physical customer experience than most. Indoor unloading, weather protection, fast in-and-out service, and contractor-friendly copy are doing a lot of work for them.</p>
+              <div class="pills">
+                <span class="pill">Indoor drive-through</span>
+                <span class="pill">Contractors</span>
+                <span class="pill">Commercial pickup</span>
+              </div>
+            </div>
+            <p class="takeaway">Coastal's edge is not a radically different message. It is comfort and convenience. They make the yard itself feel easier to use.</p>
+          </article>
+
+          <article class="competitor">
+            <div>
+              <h3>Texas Port Recycling</h3>
+              <span class="tag">Corporate operator</span>
+            </div>
+            <div>
+              <p class="quote">Fair competitive prices, clear selling instructions, multiple Texas facilities, and a corporate story tied to Nucor and DJJ.</p>
+              <p class="note">Texas Port feels more like an operations company than a neighborhood yard. The site is practical and process-heavy, while LinkedIn leans into safety, culture, sustainability, and recruiting.</p>
+              <div class="pills">
+                <span class="pill">Nucor-backed</span>
+                <span class="pill">4 locations</span>
+                <span class="pill">Process clarity</span>
+              </div>
+            </div>
+            <p class="takeaway">Texas Port brings scale and corporate proof. It looks built for confidence with larger accounts, hiring, and formal operations rather than personality.</p>
+          </article>
+
+          <article class="competitor">
+            <div>
+              <h3>CMC Recycling Houston</h3>
+              <span class="tag">Industrial credibility</span>
+            </div>
+            <div>
+              <p class="quote">Individual, commercial, and industrial recycling under a national materials company brand.</p>
+              <p class="note">CMC carries institutional weight by default. Even without louder local creative, the broader Commercial Metals Company brand gives them legitimacy with construction and industrial buyers.</p>
+              <div class="pills">
+                <span class="pill">Commercial metals</span>
+                <span class="pill">Industrial recycling</span>
+                <span class="pill">National scale</span>
+              </div>
+            </div>
+            <p class="takeaway">CMC is less interesting from a creative standpoint, but it matters because large buyers may trust the name before they compare anyone else's message.</p>
+          </article>
+
+          <article class="competitor">
+            <div>
+              <h3>TEE-X Metal Recycling</h3>
+              <span class="tag">Local family-owned</span>
+            </div>
+            <div>
+              <p class="quote">Family owned, East End, cash on the spot, and able to handle large loads with an industrial truck scale.</p>
+              <p class="note">TEE-X is much simpler than the others. The message is direct, repetitive, and plainly transactional. It feels like a yard speaking to immediate sellers, not a brand trying to create a broader reputation layer.</p>
+              <div class="pills">
+                <span class="pill">Family owned</span>
+                <span class="pill">Cash on the spot</span>
+                <span class="pill">Large loads</span>
+              </div>
+            </div>
+            <p class="takeaway">TEE-X is a good reminder that not every competitor needs polished positioning to stay in the game. Simplicity still works when the ask is clear.</p>
+          </article>
+
+          <article class="competitor">
+            <div>
+              <h3>Rose Metal Processing</h3>
+              <span class="tag">Legacy yard</span>
+            </div>
+            <div>
+              <p class="quote">Locally owned and operated since 1939 with certified scales, top prices paid, and strong industrial account services.</p>
+              <p class="note">Rose uses old-school local credibility well. The tone is straightforward, practical, bilingual, and very familiar to the category, but the long history gives it more weight than many newer players.</p>
+              <div class="pills">
+                <span class="pill">Since 1939</span>
+                <span class="pill">Certified scales</span>
+                <span class="pill">Industrial accounts</span>
+              </div>
+            </div>
+            <p class="takeaway">Rose proves that longevity still matters in this market. History itself is part of the sales pitch.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="patterns">
+      <div class="page">
+        <div class="section-title">
+          <div class="kicker">Market patterns</div>
+          <div>
+            <h2>What keeps repeating across the category</h2>
+          </div>
+        </div>
+
+        <div class="pattern-grid">
+          <div class="pattern">
+            <span class="number">Pattern 01</span>
+            <h3>Everybody says top prices.</h3>
+            <p class="muted">Top dollar, highest prices, fair pricing, competitive rates, honest weights, and transparent scales show up everywhere. This is baseline language, not a true position.</p>
+          </div>
+          <div class="pattern">
+            <span class="number">Pattern 02</span>
+            <h3>Speed is the second universal hook.</h3>
+            <p class="muted">Same-day cash, fast service, quick unloading, easy process, and instant quotes are everywhere. The category knows customers hate friction.</p>
+          </div>
+          <div class="pattern">
+            <span class="number">Pattern 03</span>
+            <h3>Business services signal seriousness.</h3>
+            <p class="muted">Roll-off containers, jobsite pickups, free evaluations, alloy testing, wire stripping, and compliance paperwork are how yards try to sound more useful to contractors and industrial accounts.</p>
+          </div>
+          <div class="pattern">
+            <span class="number">Pattern 04</span>
+            <h3>Search is messy and local.</h3>
+            <p class="muted">The Gulf Coast cluster is the clearest example. Instead of relying on one site, they appear to be covering intent with multiple keyword-driven domains and near-identical value props.</p>
+          </div>
+          <div class="pattern">
+            <span class="number">Pattern 05</span>
+            <h3>Very little distinct brand voice.</h3>
+            <p class="muted">Most sites read like category templates. C&amp;D is one of the few brands where the personality noticeably changes once you reach LinkedIn or social.</p>
+          </div>
+          <div class="pattern">
+            <span class="number">Pattern 06</span>
+            <h3>Trust is built with proof, not poetry.</h3>
+            <p class="muted">Years in business, certified scales, clean yards, family ownership, national parent companies, and visible facilities are doing more work here than polished slogans.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="channels">
+      <div class="page">
+        <div class="section-title">
+          <div class="kicker">Paid and channels</div>
+          <div>
+            <h2>Where competitors are visible outside the website</h2>
+          </div>
+        </div>
+
+        <div class="recommendations">
+          <div class="red-panel">
+            <h2>The clearest channel split</h2>
+            <p style="margin-top: 18px;">Meta is not packed with obvious scrapyard advertisers, but it is not empty either. Texas Port has a visible current ad around Earth Day and customer appreciation. Keyword searches around Gulf Coast also surfaced active local ads, though not all of them were exact brand matches. LinkedIn tells a different story. Texas Port feels disciplined and corporate there, while C&amp;D feels human, loud, and memorable.</p>
+            <p style="margin-top: 16px;">Google PPC is the least cleanly verifiable surface in this review. Automated checks hit reCAPTCHA on live Google SERPs, so the search read here leans on observed site footprints, search discovery, and exact-match domain behavior rather than confirmed sponsored placement screenshots.</p>
+          </div>
+
+          <div class="message-list">
+            <div class="message">
+              <b>Meta / Facebook</b>
+              <p class="muted">Texas Port shows an active Meta ad tied to an Earth Day customer appreciation event. Coastal did not show active ads for an exact-name search in the ad library during this review. Gulf Coast keyword searches surfaced active local ad inventory, which suggests the auction is not empty even when exact brand hits are inconsistent.</p>
+            </div>
+            <div class="message">
+              <b>LinkedIn</b>
+              <p class="muted">Texas Port has the strongest visible corporate LinkedIn presence in the local set, focusing on safety, sustainability, culture, hiring, and parent-company credibility. C&amp;D is more distinctive in voice, using a rougher, high-energy "ScrapMania" style that feels very different from the corporate category norm.</p>
+            </div>
+            <div class="message">
+              <b>Google / Search</b>
+              <p class="muted">The biggest search takeaway is Gulf Coast's footprint. The same number and brand show up across multiple Houston-intent domains, which is a practical way to dominate organic entry points even if a shopper never searches the brand name directly.</p>
+            </div>
+            <div class="message">
+              <b>What matters for C&amp;D</b>
+              <p class="muted">C&amp;D does not need to out-corporate Texas Port or out-template Gulf Coast. The better play is to keep the trust signals but connect them to a more recognizable personality, especially for contractors and commercial accounts who are choosing both a buyer and a working relationship.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="creative">
+      <div class="page">
+        <div class="section-title">
+          <div class="kicker">Creative direction</div>
+          <div>
+            <h2>Angles worth testing for lead generation</h2>
+          </div>
+        </div>
+
+        <div class="pattern-grid">
+          <div class="pattern">
+            <span class="number">Angle 01</span>
+            <h3>Show the scale ticket, not just the smile.</h3>
+            <p class="muted">The category talks about honest weights all day. Few brands really dramatize the proof. Scale readouts, live sorting, and side-by-side grading can do that better than generic service copy.</p>
+          </div>
+          <div class="pattern">
+            <span class="number">Angle 02</span>
+            <h3>Contractor convenience is a stronger story than generic top dollar.</h3>
+            <p class="muted">Jobsite pickup, containers, same-day turnaround, and fewer wasted trips are more specific and more believable than saying "highest prices" again.</p>
+          </div>
+          <div class="pattern">
+            <span class="number">Angle 03</span>
+            <h3>Lean into the real people behind the yard.</h3>
+            <p class="muted">C&amp;D already has a stronger social voice than most of the market. That can become a real differentiator if it is grounded in actual yard footage, employees, equipment, and repeat customers.</p>
+          </div>
+          <div class="pattern">
+            <span class="number">Angle 04</span>
+            <h3>Turn trust into a visual checklist.</h3>
+            <p class="muted">Certified scales. Clean yard. Safety-first operations. Fast payout. Multi-location convenience. The more visible and tangible these claims are, the less they feel like boilerplate.</p>
+          </div>
+        </div>
+
+        <div class="message-list" style="margin-top: 34px;">
+          <div class="message">
+            <b>Sample hook</b>
+            <p class="muted">Bring the load. Watch the weight. Get paid.</p>
+          </div>
+          <div class="message">
+            <b>Sample contractor hook</b>
+            <p class="muted">Less time at the yard. More time back on the job.</p>
+          </div>
+          <div class="message">
+            <b>Sample commercial hook</b>
+            <p class="muted">Pickup, containers, compliance, payout. One scrap partner, no extra runaround.</p>
+          </div>
+          <div class="message">
+            <b>Sample brand hook</b>
+            <p class="muted">Houston scrap with a little more backbone.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="screenshots">
+      <div class="page">
+        <div class="section-title">
+          <div class="kicker">Visual reference</div>
+          <div>
+            <h2>Site, Meta, and LinkedIn examples</h2>
+          </div>
+        </div>
+
+        <div class="gallery">
+          <figure>
+            <img src="assets/sites/cd-home.png" alt="C&D Scrap Metal homepage">
+            <figcaption>C&amp;D Scrap Metal homepage. Broad audience segmentation, clean trust language, and multi-location proof.</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/sites/coastal-metal-recycling.png" alt="Coastal Metal Recycling homepage">
+            <figcaption>Coastal Metal Recycling. Indoor facility and contractor-friendly convenience are doing a lot of the selling.</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/sites/houston-scrap-yard.png" alt="Houston Scrap Yard homepage">
+            <figcaption>Houston Scrap Yard. Search-first language built around transparent pricing, same-day payment, and clean facility claims.</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/sites/texas-port-recycling.png" alt="Texas Port Recycling locations page">
+            <figcaption>Texas Port Recycling. Corporate scale, multiple facilities, and operational clarity over personality.</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/meta/texas-port-meta-library.png" alt="Texas Port Recycling Meta Ad Library screenshot">
+            <figcaption>Meta Ad Library. Texas Port showed a current event-focused ad during this review.</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/meta/coastal-meta-library.png" alt="Coastal Metal Recycling Meta Ad Library screenshot">
+            <figcaption>Meta Ad Library exact-name search for Coastal Metal Recycling showed no active ads at the time of capture.</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/meta/gulf-coast-meta-library.png" alt="Gulf Coast Scrap Metal Meta Ad Library screenshot">
+            <figcaption>Keyword search around Gulf Coast Scrap Metal surfaced active local inventory, showing that related scrapyard demand is present in Meta.</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/linkedin/cd-linkedin.png" alt="C&D Scrap Metal LinkedIn screenshot">
+            <figcaption>C&amp;D LinkedIn. Distinctive voice and culture cues make this feel more memorable than the average local yard page.</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/linkedin/texas-port-linkedin.png" alt="Texas Port Recycling LinkedIn screenshot">
+            <figcaption>Texas Port LinkedIn. Stronger corporate cadence around safety, sustainability, hiring, and parent-company credibility.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="sources">
+      <div class="page">
+        <div class="section-title">
+          <div class="kicker">Sources</div>
+          <div>
+            <h2>Pages reviewed for this report</h2>
+          </div>
+        </div>
+
+        <ul class="source-list">
+          <li><a href="https://cdscrapmetal.com/" target="_blank" rel="noreferrer">C&amp;D Scrap Metal official site</a></li>
+          <li><a href="https://www.linkedin.com/company/c-d-scrap-metal" target="_blank" rel="noreferrer">C&amp;D Scrap Metal LinkedIn</a></li>
+          <li><a href="https://coastalmetalrecycling.com/" target="_blank" rel="noreferrer">Coastal Metal Recycling</a></li>
+          <li><a href="https://coastalmetalrecycling.com/scrap-metal-frequently-asked-questions/" target="_blank" rel="noreferrer">Coastal Metal Recycling FAQ</a></li>
+          <li><a href="https://www.houstonscrapyard.com/" target="_blank" rel="noreferrer">Houston Scrap Yard</a></li>
+          <li><a href="https://www.houstonscrap.com/" target="_blank" rel="noreferrer">Houston Scrap Metal / Gulf Coast Scrap Metal</a></li>
+          <li><a href="https://houstontexasrecyclingcenter.com/" target="_blank" rel="noreferrer">Houston Texas Recycling Center</a></li>
+          <li><a href="https://texasportrecycling.com/locations/" target="_blank" rel="noreferrer">Texas Port Recycling locations</a></li>
+          <li><a href="https://texasportrecycling.com/houston-tx-port/" target="_blank" rel="noreferrer">Texas Port Recycling Houston Port page</a></li>
+          <li><a href="https://www.linkedin.com/company/texas-port-recycling-l-p-" target="_blank" rel="noreferrer">Texas Port Recycling LinkedIn</a></li>
+          <li><a href="https://www.cmcrecycling.com/locations/houston" target="_blank" rel="noreferrer">CMC Recycling Houston</a></li>
+          <li><a href="https://teexmetal.com/" target="_blank" rel="noreferrer">TEE-X Metal Recycling</a></li>
+          <li><a href="https://www.rosemetal.net/" target="_blank" rel="noreferrer">Rose Metal Processing</a></li>
+          <li><a href="https://www.facebook.com/ads/library/" target="_blank" rel="noreferrer">Meta Ad Library</a></li>
+          <li><a href="https://www.google.com/search?q=houston+scrap+yard" target="_blank" rel="noreferrer">Google search query reviewed</a></li>
+          <li><a href="https://www.google.com/search?q=scrap+metal+houston" target="_blank" rel="noreferrer">Google search query reviewed</a></li>
+        </ul>
+
+        <p class="footer-note">Notes: live Google search-result ad verification was limited by reCAPTCHA in automated browser capture. Meta Ad Library exact-name searches were cleaner for some brands than others. Where channel visibility was noisy, this report treats the signal as directional rather than absolute.</p>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

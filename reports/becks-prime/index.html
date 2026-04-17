@@ -1,0 +1,730 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Becks Prime Houston Competitive Landscape</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23000'/%3E%3Cpath d='M10 46h44v8H10zM10 10h14v28H10zM30 10h24v8H30zM30 24h24v8H30z' fill='%23E10600'/%3E%3C/svg%3E">
+  <style>
+    :root {
+      --red: #E10600;
+      --black: #000000;
+      --dark: #1A1A1A;
+      --mid: #666666;
+      --light: #F5F5F5;
+      --line: #DDDDDD;
+      --white: #FFFFFF;
+      --font: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: var(--font);
+      background: var(--white);
+      color: var(--dark);
+      line-height: 1.45;
+    }
+    a { color: inherit; }
+    .page {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+    .hero {
+      min-height: 72vh;
+      display: grid;
+      align-items: end;
+      padding: 72px 0 44px;
+      background:
+        linear-gradient(90deg, rgba(0,0,0,0.97), rgba(0,0,0,0.89)),
+        url("assets/sites/becks-locations.png") center top / cover no-repeat;
+      color: var(--white);
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 22px;
+      color: rgba(255,255,255,0.74);
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before {
+      content: "";
+      width: 34px;
+      height: 3px;
+      background: var(--red);
+    }
+    h1 {
+      max-width: 980px;
+      margin: 0;
+      font-size: clamp(3rem, 6.4vw, 6.4rem);
+      line-height: 0.88;
+      letter-spacing: -0.05em;
+      text-transform: uppercase;
+    }
+    .hero p {
+      max-width: 760px;
+      margin: 28px 0 0;
+      color: rgba(255,255,255,0.82);
+      font-size: clamp(1.05rem, 2vw, 1.32rem);
+      font-weight: 500;
+    }
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255,255,255,0.94);
+      backdrop-filter: blur(12px);
+    }
+    .nav .page {
+      display: flex;
+      gap: 18px;
+      overflow-x: auto;
+      padding: 14px 0;
+    }
+    .nav a {
+      white-space: nowrap;
+      color: var(--mid);
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+    section {
+      padding: 76px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .section-title {
+      display: grid;
+      grid-template-columns: minmax(180px, 0.38fr) minmax(0, 1fr);
+      gap: 40px;
+      margin-bottom: 34px;
+      align-items: start;
+    }
+    .kicker {
+      color: var(--red);
+      font-size: 0.74rem;
+      font-weight: 900;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+    h2 {
+      margin: 0;
+      color: var(--black);
+      font-size: clamp(2.1rem, 4vw, 4.2rem);
+      line-height: 0.96;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+    }
+    h3 {
+      margin: 0 0 12px;
+      color: var(--black);
+      font-size: 1.16rem;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      overflow-wrap: anywhere;
+    }
+    p { margin: 0; }
+    .lead {
+      max-width: 860px;
+      color: var(--dark);
+      font-size: clamp(1.15rem, 2.2vw, 1.68rem);
+      line-height: 1.18;
+      letter-spacing: -0.025em;
+      font-weight: 700;
+    }
+    .muted { color: var(--mid); }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+    .stat {
+      min-height: 190px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      background: var(--light);
+    }
+    .stat strong {
+      display: block;
+      margin-bottom: 18px;
+      color: var(--red);
+      font-size: clamp(2.2rem, 5vw, 5rem);
+      line-height: 0.82;
+      letter-spacing: -0.06em;
+    }
+    .stat span {
+      display: block;
+      color: var(--black);
+      font-size: 0.9rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .matrix {
+      display: grid;
+      gap: 14px;
+    }
+    .competitor {
+      display: grid;
+      grid-template-columns: minmax(220px, 0.34fr) minmax(0, 1fr) minmax(220px, 0.34fr);
+      gap: 24px;
+      padding: 24px 0;
+      border-top: 1px solid var(--line);
+    }
+    .competitor:first-child { border-top: 0; }
+    .competitor > * { min-width: 0; }
+    .tag {
+      display: inline-flex;
+      width: fit-content;
+      margin-top: 8px;
+      padding: 6px 9px;
+      border: 1px solid var(--line);
+      color: var(--red);
+      font-size: 0.68rem;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .quote {
+      margin: 0 0 12px;
+      color: var(--black);
+      font-size: 1.02rem;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+    }
+    .note {
+      color: var(--mid);
+      font-size: 0.94rem;
+    }
+    .takeaway {
+      padding-left: 18px;
+      border-left: 4px solid var(--red);
+      color: var(--dark);
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+    .pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .pill {
+      padding: 7px 10px;
+      border: 1px solid var(--line);
+      background: var(--white);
+      color: var(--mid);
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    .pattern-grid,
+    .gallery,
+    .source-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+    .pattern {
+      min-height: 220px;
+      padding: 26px;
+      border: 1px solid var(--line);
+      background: var(--white);
+    }
+    .pattern .number {
+      display: block;
+      margin-bottom: 22px;
+      color: var(--red);
+      font-size: 0.72rem;
+      font-weight: 900;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+    .recommendations {
+      display: grid;
+      grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+      gap: 28px;
+      align-items: stretch;
+    }
+    .red-panel {
+      padding: 34px;
+      background: var(--red);
+      color: var(--white);
+    }
+    .red-panel h2,
+    .red-panel h3 { color: var(--white); }
+    .red-panel p { color: rgba(255,255,255,0.82); }
+    .message-list {
+      display: grid;
+      gap: 14px;
+    }
+    .message {
+      padding: 22px;
+      border: 1px solid var(--line);
+      background: var(--light);
+    }
+    .message b {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--black);
+      font-size: 0.95rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    figure {
+      margin: 0;
+      border: 1px solid var(--line);
+      background: var(--light);
+    }
+    figure img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      object-fit: cover;
+      object-position: top center;
+      border-bottom: 1px solid var(--line);
+    }
+    figcaption {
+      padding: 14px 16px 16px;
+      color: var(--mid);
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+    .source-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      gap: 10px 24px;
+    }
+    .source-list li {
+      color: var(--mid);
+      font-size: 0.9rem;
+    }
+    .source-list a {
+      color: var(--black);
+      font-weight: 800;
+      text-decoration-color: var(--red);
+      text-underline-offset: 3px;
+    }
+    .footer-note {
+      padding: 36px 0 60px;
+      color: var(--mid);
+      font-size: 0.82rem;
+    }
+    @media (max-width: 860px) {
+      .page { width: min(100% - 28px, 1180px); }
+      .hero { min-height: 64vh; padding: 54px 0 34px; }
+      .section-title,
+      .competitor,
+      .recommendations {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+      .grid-3,
+      .pattern-grid,
+      .gallery,
+      .source-list {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="page">
+      <div class="eyebrow">Houston competitive landscape / April 16, 2026</div>
+      <h1>Becks Prime does not face one market in Houston. It faces seven different ones.</h1>
+      <p>Becks Prime is strongest when the decision is pre-planned, parking is easy, families are involved, and the meal is part of a routine or occasion. It gets weaker when the decision is made on-site, vibe outweighs food, health perception leads, or speed has to be almost frictionless.</p>
+    </div>
+  </header>
+
+  <nav class="nav" aria-label="Report navigation">
+    <div class="page">
+      <a href="#summary">Summary</a>
+      <a href="#modes">Modes</a>
+      <a href="#zones">Zones</a>
+      <a href="#channels">Channels</a>
+      <a href="#creative">Creative Angles</a>
+      <a href="#screenshots">Screenshots</a>
+      <a href="#sources">Sources</a>
+    </div>
+  </nav>
+
+  <main>
+    <section id="summary">
+      <div class="page">
+        <div class="section-title">
+          <div class="kicker">Executive read</div>
+          <div>
+            <h2>Becks is not just competing with burger brands. It is competing with the reason someone is eating out in that moment.</h2>
+          </div>
+        </div>
+
+        <p class="lead">The most important frame here is not burger versus burger. It is mode versus mode. In one part of Houston, the alternative is healthy lunch. In another, it is social patio energy. In another, it is sheer speed. Becks Prime changes shape depending on which of those conditions surrounds the store.</p>
+
+        <div class="grid-3" style="margin-top: 34px;">
+          <div class="stat">
+            <strong>7</strong>
+            <span>Houston zones matter more than one broad citywide brand view. Becks behaves like a different business in each one.</span>
+          </div>
+          <div class="stat">
+            <strong>4</strong>
+            <span>The practical choice modes are healthy, social, quick, and craving. Becks mainly wins in the craving lane unless convenience tilts the board.</span>
+          </div>
+          <div class="stat">
+            <strong>2</strong>
+            <span>The strongest Becks environments in this framework are Memorial Park and family suburban trade areas like Meyerland and outer suburbs.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="modes">
+      <div class="page">
+        <div class="section-title">
+          <div class="kicker">Decision model</div>
+          <div>
+            <h2>Consumers are picking a mode, not a category</h2>
+          </div>
+        </div>
+
+        <div class="pattern-grid">
+          <div class="pattern">
+            <span class="number">Mode 01</span>
+            <h3>Healthy / light</h3>
+            <p class="muted">Sweetgreen, Cava, Flower Child, Salata, and Local Foods win here because the meal signals restraint, freshness, and personal virtue before anyone talks about price.</p>
+          </div>
+          <div class="pattern">
+            <span class="number">Mode 02</span>
+            <h3>Social / vibe</h3>
+            <p class="muted">Dish Society, Postino, Common Bond, patio-heavy brunch concepts, and polished casual places win here because the experience itself carries value.</p>
+          </div>
+          <div class="pattern">
+            <span class="number">Mode 03</span>
+            <h3>Quick / routine</h3>
+            <p class="muted">Panera, Chipotle, Potbelly, Salata, and office-lunch staples win when the customer has almost no emotional bandwidth and wants a familiar path with minimum drag.</p>
+          </div>
+          <div class="pattern">
+            <span class="number">Mode 04</span>
+            <h3>Craving / indulgent</h3>
+            <p class="muted">Becks, Shake Shack, Hopdoddy, Whataburger, and other burger concepts win when people want something satisfying, familiar, and worth bending the rules for.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="zones">
+      <div class="page">
+        <div class="section-title">
+          <div class="kicker">Location-based zones</div>
+          <div>
+            <h2>Where Becks is structurally strong and where it is structurally weaker</h2>
+          </div>
+        </div>
+
+        <div class="matrix">
+          <article class="competitor">
+            <div>
+              <h3>Heights / Inner Loop</h3>
+              <span class="tag">Walkable ecosystem</span>
+            </div>
+            <div>
+              <p class="quote">Primary alternatives: Local Foods, Dish Society, Postino Heights, Flower Child, Mendocino Farms, Common Bond.</p>
+              <p class="note">This is a walkability and group-choice environment. The decision often gets made on-site and can be driven by patio energy, polish, brunch habits, and whether the group wants to feel like it picked somewhere current.</p>
+              <div class="pills">
+                <span class="pill">Walkable</span>
+                <span class="pill">Group choice</span>
+                <span class="pill">Vibe-led</span>
+              </div>
+            </div>
+            <p class="takeaway">Becks is weak here unless there is a direct burger craving or a family convenience need. This is ecosystem competition more than brand competition.</p>
+          </article>
+
+          <article class="competitor">
+            <div>
+              <h3>Kirby / River Oaks / Upper Kirby</h3>
+              <span class="tag">Perception market</span>
+            </div>
+            <div>
+              <p class="quote">Primary alternatives: Local Foods Rice Village, Shake Shack, Hopdoddy, Tiny Boxwoods, polished casual lunch spots.</p>
+              <p class="note">The food decision here is partly about quality and partly about whether the place feels nice enough for the context. Lunch meetings, polished shopping trips, and affluent casual dining make aesthetics matter more.</p>
+              <div class="pills">
+                <span class="pill">Affluent casual</span>
+                <span class="pill">Business lunch</span>
+                <span class="pill">Design matters</span>
+              </div>
+            </div>
+            <p class="takeaway">Becks is mid-tier here. It can win on familiarity, but it loses when brand polish, atmosphere, and perceived quality become the deciding criteria.</p>
+          </article>
+
+          <article class="competitor">
+            <div>
+              <h3>Memorial Park / Washington Corridor</h3>
+              <span class="tag">Occasion fit</span>
+            </div>
+            <div>
+              <p class="quote">Primary alternatives: Barnaby's Cafe, Velvet Taco, picnic or park-adjacent alternatives, family daytime dining.</p>
+              <p class="note">This zone is about runners, cyclists, families, dog walks, and simple occasion-based eating. Parking, outdoor seating, and low-friction familiarity matter more than trendiness.</p>
+              <div class="pills">
+                <span class="pill">Daytime heavy</span>
+                <span class="pill">Outdoor-friendly</span>
+                <span class="pill">Family ease</span>
+              </div>
+            </div>
+            <p class="takeaway">This is Becks' strongest Houston fit. Here it feels like part of the environment instead of a burger place trying to fight its way into one.</p>
+          </article>
+
+          <article class="competitor">
+            <div>
+              <h3>Energy Corridor / West Houston</h3>
+              <span class="tag">Habit market</span>
+            </div>
+            <div>
+              <p class="quote">Primary alternatives: Cava, Salata, Panera Bread, fast-casual office lunch chains.</p>
+              <p class="note">This is an office-routine environment. Repetition drives volume, so health signaling, app ordering, and speed matter more than discovery or atmosphere.</p>
+              <div class="pills">
+                <span class="pill">Routine lunch</span>
+                <span class="pill">Office-driven</span>
+                <span class="pill">Health pressure</span>
+              </div>
+            </div>
+            <p class="takeaway">Becks is competitive but inconsistent here. It wins when someone wants comfort. It loses when speed and healthy defaults shape the weekly habit.</p>
+          </article>
+
+          <article class="competitor">
+            <div>
+              <h3>Downtown / Med Center</h3>
+              <span class="tag">Throughput market</span>
+            </div>
+            <div>
+              <p class="quote">Primary alternatives: Sweetgreen, Chipotle, Potbelly, grab-and-go concepts, anything optimized for fast weekday lunch.</p>
+              <p class="note">This is the least forgiving zone. Customers are time-constrained and often making the decision in under two minutes. Throughput is the brand here.</p>
+              <div class="pills">
+                <span class="pill">High speed</span>
+                <span class="pill">Weekday lunch</span>
+                <span class="pill">Under 2 minutes</span>
+              </div>
+            </div>
+            <p class="takeaway">Becks is weak in this environment. It reads as too indulgent for some weekday diners and too slow if throughput is the real requirement.</p>
+          </article>
+
+          <article class="competitor">
+            <div>
+              <h3>Meyerland / Family suburban</h3>
+              <span class="tag">Family convenience</span>
+            </div>
+            <div>
+              <p class="quote">Primary alternatives: neighborhood casual dining, Whataburger, Chick-fil-A, convenient fast-casual chains.</p>
+              <p class="note">This market rewards reliability, familiar menus, drive-thru ease, and repeatable family decisions. The question is less "where is coolest?" and more "what works for everybody?"</p>
+              <div class="pills">
+                <span class="pill">Drive-thru</span>
+                <span class="pill">Repeat visits</span>
+                <span class="pill">Family-friendly</span>
+              </div>
+            </div>
+            <p class="takeaway">Becks is strong here because the format matches the life pattern. It fits the decision people are already trying to make.</p>
+          </article>
+
+          <article class="competitor">
+            <div>
+              <h3>Suburban ring: Katy, Sugar Land, Woodlands</h3>
+              <span class="tag">Chain pressure</span>
+            </div>
+            <div>
+              <p class="quote">Primary alternatives: Whataburger, Shake Shack, emerging P. Terry's footprint, local burger chains, suburban family chains.</p>
+              <p class="note">This is a car-based convenience market. Value, speed, and familiarity dominate, but newer entrants can look fresher or more relevant if Becks feels like the older default.</p>
+              <div class="pills">
+                <span class="pill">Car-based</span>
+                <span class="pill">Value</span>
+                <span class="pill">Convenience</span>
+              </div>
+            </div>
+            <p class="takeaway">Becks is solid here, but it is under pressure from chains that feel newer, cleaner, or more aggressively branded.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="channels">
+      <div class="page">
+        <div class="section-title">
+          <div class="kicker">Paid and channels</div>
+          <div>
+            <h2>What shows up in Meta and what that says about the market</h2>
+          </div>
+        </div>
+
+        <div class="recommendations">
+          <div class="red-panel">
+            <h2>The strongest visible paid signal</h2>
+            <p style="margin-top: 18px;">Becks Prime is actively present in Meta Ad Library and the visible creative is location-specific. That matters. The current work does not just sell "Becks Prime" in the abstract. It sells Katy, Sugar Land, Dairy Ashford, Meyerland, and the practical reasons those stores fit into everyday Houston life.</p>
+            <p style="margin-top: 16px;">The healthy and polished casual set is also active, but their lane is different. Sweetgreen and Salata are selling freshness and menu framing. Becks is selling local familiarity, mesquite burgers, store-specific relevance, and family routine.</p>
+          </div>
+
+          <div class="message-list">
+            <div class="message">
+              <b>Becks Prime on Meta</b>
+              <p class="muted">The exact-name Meta search surfaced current Becks ads tied to individual locations and neighborhood cues. That supports the thesis that Becks should market like a portfolio of local stores, not as one monolithic citywide brand.</p>
+            </div>
+            <div class="message">
+              <b>Healthy competitors on Meta</b>
+              <p class="muted">Sweetgreen and Salata both show active creative. Their messaging leans on freshness, wraps, salads, bowls, and lighter meal framing. That reinforces the "healthy mode" competition in zones like Downtown, Energy Corridor, and walkable affluent pockets.</p>
+            </div>
+            <div class="message">
+              <b>Postino and lifestyle concepts</b>
+              <p class="muted">Postino shows paid activity too, but the role is different. It belongs to the social and occasion side of the map. The comparison is less about burgers and more about what people feel like doing with their time.</p>
+            </div>
+            <div class="message">
+              <b>TikTok check</b>
+              <p class="muted">TikTok search surfaces were checked, but public search results were heavily limited by login-gated loading during this pass. There was not enough clean public signal to make a confident TikTok assessment, so this report keeps TikTok as a watch item rather than a strategic proof point.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="creative">
+      <div class="page">
+        <div class="section-title">
+          <div class="kicker">Creative direction</div>
+          <div>
+            <h2>What Becks should emphasize if it wants to grow without pretending every store is the same</h2>
+          </div>
+        </div>
+
+        <div class="pattern-grid">
+          <div class="pattern">
+            <span class="number">Angle 01</span>
+            <h3>Market the store, not just the brand.</h3>
+            <p class="muted">Memorial Park should look like an outdoor routine and family stop. Meyerland should look like family ease. Dairy Ashford should look like lunch reliability. One master brand voice can still flex by occasion.</p>
+          </div>
+          <div class="pattern">
+            <span class="number">Angle 02</span>
+            <h3>Own the pre-planned choice.</h3>
+            <p class="muted">Becks is not at its best when it has to win an on-the-spot vibe battle. It is strongest when the customer already knows the kind of meal they want and wants it done without drama.</p>
+          </div>
+          <div class="pattern">
+            <span class="number">Angle 03</span>
+            <h3>Lean into Houston familiarity.</h3>
+            <p class="muted">The brand has local memory and neighborhood presence. That is useful when newer concepts can feel trendier but less rooted.</p>
+          </div>
+          <div class="pattern">
+            <span class="number">Angle 04</span>
+            <h3>Stop fighting the healthy lane head-on.</h3>
+            <p class="muted">Trying to out-healthy Cava or Sweetgreen is not the answer. Becks should focus on why the indulgent choice is still the right one in specific moments and neighborhoods.</p>
+          </div>
+        </div>
+
+        <div class="message-list" style="margin-top: 34px;">
+          <div class="message">
+            <b>Sample line for Memorial Park</b>
+            <p class="muted">After the loop, after the game, after the park. Becks fits the plan.</p>
+          </div>
+          <div class="message">
+            <b>Sample line for family suburbs</b>
+            <p class="muted">Everybody gets what they want and nobody overthinks it.</p>
+          </div>
+          <div class="message">
+            <b>Sample line for Energy Corridor</b>
+            <p class="muted">When lunch needs to feel real, not optimized.</p>
+          </div>
+          <div class="message">
+            <b>Sample line for citywide brand work</b>
+            <p class="muted">Houston has a lot of ways to eat. This is one of the dependable ones.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="screenshots">
+      <div class="page">
+        <div class="section-title">
+          <div class="kicker">Visual reference</div>
+          <div>
+            <h2>Brand, competitor, and paid examples</h2>
+          </div>
+        </div>
+
+        <div class="gallery">
+          <figure>
+            <img src="assets/sites/becks-locations.png" alt="Becks Prime locations page">
+            <figcaption>Becks Prime locations page. The footprint itself supports a location-first planning model.</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/sites/local-foods-rice-village.png" alt="Local Foods Rice Village">
+            <figcaption>Local Foods Rice Village. Strong fit for polished, health-forward, walkable lunch behavior.</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/sites/dish-society-heights.png" alt="Dish Society Heights">
+            <figcaption>Dish Society Heights. Social-hour and neighborhood energy matter as much as menu.</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/sites/postino-heights.png" alt="Postino Heights">
+            <figcaption>Postino Heights. A good example of a social and vibe-driven alternative in the Heights ecosystem.</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/sites/flower-child-woodlands.png" alt="Flower Child The Woodlands">
+            <figcaption>Flower Child. Clean, health-forward visual language that competes on lifestyle more than indulgence.</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/sites/barnabys-cafe.png" alt="Barnaby's Cafe">
+            <figcaption>Barnaby's Cafe. Casual, family-friendly, occasion-adjacent competition that overlaps with Becks in park and daytime environments.</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/meta/becks-prime-meta.png" alt="Becks Prime Meta Ad Library">
+            <figcaption>Becks Prime Meta ads. Visible creative is location-specific and neighborhood-aware.</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/meta/sweetgreen-meta.png" alt="Sweetgreen Meta Ad Library">
+            <figcaption>Sweetgreen Meta ads. Clean product framing reinforces the healthy and quick urban lane.</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/meta/salata-meta.png" alt="Salata Meta Ad Library">
+            <figcaption>Salata Meta ads. Rewards, personalization, and lighter meal cues fit routine lunch behavior.</figcaption>
+          </figure>
+          <figure>
+            <img src="assets/meta/postino-meta.png" alt="Postino Meta Ad Library">
+            <figcaption>Postino Meta ads. Social and experience-first cues reflect a different competitive mode than Becks.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="sources">
+      <div class="page">
+        <div class="section-title">
+          <div class="kicker">Sources</div>
+          <div>
+            <h2>Pages reviewed for this report</h2>
+          </div>
+        </div>
+
+        <ul class="source-list">
+          <li><a href="https://www.becksprime.com/locations" target="_blank" rel="noreferrer">Becks Prime locations</a></li>
+          <li><a href="https://www.localfoodstexas.com/location/local-foods-rice-village" target="_blank" rel="noreferrer">Local Foods Rice Village</a></li>
+          <li><a href="https://dishsociety.com/location/heights/" target="_blank" rel="noreferrer">Dish Society Heights</a></li>
+          <li><a href="https://www.postino.com/locations/postino-heights" target="_blank" rel="noreferrer">Postino Heights</a></li>
+          <li><a href="https://www.iamaflowerchild.com/locations/houston-tx-the-woodlands/" target="_blank" rel="noreferrer">Flower Child Houston (The Woodlands)</a></li>
+          <li><a href="https://barnabyscafe.com/" target="_blank" rel="noreferrer">Barnaby's Cafe</a></li>
+          <li><a href="https://www.salata.com/locations/" target="_blank" rel="noreferrer">Salata locations</a></li>
+          <li><a href="https://www.sweetgreen.com/locations" target="_blank" rel="noreferrer">Sweetgreen locations</a></li>
+          <li><a href="https://www.facebook.com/ads/library/" target="_blank" rel="noreferrer">Meta Ad Library</a></li>
+          <li><a href="https://www.tiktok.com/search?q=becks%20prime%20houston" target="_blank" rel="noreferrer">TikTok search checked for Becks Prime Houston</a></li>
+          <li><a href="https://www.tiktok.com/search?q=dish%20society%20houston" target="_blank" rel="noreferrer">TikTok search checked for Dish Society Houston</a></li>
+          <li><a href="https://www.tiktok.com/search?q=local%20foods%20houston" target="_blank" rel="noreferrer">TikTok search checked for Local Foods Houston</a></li>
+        </ul>
+
+        <p class="footer-note">Source context also includes the user-provided Houston zone framework used to structure this report. TikTok was checked but not relied on heavily because public search results were heavily login-limited at the time of review.</p>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
