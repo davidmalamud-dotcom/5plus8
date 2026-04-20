@@ -41,7 +41,7 @@
       align-items: center;
       justify-content: space-between;
       padding: 0 32px;
-      height: 60px;
+      min-height: 78px;
       border-bottom: 1px solid var(--border);
       background: var(--surface);
     }
@@ -49,23 +49,20 @@
     .header-brand {
       display: flex;
       align-items: center;
-      gap: 14px;
     }
 
     .header-logo {
-      width: 36px;
-      height: 36px;
-      background: var(--red);
+      width: 220px;
+      max-width: 100%;
       display: flex;
       align-items: center;
-      justify-content: center;
       flex-shrink: 0;
     }
 
-    .header-name {
-      font-family: var(--display);
-      font-size: 1.15rem;
-      letter-spacing: 0.12em;
+    .header-logo img {
+      display: block;
+      width: 100%;
+      height: auto;
     }
 
     .header-meta {
@@ -439,7 +436,12 @@
 
     /* ── RESPONSIVE ─────────────────────────── */
     @media (max-width: 600px) {
-      .header-name { font-size: 0.9rem; }
+      .header {
+        min-height: 68px;
+      }
+      .header-logo {
+        width: 168px;
+      }
       .hero { padding: 36px 20px 28px; }
       .main, .header, .tabs { padding-left: 20px; padding-right: 20px; }
       .footer { flex-direction: column; gap: 6px; text-align: center; }
@@ -452,11 +454,8 @@
   <header class="header">
     <div class="header-brand">
       <div class="header-logo">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
-          <path d="M3 5h18v2.5H3zm0 5.5h18V13H3zm0 5.5h18V18.5H3z"/>
-        </svg>
+        <img src="assets/mossy-ineos-grenadier-logo-white.svg" alt="Mossy INEOS Grenadier">
       </div>
-      <span class="header-name">MOSSY INEOS GRENADIER</span>
     </div>
     <div class="header-meta">
       SOCIAL ANALYTICS<br>MARCH 2026
