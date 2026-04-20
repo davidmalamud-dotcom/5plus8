@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mossy INEOS Grenadier — Social Dashboard / March 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Barlow:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  <style>
+    :root {
+      --bg: #080808;
+      --surface: #111111;
+      --surface2: #1a1a1a;
+      --border: #272727;
+      --faint: #1e1e1e;
+      --text: #e8e8e8;
+      --muted: #777;
+      --red: #e10600;
+      --facebook: #2b74e8;
+      --instagram: #c44fd2;
+      --youtube: #e12727;
+      --display: 'Bebas Neue', sans-serif;
+      --mono: 'Space Mono', monospace;
+      --body: 'Barlow', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--body);
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ── HEADER ─────────────────────────────── */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 32px;
+      height: 60px;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    .header-brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .header-logo {
+      width: 36px;
+      height: 36px;
+      background: var(--red);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .header-name {
+      font-family: var(--display);
+      font-size: 1.15rem;
+      letter-spacing: 0.12em;
+    }
+
+    .header-meta {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--muted);
+      text-align: right;
+      line-height: 1.7;
+    }
+
+    /* ── HERO ───────────────────────────────── */
+    .hero {
+      padding: 56px 32px 44px;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: "2026";
+      position: absolute;
+      right: -12px;
+      bottom: -40px;
+      font-family: var(--display);
+      font-size: clamp(120px, 20vw, 260px);
+      color: var(--surface2);
+      pointer-events: none;
+      line-height: 1;
+      user-select: none;
+      letter-spacing: -0.04em;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--red);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .hero-eyebrow::before {
+      content: "";
+      display: block;
+      width: 28px;
+      height: 2px;
+      background: var(--red);
+    }
+
+    .hero-headline {
+      font-family: var(--display);
+      font-size: clamp(3.5rem, 8vw, 8rem);
+      line-height: 0.88;
+      letter-spacing: 0.01em;
+      max-width: 820px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-headline .accent { color: var(--red); }
+
+    .hero-desc {
+      margin-top: 22px;
+      max-width: 620px;
+      font-size: 0.97rem;
+      color: var(--muted);
+      font-weight: 300;
+      line-height: 1.65;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── TABS ───────────────────────────────── */
+    .tabs {
+      display: flex;
+      overflow-x: auto;
+      padding: 0 32px;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+      gap: 0;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+
+    .tab {
+      padding: 15px 20px;
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: color 0.18s, border-color 0.18s;
+    }
+
+    .tab:hover { color: var(--text); }
+    .tab.active { color: var(--text); border-bottom-color: var(--red); }
+    .tab.fb.active  { color: var(--facebook);  border-bottom-color: var(--facebook); }
+    .tab.ig.active  { color: var(--instagram); border-bottom-color: var(--instagram); }
+    .tab.yt.active  { color: var(--youtube);   border-bottom-color: var(--youtube); }
+
+    /* ── MAIN ───────────────────────────────── */
+    .main {
+      padding: 32px;
+      max-width: 1380px;
+      margin: 0 auto;
+    }
+
+    /* ── VIEWS ──────────────────────────────── */
+    .view { display: none; }
+    .view.active { display: block; animation: fadeIn 0.3s ease; }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── SECTION LABEL ──────────────────────── */
+    .section-label {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--red);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    /* ── KPI STRIP ──────────────────────────── */
+    .kpi-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-bottom: 28px;
+    }
+
+    .kpi {
+      background: var(--surface);
+      padding: 22px 20px;
+      transition: background 0.15s;
+    }
+    .kpi:hover { background: var(--surface2); }
+
+    .kpi-lbl {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      color: var(--muted);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .kpi-val {
+      font-family: var(--display);
+      font-size: 2.4rem;
+      line-height: 1;
+      letter-spacing: 0.02em;
+    }
+
+    .kpi-val.fb { color: var(--facebook); }
+    .kpi-val.ig { color: var(--instagram); }
+    .kpi-val.yt { color: var(--youtube); }
+    .kpi-val.red { color: var(--red); }
+
+    .kpi-sub {
+      margin-top: 6px;
+      font-size: 0.74rem;
+      color: var(--muted);
+    }
+
+    /* ── GRID LAYOUTS ───────────────────────── */
+    .g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
+    .g3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 20px; }
+    .g1 { margin-bottom: 20px; }
+
+    @media (max-width: 960px) { .g2, .g3 { grid-template-columns: 1fr; } }
+
+    /* ── PANEL ──────────────────────────────── */
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 22px;
+    }
+
+    .panel-hd {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+
+    .panel-title {
+      font-family: var(--display);
+      font-size: 1.2rem;
+      letter-spacing: 0.06em;
+    }
+
+    /* ── BADGES ─────────────────────────────── */
+    .badge {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 4px 8px;
+      border: 1px solid;
+      white-space: nowrap;
+    }
+    .badge.fb { color: var(--facebook); border-color: var(--facebook); }
+    .badge.ig { color: var(--instagram); border-color: var(--instagram); }
+    .badge.yt { color: var(--youtube); border-color: var(--youtube); }
+
+    /* ── CHART WRAP ─────────────────────────── */
+    .cw       { position: relative; height: 250px; }
+    .cw.tall  { height: 300px; }
+    .cw.slim  { height: 200px; }
+
+    /* ── STATS ROW ──────────────────────────── */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 680px) { .stats-row { grid-template-columns: repeat(2, 1fr); } }
+
+    .stat {
+      background: var(--surface);
+      padding: 18px;
+    }
+    .stat-lbl {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      color: var(--muted);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .stat-val {
+      font-family: var(--display);
+      font-size: 2rem;
+      line-height: 1;
+      letter-spacing: 0.02em;
+    }
+    .stat-val.fb { color: var(--facebook); }
+    .stat-val.ig { color: var(--instagram); }
+    .stat-val.yt { color: var(--youtube); }
+
+    /* ── TABLE ──────────────────────────────── */
+    .tbl { width: 100%; border-collapse: collapse; }
+    .tbl th {
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-align: left;
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    .tbl td {
+      padding: 14px 12px;
+      border-bottom: 1px solid var(--faint);
+      font-size: 0.86rem;
+      vertical-align: top;
+    }
+    .tbl tr:last-child td { border-bottom: none; }
+    .tbl tbody tr:hover td { background: var(--surface2); }
+
+    .post-title { font-weight: 600; margin-bottom: 4px; }
+    .post-date  { font-family: var(--mono); font-size: 0.62rem; color: var(--muted); }
+    .m-primary  { font-family: var(--mono); font-size: 0.95rem; font-weight: 700; line-height: 1.2; }
+    .m-sub      { font-family: var(--mono); font-size: 0.65rem; color: var(--muted); margin-top: 2px; }
+
+    /* ── TAKEAWAY GRID ──────────────────────── */
+    .tk-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      margin-bottom: 20px;
+    }
+
+    .tk {
+      background: var(--surface);
+      padding: 24px;
+    }
+
+    .tk-icon {
+      width: 28px;
+      height: 28px;
+      background: var(--red);
+      margin-bottom: 14px;
+    }
+    .tk-icon.fb { background: var(--facebook); }
+    .tk-icon.ig { background: var(--instagram); }
+    .tk-icon.yt { background: var(--youtube); }
+    .tk-icon.dark { background: #3a3a3a; }
+
+    .tk-title {
+      font-family: var(--display);
+      font-size: 1.1rem;
+      letter-spacing: 0.04em;
+      line-height: 1.15;
+      margin-bottom: 10px;
+    }
+
+    .tk-body {
+      font-size: 0.86rem;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* ── KW BAR ─────────────────────────────── */
+    .kw-row { margin-bottom: 16px; }
+    .kw-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 6px;
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: #aaa;
+    }
+    .kw-track {
+      height: 5px;
+      background: #222;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .kw-fill {
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #e12727, #f07070);
+      transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* ── BLOCKQUOTE ─────────────────────────── */
+    .bq {
+      border-left: 3px solid var(--red);
+      padding: 18px 22px;
+      font-size: 1.02rem;
+      font-weight: 500;
+      line-height: 1.65;
+      color: var(--text);
+    }
+
+    /* ── FOOTER ─────────────────────────────── */
+    .footer {
+      padding: 20px 32px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      color: var(--muted);
+    }
+
+    /* ── RESPONSIVE ─────────────────────────── */
+    @media (max-width: 600px) {
+      .header-name { font-size: 0.9rem; }
+      .hero { padding: 36px 20px 28px; }
+      .main, .header, .tabs { padding-left: 20px; padding-right: 20px; }
+      .footer { flex-direction: column; gap: 6px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-brand">
+      <div class="header-logo">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
+          <path d="M3 5h18v2.5H3zm0 5.5h18V13H3zm0 5.5h18V18.5H3z"/>
+        </svg>
+      </div>
+      <span class="header-name">MOSSY INEOS GRENADIER</span>
+    </div>
+    <div class="header-meta">
+      SOCIAL ANALYTICS<br>MARCH 2026
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-eyebrow">Analytics / Q1 2026 / March</div>
+    <h1 class="hero-headline">SOCIAL<br><span class="accent">PERFORMANCE</span></h1>
+    <p class="hero-desc">March closed with strong Facebook scale, active Instagram engagement, and continued YouTube search relevance. The clearest pattern across channels is that story-led content outperformed routine posting.</p>
+  </div>
+
+  <!-- TABS -->
+  <nav class="tabs" role="tablist" aria-label="Dashboard sections">
+    <button class="tab active"  data-view="all"       role="tab">Overview</button>
+    <button class="tab fb"      data-view="facebook"  role="tab">Facebook</button>
+    <button class="tab ig"      data-view="instagram" role="tab">Instagram</button>
+    <button class="tab yt"      data-view="youtube"   role="tab">YouTube</button>
+    <button class="tab"         data-view="content"   role="tab">Top Content</button>
+    <button class="tab"         data-view="takeaways" role="tab">Takeaways</button>
+  </nav>
+
+  <main class="main">
+
+    <!-- ══ OVERVIEW ══════════════════════════════════════════════ -->
+    <div class="view active" id="view-all">
+      <div class="section-label">// Overview — All Channels</div>
+
+      <div class="kpi-strip">
+        <div class="kpi">
+          <div class="kpi-lbl">Facebook Reach</div>
+          <div class="kpi-val fb" data-count="496700" data-div="1000" data-sfx="K">0</div>
+          <div class="kpi-sub">607.5K impressions</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-lbl">Instagram Reach</div>
+          <div class="kpi-val ig" data-count="96300" data-div="1000" data-sfx="K">0</div>
+          <div class="kpi-sub">5.5K total followers</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-lbl">YouTube Views</div>
+          <div class="kpi-val yt" data-count="8800" data-div="1000" data-sfx="K">0</div>
+          <div class="kpi-sub">4.7K min watched</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-lbl">IG New Followers</div>
+          <div class="kpi-val red" data-count="737" data-div="1" data-sfx="">0</div>
+          <div class="kpi-sub">March growth</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-lbl">IG Interactions</div>
+          <div class="kpi-val ig" data-count="4300" data-div="1000" data-sfx="K">0</div>
+          <div class="kpi-sub">Strongest engagement</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-lbl">YT Watch Time</div>
+          <div class="kpi-val yt" data-count="4700" data-div="1000" data-sfx="K">0</div>
+          <div class="kpi-sub">min · avg 0:49 dur.</div>
+        </div>
+      </div>
+
+      <div class="g2">
+        <div class="panel">
+          <div class="panel-hd">
+            <div class="panel-title">REACH BY PLATFORM</div>
+          </div>
+          <div class="cw"><canvas id="c-reach"></canvas></div>
+        </div>
+        <div class="panel">
+          <div class="panel-hd">
+            <div class="panel-title">REACH DISTRIBUTION</div>
+          </div>
+          <div class="cw"><canvas id="c-donut"></canvas></div>
+        </div>
+      </div>
+
+      <div class="g3">
+        <div class="panel">
+          <div class="panel-hd">
+            <div class="panel-title">FACEBOOK</div>
+            <span class="badge fb">Scale Driver</span>
+          </div>
+          <div class="cw slim"><canvas id="c-fb-ov"></canvas></div>
+        </div>
+        <div class="panel">
+          <div class="panel-hd">
+            <div class="panel-title">INSTAGRAM</div>
+            <span class="badge ig">Engagement Driver</span>
+          </div>
+          <div class="cw slim"><canvas id="c-ig-ov"></canvas></div>
+        </div>
+        <div class="panel">
+          <div class="panel-hd">
+            <div class="panel-title">YOUTUBE</div>
+            <span class="badge yt">Intent Driver</span>
+          </div>
+          <div class="cw slim"><canvas id="c-yt-ov"></canvas></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ FACEBOOK ══════════════════════════════════════════════ -->
+    <div class="view" id="view-facebook">
+      <div class="section-label">// Facebook — Scale Driver</div>
+
+      <div class="stats-row">
+        <div class="stat"><div class="stat-lbl">Reach</div><div class="stat-val fb">496.7K</div></div>
+        <div class="stat"><div class="stat-lbl">Impressions</div><div class="stat-val fb">607.5K</div></div>
+        <div class="stat"><div class="stat-lbl">Engagement</div><div class="stat-val fb">1.2K</div></div>
+        <div class="stat"><div class="stat-lbl">Comments</div><div class="stat-val fb">34</div></div>
+      </div>
+
+      <div class="g2">
+        <div class="panel">
+          <div class="panel-hd"><div class="panel-title">PAID vs ORGANIC vs VIRAL</div></div>
+          <div class="cw tall"><canvas id="c-fb-split"></canvas></div>
+        </div>
+        <div class="panel">
+          <div class="panel-hd"><div class="panel-title">REACH COMPOSITION</div></div>
+          <div class="cw tall"><canvas id="c-fb-donut"></canvas></div>
+        </div>
+      </div>
+
+      <div class="panel g1">
+        <div class="panel-hd">
+          <div class="panel-title">TOP POST — MARCH 18</div>
+          <span class="badge fb">Breakout Content</span>
+        </div>
+        <table class="tbl">
+          <thead><tr>
+            <th>Content</th><th>Reach</th><th>Video Views</th><th>Signal</th>
+          </tr></thead>
+          <tbody>
+            <tr>
+              <td>
+                <div class="post-title">"Not every 4x4 needs to chase..."</div>
+                <div class="post-date">March 18, 2026</div>
+              </td>
+              <td><div class="m-primary" style="color:var(--facebook)">46.9K</div></td>
+              <td><div class="m-primary" style="color:var(--facebook)">36.4K</div></td>
+              <td style="color:var(--muted);font-size:.84rem;max-width:260px">Story packaging and personality created a clear gap between this piece and the rest of the month.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ══ INSTAGRAM ═════════════════════════════════════════════ -->
+    <div class="view" id="view-instagram">
+      <div class="section-label">// Instagram — Engagement Driver</div>
+
+      <div class="stats-row">
+        <div class="stat"><div class="stat-lbl">Followers</div><div class="stat-val ig">5.5K</div></div>
+        <div class="stat"><div class="stat-lbl">New Followers</div><div class="stat-val ig">737</div></div>
+        <div class="stat"><div class="stat-lbl">Reach</div><div class="stat-val ig">96.3K</div></div>
+        <div class="stat"><div class="stat-lbl">Interactions</div><div class="stat-val ig">4.3K</div></div>
+      </div>
+
+      <div class="g2">
+        <div class="panel">
+          <div class="panel-hd"><div class="panel-title">ACTIVITY BREAKDOWN</div></div>
+          <div class="cw tall"><canvas id="c-ig-split"></canvas></div>
+        </div>
+        <div class="panel">
+          <div class="panel-hd"><div class="panel-title">ENGAGEMENT vs REACH</div></div>
+          <div class="cw tall"><canvas id="c-ig-eng"></canvas></div>
+        </div>
+      </div>
+
+      <div class="panel g1">
+        <div class="panel-hd">
+          <div class="panel-title">TOP CONTENT — MARCH</div>
+          <span class="badge ig">Best Performers</span>
+        </div>
+        <table class="tbl">
+          <thead><tr>
+            <th>Type</th><th>Content</th><th>Reach / Views</th><th>Interactions</th><th>Signal</th>
+          </tr></thead>
+          <tbody>
+            <tr>
+              <td><span class="badge ig">Post</span></td>
+              <td>
+                <div class="post-title">"If you've been eyeing..."</div>
+                <div class="post-date">March 12, 2026</div>
+              </td>
+              <td><div class="m-primary" style="color:var(--instagram)">2.4K</div></td>
+              <td><div class="m-primary" style="color:var(--instagram)">124</div></td>
+              <td style="color:var(--muted);font-size:.84rem">Ownership framing drives curiosity and desire.</td>
+            </tr>
+            <tr>
+              <td><span class="badge ig">Reel</span></td>
+              <td>
+                <div class="post-title">"Some inventions are..."</div>
+                <div class="post-date">March 16, 2026</div>
+              </td>
+              <td><div class="m-primary" style="color:var(--instagram)">3.0K</div></td>
+              <td><div class="m-primary" style="color:var(--instagram)">130</div></td>
+              <td style="color:var(--muted);font-size:.84rem">Short-form video carries most interaction on the channel.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ══ YOUTUBE ════════════════════════════════════════════════ -->
+    <div class="view" id="view-youtube">
+      <div class="section-label">// YouTube — Intent Driver</div>
+
+      <div class="stats-row">
+        <div class="stat"><div class="stat-lbl">Views</div><div class="stat-val yt">8.8K</div></div>
+        <div class="stat"><div class="stat-lbl">Watch Time</div><div class="stat-val yt">4.7K min</div></div>
+        <div class="stat"><div class="stat-lbl">Subscribers</div><div class="stat-val yt">179</div></div>
+        <div class="stat"><div class="stat-lbl">Avg. Duration</div><div class="stat-val yt">0:49</div></div>
+      </div>
+
+      <div class="g2">
+        <div class="panel">
+          <div class="panel-hd"><div class="panel-title">PERFORMANCE METRICS</div></div>
+          <div class="cw tall"><canvas id="c-yt-split"></canvas></div>
+        </div>
+        <div class="panel">
+          <div class="panel-hd"><div class="panel-title">ACTIVE SEARCH KEYWORDS</div></div>
+          <div id="kw-list" style="padding-top:8px"></div>
+        </div>
+      </div>
+
+      <div class="panel g1">
+        <div class="panel-hd">
+          <div class="panel-title">TOP VIDEO — MARCH 18</div>
+          <span class="badge yt">Best Performer</span>
+        </div>
+        <table class="tbl">
+          <thead><tr>
+            <th>Content</th><th>Views</th><th>Likes</th><th>Shares</th><th>Signal</th>
+          </tr></thead>
+          <tbody>
+            <tr>
+              <td>
+                <div class="post-title">"The Real Reason INEOS Built..."</div>
+                <div class="post-date">March 18, 2026</div>
+              </td>
+              <td><div class="m-primary" style="color:var(--youtube)">3.2K</div></td>
+              <td><div class="m-primary" style="color:var(--youtube)">141</div></td>
+              <td><div class="m-primary" style="color:var(--youtube)">15</div></td>
+              <td style="color:var(--muted);font-size:.84rem">Explanation-led content wins when it maps to active search demand and gives viewers a reason to continue watching.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ══ TOP CONTENT ════════════════════════════════════════════ -->
+    <div class="view" id="view-content">
+      <div class="section-label">// Top Performing Content — All Channels</div>
+
+      <div class="panel g1">
+        <table class="tbl">
+          <thead><tr>
+            <th>Platform</th><th>Content</th><th>Lead Metric</th><th>Supporting</th><th>Signal</th>
+          </tr></thead>
+          <tbody>
+            <tr>
+              <td><span class="badge fb">Facebook</span></td>
+              <td>
+                <div class="post-title">"Not every 4x4 needs to chase..."</div>
+                <div class="post-date">March 18, 2026</div>
+              </td>
+              <td><div class="m-primary" style="color:var(--facebook)">46.9K Reach</div></td>
+              <td><div class="m-sub">36.4K video views</div></td>
+              <td style="color:var(--muted);font-size:.84rem;max-width:240px">Breakout post. Story packaging created a clear performance gap versus the rest of the month.</td>
+            </tr>
+            <tr>
+              <td><span class="badge ig">IG Post</span></td>
+              <td>
+                <div class="post-title">"If you've been eyeing..."</div>
+                <div class="post-date">March 12, 2026</div>
+              </td>
+              <td><div class="m-primary" style="color:var(--instagram)">2.4K Reach</div></td>
+              <td><div class="m-sub">124 interactions</div></td>
+              <td style="color:var(--muted);font-size:.84rem;max-width:240px">Ownership interest framing still performs when done with intention.</td>
+            </tr>
+            <tr>
+              <td><span class="badge ig">IG Reel</span></td>
+              <td>
+                <div class="post-title">"Some inventions are..."</div>
+                <div class="post-date">March 16, 2026</div>
+              </td>
+              <td><div class="m-primary" style="color:var(--instagram)">3.0K Views</div></td>
+              <td><div class="m-sub">130 interactions</div></td>
+              <td style="color:var(--muted);font-size:.84rem;max-width:240px">Reels are where Mossy can look more active and culturally current.</td>
+            </tr>
+            <tr>
+              <td><span class="badge yt">YouTube</span></td>
+              <td>
+                <div class="post-title">"The Real Reason INEOS Built..."</div>
+                <div class="post-date">March 18, 2026</div>
+              </td>
+              <td><div class="m-primary" style="color:var(--youtube)">3.2K Views</div></td>
+              <td><div class="m-sub">141 likes · 15 shares</div></td>
+              <td style="color:var(--muted);font-size:.84rem;max-width:240px">Explanation-led content wins when it maps to active search demand.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="g2">
+        <div class="panel">
+          <div class="panel-hd"><div class="panel-title">WHAT CUT THROUGH</div></div>
+          <p style="color:var(--muted);font-size:.9rem;line-height:1.7">Recognizable personalities, point-of-view angles, and content that feels like a story instead of an announcement. The Grenadier performs best when framed as distinctive, not just available.</p>
+        </div>
+        <div class="panel">
+          <div class="panel-hd"><div class="panel-title">WHAT LOOKED WEAKER</div></div>
+          <p style="color:var(--muted);font-size:.9rem;line-height:1.7">Routine updates presenting inventory or brand information without a narrative hook. Content that reads like an announcement rather than a story consistently underperformed.</p>
+        </div>
+      </div>
+
+      <div class="panel g1">
+        <div class="panel-hd"><div class="panel-title">CONTENT PERFORMANCE COMPARISON</div></div>
+        <div class="cw"><canvas id="c-content-cmp"></canvas></div>
+      </div>
+    </div>
+
+    <!-- ══ TAKEAWAYS ══════════════════════════════════════════════ -->
+    <div class="view" id="view-takeaways">
+      <div class="section-label">// Key Takeaways — March 2026</div>
+
+      <div class="tk-grid">
+        <div class="tk">
+          <div class="tk-icon fb"></div>
+          <div class="tk-title">Facebook: Stay Focused on Scale</div>
+          <div class="tk-body">Paid support is clearly working. The next step is making the organic side more memorable by borrowing from the strongest story-led posts.</div>
+        </div>
+        <div class="tk">
+          <div class="tk-icon ig"></div>
+          <div class="tk-title">Instagram: Lean Further Into Video</div>
+          <div class="tk-body">The most active interaction patterns came from Reels and visually dynamic content. This is the right place to make Mossy feel more current and more human.</div>
+        </div>
+        <div class="tk">
+          <div class="tk-icon yt"></div>
+          <div class="tk-title">YouTube: Build Search Authority</div>
+          <div class="tk-body">Review, model-year, and brand-story content map closely to audience intent. This channel matters less for raw scale and more for buyer confidence.</div>
+        </div>
+        <div class="tk">
+          <div class="tk-icon dark"></div>
+          <div class="tk-title">Strongest Content is Identity-Driven</div>
+          <div class="tk-body">The posts that win are the ones that make the Grenadier feel different, not just available. That is the creative lane worth expanding across every channel.</div>
+        </div>
+      </div>
+
+      <div class="panel g1">
+        <p class="bq">"The biggest opportunity is not simply posting more. It is leaning harder into the formats that already proved they can carry attention: recognizable personalities, POV content, and stories that make the Grenadier feel distinctive."</p>
+      </div>
+
+      <div class="panel g1">
+        <div class="panel-hd"><div class="panel-title">CHANNEL ROLE SUMMARY</div></div>
+        <div class="cw"><canvas id="c-radar"></canvas></div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="footer">
+    <span>MOSSY INEOS GRENADIER / SOCIAL ANALYTICS</span>
+    <span>DATA PERIOD: 03.01.2026 – 03.31.2026</span>
+  </footer>
+
+  <script>
+    // ── TABS ──────────────────────────────────────────────────────
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById('view-' + tab.dataset.view).classList.add('active');
+      });
+    });
+
+    // ── COUNTER ANIMATION ─────────────────────────────────────────
+    function runCounter(el) {
+      const target  = parseInt(el.dataset.count);
+      const divisor = parseFloat(el.dataset.div);
+      const suffix  = el.dataset.sfx;
+      const dur     = 1300;
+      const t0      = performance.now();
+      function step(now) {
+        const p = Math.min((now - t0) / dur, 1);
+        const e = 1 - Math.pow(1 - p, 4);
+        const v = (target * e) / divisor;
+        el.textContent = (v % 1 === 0 ? v.toFixed(0) : v.toFixed(1)) + suffix;
+        if (p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+    setTimeout(() => {
+      document.querySelectorAll('[data-count]').forEach(el => runCounter(el));
+    }, 200);
+
+    // ── CHART GLOBALS ─────────────────────────────────────────────
+    Chart.defaults.color           = '#777';
+    Chart.defaults.borderColor     = '#2a2a2a';
+    Chart.defaults.font.family     = "'Space Mono', monospace";
+    Chart.defaults.font.size       = 10;
+
+    const FB = '#2b74e8', IG = '#c44fd2', YT = '#e12727', RED = '#e10600';
+
+    const fmtK = v => v >= 1000 ? (v / 1000).toFixed(v >= 100000 ? 0 : 1) + 'K' : v;
+
+    const baseOpts = (indexAxis = 'x') => ({
+      responsive: true,
+      maintainAspectRatio: false,
+      indexAxis,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: {
+          grid: { color: '#1e1e1e' },
+          ticks: { callback: indexAxis === 'y' ? fmtK : v => v }
+        },
+        y: {
+          grid: { color: indexAxis === 'x' ? '#1e1e1e' : 'transparent' },
+          ticks: { callback: indexAxis === 'x' ? fmtK : v => v }
+        }
+      }
+    });
+
+    // ── REACH BAR ─────────────────────────────────────────────────
+    new Chart(document.getElementById('c-reach'), {
+      type: 'bar',
+      data: {
+        labels: ['Facebook', 'Instagram', 'YouTube'],
+        datasets: [{
+          data: [496700, 96300, 8800],
+          backgroundColor: [FB + 'dd', IG + 'dd', YT + 'dd'],
+          borderColor:      [FB, IG, YT],
+          borderWidth: 1,
+          borderRadius: 3
+        }]
+      },
+      options: {
+        ...baseOpts(),
+        plugins: {
+          legend: { display: false },
+          tooltip: { callbacks: { label: ctx => ' ' + fmtK(ctx.raw) + ' reach' } }
+        },
+        scales: {
+          x: { grid: { display: false } },
+          y: { grid: { color: '#1e1e1e' }, ticks: { callback: fmtK } }
+        }
+      }
+    });
+
+    // ── REACH DONUT ───────────────────────────────────────────────
+    new Chart(document.getElementById('c-donut'), {
+      type: 'doughnut',
+      data: {
+        labels: ['Facebook 82.5%', 'Instagram 16.0%', 'YouTube 1.5%'],
+        datasets: [{
+          data: [496700, 96300, 8800],
+          backgroundColor: [FB, IG, YT],
+          borderWidth: 0,
+          hoverOffset: 8
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        cutout: '72%',
+        plugins: {
+          legend: { position: 'bottom', labels: { padding: 14, usePointStyle: true, pointStyleWidth: 8, font: { size: 10 } } },
+          tooltip: { callbacks: { label: ctx => ' ' + fmtK(ctx.raw) + ' (' + (ctx.raw / 601800 * 100).toFixed(1) + '%)' } }
+        }
+      }
+    });
+
+    // ── FB OVERVIEW ───────────────────────────────────────────────
+    new Chart(document.getElementById('c-fb-ov'), {
+      type: 'bar',
+      data: {
+        labels: ['Reach', 'Impressions', 'Engagement', 'Comments'],
+        datasets: [{ data: [496700, 607500, 1200, 34], backgroundColor: FB + 'aa', borderColor: FB, borderWidth: 1, borderRadius: 2 }]
+      },
+      options: {
+        ...baseOpts(),
+        scales: { x: { grid: { display: false }, ticks: { font: { size: 9 } } }, y: { grid: { color: '#1e1e1e' }, ticks: { callback: fmtK, font: { size: 9 } } } }
+      }
+    });
+
+    // ── IG OVERVIEW ───────────────────────────────────────────────
+    new Chart(document.getElementById('c-ig-ov'), {
+      type: 'bar',
+      data: {
+        labels: ['Views', 'Reach', 'Followers', 'Interactions'],
+        datasets: [{ data: [157800, 96300, 5500, 4300], backgroundColor: IG + 'aa', borderColor: IG, borderWidth: 1, borderRadius: 2 }]
+      },
+      options: {
+        ...baseOpts(),
+        scales: { x: { grid: { display: false }, ticks: { font: { size: 9 } } }, y: { grid: { color: '#1e1e1e' }, ticks: { callback: fmtK, font: { size: 9 } } } }
+      }
+    });
+
+    // ── YT OVERVIEW ───────────────────────────────────────────────
+    new Chart(document.getElementById('c-yt-ov'), {
+      type: 'bar',
+      data: {
+        labels: ['Views', 'Watch (min)', 'Engagement', 'Subscribers'],
+        datasets: [{ data: [8800, 4700, 345, 179], backgroundColor: YT + 'aa', borderColor: YT, borderWidth: 1, borderRadius: 2 }]
+      },
+      options: {
+        ...baseOpts(),
+        scales: { x: { grid: { display: false }, ticks: { font: { size: 9 } } }, y: { grid: { color: '#1e1e1e' }, ticks: { font: { size: 9 } } } }
+      }
+    });
+
+    // ── FB SPLIT ──────────────────────────────────────────────────
+    new Chart(document.getElementById('c-fb-split'), {
+      type: 'bar',
+      data: {
+        labels: ['Paid Reach', 'Organic Reach', 'Viral Reach'],
+        datasets: [{
+          data: [390000, 220000, 474],
+          backgroundColor: [FB, RED, '#555'],
+          borderRadius: 3
+        }]
+      },
+      options: {
+        ...baseOpts('y'),
+        plugins: {
+          legend: { display: false },
+          tooltip: { callbacks: { label: ctx => ' ' + fmtK(ctx.raw) } }
+        },
+        scales: {
+          x: { grid: { color: '#1e1e1e' }, ticks: { callback: fmtK } },
+          y: { grid: { display: false } }
+        }
+      }
+    });
+
+    // ── FB DONUT ──────────────────────────────────────────────────
+    new Chart(document.getElementById('c-fb-donut'), {
+      type: 'doughnut',
+      data: {
+        labels: ['Paid 63.3%', 'Organic 35.7%', 'Viral 0.1%'],
+        datasets: [{ data: [390000, 220000, 474], backgroundColor: [FB, RED, '#555'], borderWidth: 0, hoverOffset: 8 }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false, cutout: '70%',
+        plugins: {
+          legend: { position: 'bottom', labels: { padding: 14, usePointStyle: true, font: { size: 10 } } },
+          tooltip: { callbacks: { label: ctx => ' ' + fmtK(ctx.raw) } }
+        }
+      }
+    });
+
+    // ── IG SPLIT ──────────────────────────────────────────────────
+    new Chart(document.getElementById('c-ig-split'), {
+      type: 'bar',
+      data: {
+        labels: ['Total Views', 'Total Reach', 'Total Followers', 'Interactions', 'New Followers'],
+        datasets: [{ data: [157800, 96300, 5500, 4300, 737], backgroundColor: IG + 'bb', borderColor: IG, borderWidth: 1, borderRadius: 3 }]
+      },
+      options: {
+        ...baseOpts('y'),
+        plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ' ' + fmtK(ctx.raw) } } },
+        scales: { x: { grid: { color: '#1e1e1e' }, ticks: { callback: fmtK } }, y: { grid: { display: false } } }
+      }
+    });
+
+    // ── IG ENGAGEMENT DONUT ───────────────────────────────────────
+    new Chart(document.getElementById('c-ig-eng'), {
+      type: 'doughnut',
+      data: {
+        labels: ['Interactions 4.5%', 'Non-engaged Reach'],
+        datasets: [{ data: [4300, 92000], backgroundColor: [IG, '#222'], borderWidth: 0 }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false, cutout: '70%',
+        plugins: {
+          legend: { position: 'bottom', labels: { padding: 14, usePointStyle: true, font: { size: 10 } } },
+          tooltip: { callbacks: { label: ctx => ' ' + fmtK(ctx.raw) } }
+        }
+      }
+    });
+
+    // ── YT SPLIT ──────────────────────────────────────────────────
+    new Chart(document.getElementById('c-yt-split'), {
+      type: 'bar',
+      data: {
+        labels: ['Views', 'Watch Time (min)', 'Engagement Actions', 'New Subscribers'],
+        datasets: [{
+          data: [8800, 4700, 345, 24],
+          backgroundColor: [YT, YT + 'aa', YT + '66', YT + '44'],
+          borderRadius: 3
+        }]
+      },
+      options: {
+        ...baseOpts('y'),
+        plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ' ' + fmtK(ctx.raw) } } },
+        scales: { x: { grid: { color: '#1e1e1e' }, ticks: { callback: fmtK } }, y: { grid: { display: false } } }
+      }
+    });
+
+    // ── YT KEYWORDS ───────────────────────────────────────────────
+    const kws = [
+      { label: 'ineos grenadier',          score: 100 },
+      { label: 'ineos grenadier 2026',      score: 80 },
+      { label: 'ineos grenadier review',    score: 66 },
+      { label: 'grenadier off road',        score: 50 },
+      { label: 'mossy ineos',              score: 38 },
+    ];
+    const kwEl = document.getElementById('kw-list');
+    kws.forEach(k => {
+      kwEl.innerHTML += `
+        <div class="kw-row">
+          <div class="kw-header">
+            <span>${k.label}</span>
+            <span style="color:var(--youtube)">${k.score}</span>
+          </div>
+          <div class="kw-track">
+            <div class="kw-fill" style="width:0" data-w="${k.score}%"></div>
+          </div>
+        </div>`;
+    });
+    // Animate bars in after a tick
+    setTimeout(() => {
+      document.querySelectorAll('.kw-fill').forEach(el => {
+        el.style.width = el.dataset.w;
+      });
+    }, 400);
+
+    // ── CONTENT COMPARISON ────────────────────────────────────────
+    new Chart(document.getElementById('c-content-cmp'), {
+      type: 'bar',
+      data: {
+        labels: ['FB: Not every 4x4...', 'IG Reel: Some inventions...', 'YT: Real Reason INEOS...', 'IG Post: If you\'ve been...'],
+        datasets: [
+          {
+            label: 'Primary Metric',
+            data: [46900, 3000, 3200, 2400],
+            backgroundColor: [FB + 'cc', IG + 'cc', YT + 'cc', IG + '88'],
+            borderColor:      [FB, IG, YT, IG],
+            borderWidth: 1,
+            borderRadius: 3
+          }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ' ' + fmtK(ctx.raw) + ' reach/views' } } },
+        scales: {
+          x: { grid: { display: false }, ticks: { font: { size: 9 }, maxRotation: 0, callback: (v, i, ticks) => {
+            const labels = ['FB: Not every 4x4...', 'IG Reel', 'YT: Real Reason...', 'IG Post'];
+            return labels[i];
+          } } },
+          y: { grid: { color: '#1e1e1e' }, ticks: { callback: fmtK } }
+        }
+      }
+    });
+
+    // ── RADAR CHART ───────────────────────────────────────────────
+    new Chart(document.getElementById('c-radar'), {
+      type: 'radar',
+      data: {
+        labels: ['Scale / Reach', 'Engagement Rate', 'Follower Growth', 'Watch / Intent', 'Content Quality', 'Paid Efficiency'],
+        datasets: [
+          {
+            label: 'Facebook',
+            data: [98, 25, 15, 20, 72, 90],
+            backgroundColor: FB + '22',
+            borderColor: FB,
+            borderWidth: 2,
+            pointBackgroundColor: FB,
+            pointRadius: 4
+          },
+          {
+            label: 'Instagram',
+            data: [35, 88, 82, 30, 78, 40],
+            backgroundColor: IG + '22',
+            borderColor: IG,
+            borderWidth: 2,
+            pointBackgroundColor: IG,
+            pointRadius: 4
+          },
+          {
+            label: 'YouTube',
+            data: [12, 40, 20, 95, 85, 10],
+            backgroundColor: YT + '22',
+            borderColor: YT,
+            borderWidth: 2,
+            pointBackgroundColor: YT,
+            pointRadius: 4
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: 'bottom',
+            labels: { padding: 18, usePointStyle: true, pointStyleWidth: 8, font: { size: 10 } }
+          }
+        },
+        scales: {
+          r: {
+            backgroundColor: 'transparent',
+            grid: { color: '#2a2a2a' },
+            angleLines: { color: '#2a2a2a' },
+            ticks: { display: false },
+            pointLabels: { font: { size: 10, family: "'Space Mono', monospace" }, color: '#999' },
+            min: 0, max: 100
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
