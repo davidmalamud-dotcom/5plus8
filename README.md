@@ -12,6 +12,7 @@ Current reports:
 - [Mustang Cat Competitive Landscape](./reports/mustang-cat/)
 - [Becks Prime Houston Competitive Landscape](./reports/becks-prime/)
 - [C&D Scrap Metal Competitive Landscape](./reports/cd-scrap/)
+- [Borderline Supply Sourcing Lead Map](./reports/borderline-sourcing/)
 
 Suggested structure for future reports:
 

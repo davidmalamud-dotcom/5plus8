@@ -1,0 +1,564 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Borderline Supply National Sourcing Lead Map</title>
+  <style>
+    :root {
+      --red: #e10600;
+      --black: #000;
+      --dark: #191919;
+      --mid: #666;
+      --light: #f4f4f4;
+      --line: #ddd;
+      --white: #fff;
+      --font: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: var(--font);
+      background: var(--white);
+      color: var(--dark);
+      line-height: 1.45;
+    }
+    a { color: inherit; }
+    .page {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+    .hero {
+      min-height: 68vh;
+      display: grid;
+      align-items: end;
+      padding: 72px 0 44px;
+      background:
+        linear-gradient(90deg, rgba(0,0,0,0.97), rgba(0,0,0,0.88)),
+        linear-gradient(140deg, rgba(225,6,0,0.18), rgba(255,255,255,0) 45%);
+      color: var(--white);
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 22px;
+      color: rgba(255,255,255,0.74);
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before {
+      content: "";
+      width: 34px;
+      height: 3px;
+      background: var(--red);
+    }
+    h1 {
+      max-width: 980px;
+      margin: 0;
+      font-size: clamp(2.9rem, 6vw, 5.8rem);
+      line-height: 0.9;
+      letter-spacing: -0.05em;
+      text-transform: uppercase;
+    }
+    .hero p {
+      max-width: 760px;
+      margin: 28px 0 0;
+      color: rgba(255,255,255,0.82);
+      font-size: clamp(1.02rem, 1.9vw, 1.22rem);
+      font-weight: 500;
+    }
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255,255,255,0.94);
+      backdrop-filter: blur(12px);
+    }
+    .nav .page {
+      display: flex;
+      gap: 18px;
+      overflow-x: auto;
+      padding: 14px 0;
+    }
+    .nav a {
+      white-space: nowrap;
+      text-decoration: none;
+      color: var(--mid);
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .nav a:hover,
+    .nav a:focus-visible { color: var(--red); }
+    section {
+      padding: 54px 0;
+      border-top: 1px solid var(--line);
+    }
+    section.alt { background: var(--light); }
+    h2 {
+      margin: 0 0 18px;
+      font-size: clamp(2rem, 3vw, 3.2rem);
+      line-height: 0.94;
+      letter-spacing: -0.04em;
+      text-transform: uppercase;
+    }
+    .lede {
+      max-width: 900px;
+      margin: 0 0 26px;
+      color: var(--mid);
+      font-size: 1.04rem;
+    }
+    .summary-grid,
+    .target-grid,
+    .segment-grid,
+    .source-grid {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    }
+    .card, .source-card {
+      padding: 20px;
+      border: 1px solid var(--line);
+      background: var(--white);
+    }
+    .card h3, .source-card h3 {
+      margin: 0 0 10px;
+      font-size: 1rem;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+    .card p, .card li, .source-card p, .source-card li {
+      margin: 0;
+      color: var(--mid);
+      font-size: 0.95rem;
+    }
+    .card ul, .source-card ul {
+      margin: 0;
+      padding-left: 18px;
+      display: grid;
+      gap: 8px;
+    }
+    .metric-label {
+      color: var(--mid);
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .metric-value {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .badge {
+      display: inline-flex;
+      width: fit-content;
+      margin-bottom: 10px;
+      padding: 6px 8px;
+      border: 1px solid var(--line);
+      color: var(--red);
+      font-size: 0.7rem;
+      font-weight: 900;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+    .matrix {
+      display: grid;
+      gap: 14px;
+    }
+    .matrix-row {
+      display: grid;
+      grid-template-columns: minmax(180px, 1.05fr) minmax(160px, 0.8fr) minmax(240px, 1.35fr) minmax(220px, 1.1fr) minmax(180px, 0.85fr);
+      gap: 18px;
+      padding: 18px 0;
+      border-top: 1px solid var(--line);
+      align-items: start;
+    }
+    .matrix-row.header {
+      padding-top: 0;
+      border-top: 0;
+      color: var(--mid);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .matrix-row h3 {
+      margin: 0 0 8px;
+      font-size: 1.3rem;
+      line-height: 0.94;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+    }
+    .matrix-row p, .matrix-row li {
+      margin: 0;
+      color: var(--mid);
+      font-size: 0.94rem;
+    }
+    .matrix-row ul {
+      margin: 0;
+      padding-left: 18px;
+      display: grid;
+      gap: 8px;
+    }
+    .fit {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1;
+    }
+    .fit small {
+      display: block;
+      margin-top: 8px;
+      color: var(--mid);
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .note {
+      margin-top: 16px;
+      color: var(--mid);
+      font-size: 0.9rem;
+    }
+    .download {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 16px;
+      padding: 12px 16px;
+      border: 1px solid var(--dark);
+      background: var(--dark);
+      color: var(--white);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .download:hover,
+    .download:focus-visible {
+      background: var(--red);
+      border-color: var(--red);
+    }
+    @media (max-width: 980px) {
+      .matrix-row {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      .matrix-row.header { display: none; }
+    }
+    @media (max-width: 720px) {
+      .page { width: min(100%, calc(100% - 24px)); }
+      .hero { min-height: 56vh; padding: 56px 0 28px; }
+      h1 { font-size: clamp(2.4rem, 12vw, 3.8rem); }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="page">
+      <div class="eyebrow">Borderline Supply / National Sourcing Leads</div>
+      <h1>Supplier and Middleman Lead Map</h1>
+      <p>This list is built around the national middlemen most likely to surface equipment before it hits the open market: commercial fitness distributors, installation networks, commercial movers, and corporate wellness operators.</p>
+    </div>
+  </header>
+
+  <nav class="nav" aria-label="Section navigation">
+    <div class="page">
+      <a href="#snapshot">Snapshot</a>
+      <a href="#titles">Target Titles</a>
+      <a href="#segments">Segments</a>
+      <a href="#leads">Lead List</a>
+      <a href="#priority">Priority Contacts</a>
+      <a href="#sources">Sources</a>
+    </div>
+  </nav>
+
+  <main>
+    <section id="snapshot">
+      <div class="page">
+        <h2>Snapshot</h2>
+        <p class="lede">The best supplier-side lead strategy is not just “find gym owners.” It is finding the people upstream from closures, refreshes, tenant improvement cycles, and corporate amenity transitions. Those people usually sit inside sales, installation, project management, relocation, or corporate fitness operations.</p>
+        <div class="summary-grid">
+          <article class="card">
+            <div class="metric-label">Organizations</div>
+            <div class="metric-value">43</div>
+            <p>National and multi-market targets across distribution, trade-in, logistics, relocation, hospitality, multifamily, and corporate fitness operations.</p>
+          </article>
+          <article class="card">
+            <div class="metric-label">Primary Buckets</div>
+            <div class="metric-value">6</div>
+            <p>Commercial fitness distributors, hospitality fitness specialists, trade-in and liquidation partners, fitness logistics groups, commercial movers, and corporate wellness operators.</p>
+          </article>
+          <article class="card">
+            <div class="metric-label">LinkedIn Signals</div>
+            <div class="metric-value">10+</div>
+            <p>Public LinkedIn company pages, hiring signals, or named contacts attached where usable.</p>
+          </article>
+          <article class="card">
+            <div class="metric-label">Output</div>
+            <div class="metric-value">Dashboard + 2 CSVs</div>
+            <p>Use the main CSV for market coverage and the priority file for immediate outreach.</p>
+          </article>
+        </div>
+        <a class="download" href="leads.csv" download>Download CSV</a>
+      </div>
+    </section>
+
+    <section id="titles" class="alt">
+      <div class="page">
+        <h2>Target Titles</h2>
+        <p class="lede">These are the roles most likely to know when equipment is being replaced, relocated, decommissioned, or traded in.</p>
+        <div class="target-grid">
+          <article class="card">
+            <span class="badge">Tier 1</span>
+            <h3>Commercial Sales</h3>
+            <ul>
+              <li>Commercial Sales Representative</li>
+              <li>Commercial Account Manager</li>
+              <li>Territory Sales Manager</li>
+              <li>Director of Commercial Sales</li>
+            </ul>
+          </article>
+          <article class="card">
+            <span class="badge">Tier 1</span>
+            <h3>Install and Service</h3>
+            <ul>
+              <li>Installation Manager</li>
+              <li>Service Manager</li>
+              <li>Installation Coordinator</li>
+              <li>Trade-In Program Manager</li>
+            </ul>
+          </article>
+          <article class="card">
+            <span class="badge">Tier 1</span>
+            <h3>Relocation and Decommission</h3>
+            <ul>
+              <li>Project Manager</li>
+              <li>Move Coordinator</li>
+              <li>Relocation Manager</li>
+              <li>Decommissioning Manager</li>
+            </ul>
+          </article>
+          <article class="card">
+            <span class="badge">Tier 2</span>
+            <h3>Corporate Fitness Ops</h3>
+            <ul>
+              <li>Program Manager</li>
+              <li>Corporate Fitness Manager</li>
+              <li>Site Manager</li>
+              <li>Equipment Procurement Manager</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="segments">
+      <div class="page">
+        <h2>Segment Read</h2>
+        <p class="lede">Borderline should not build one sourcing list. It should build parallel lists because each segment sees different kinds of inventory at different moments.</p>
+        <div class="segment-grid">
+          <article class="card">
+            <h3>Commercial Fitness Distributors</h3>
+            <p>Best source for trade-ins, replacement cycles, and facilities refreshing entire packages. These teams often know what is leaving before the market does.</p>
+          </article>
+          <article class="card">
+            <h3>Fitness Logistics and Installation</h3>
+            <p>Strong source for relocation, extraction, and reinstallation opportunities. These operators are closest to equipment moving in and out of service.</p>
+          </article>
+          <article class="card">
+            <h3>Commercial Movers</h3>
+            <p>Best source for office gyms, amenity spaces, and corporate facilities during closures, consolidations, and redesigns.</p>
+          </article>
+          <article class="card">
+            <h3>Corporate Wellness Operators</h3>
+            <p>Useful for campus, tenant, and employee fitness centers where they influence procurement, refreshes, or vendor relationships nationally.</p>
+          </article>
+          <article class="card">
+            <h3>Trade-In and Amenity Specialists</h3>
+            <p>These groups see refresh cycles in multifamily, hospitality, and corporate environments and often have a cleaner line of sight into outgoing equipment.</p>
+          </article>
+          <article class="card">
+            <h3>Hospitality Fitness Distributors</h3>
+            <p>Hotel and resort fitness specialists who see refresh cycles before the broader market does. When a brand upgrades a fitness room, these are the first calls. Trade-in coordination and extraction are core parts of the relationship.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="leads" class="alt">
+      <div class="page">
+        <h2>Lead List</h2>
+        <p class="lede">This list prioritizes national or multi-market operators that can surface volume, repeat opportunities, or early visibility into upcoming equipment transitions.</p>
+        <div class="matrix">
+          <div class="matrix-row header">
+            <div>Company</div>
+            <div>Segment</div>
+            <div>Why It Matters</div>
+            <div>Best Titles</div>
+            <div>Fit</div>
+          </div>
+
+          <div class="matrix-row"><div><h3>Fitnessmith</h3><p><a href="https://fitnessmith.com/">Website</a> · <a href="https://www.linkedin.com/company/fitnessmith-equipment-sales">LinkedIn</a></p><p><a href="https://www.linkedin.com/in/michael-scichilone-14998b4">Michael Scichilone</a></p></div><div><p>Distributor</p></div><div><p>National footprint, trade-in and removal programs, pre-owned focus, and nationwide sales and service.</p></div><div><ul><li>Director of Commercial Sales</li><li>Commercial Sales Rep</li><li>Trade-In Program Manager</li></ul></div><div><div class="fit">10<small>Priority</small></div></div></div>
+          <div class="matrix-row"><div><h3>Fit Supply</h3><p><a href="https://fitsupply.com/">Website</a> · <a href="https://www.linkedin.com/company/fit-supply">LinkedIn</a></p><p><a href="https://www.linkedin.com/in/ryan-freeman-88a4998">Ryan Freeman</a></p></div><div><p>Distributor</p></div><div><p>50-state reach, 100+ installation partners, multifamily and corporate wellness relevance, and a visible leadership team.</p></div><div><ul><li>Sales Representative</li><li>Project Manager</li><li>Installation Coordinator</li></ul></div><div><div class="fit">10<small>Priority</small></div></div></div>
+          <div class="matrix-row"><div><h3>McCollister's Fitness Systems</h3><p><a href="https://www.mccollisters.com/services/mccollisters-fitness-systems/">Website</a></p><p><a href="https://www.linkedin.com/in/john-cross-57a672155">John Cross</a></p></div><div><p>Fitness logistics</p></div><div><p>Largest fitness installation network in the country with relocation, installation, and repair across the U.S.</p></div><div><ul><li>Fitness Systems Project Manager</li><li>Installation Manager</li><li>Relocation Manager</li></ul></div><div><div class="fit">10<small>Priority</small></div></div></div>
+          <div class="matrix-row"><div><h3>JK Moving Services</h3><p><a href="https://www.jkmoving.com/">Website</a></p><p><a href="https://www.jkmoving.com/app/uploads/2020/04/JK-Commercial-GSA-schedule.pdf">GSA Rate Sheet</a></p></div><div><p>Commercial moving</p></div><div><p>Formal commercial relocation roles are public, which makes title targeting unusually clear.</p></div><div><ul><li>Project Manager</li><li>Move Coordinator</li><li>Install Supervisor</li></ul></div><div><div class="fit">10<small>Priority</small></div></div></div>
+          <div class="matrix-row"><div><h3>Marathon Fitness</h3><p><a href="https://www.marathonfitness.com/contact/">Website</a> · <a href="https://www.linkedin.com/company/marathonfitness">LinkedIn</a></p></div><div><p>Distributor</p></div><div><p>Large provider to Fortune 500, hospitality, multifamily, and clubs, with trade-in, service, and layout planning signals.</p></div><div><ul><li>Commercial Sales Representative</li><li>Inside Sales Representative</li><li>Service Manager</li></ul></div><div><div class="fit">9<small>Priority</small></div></div></div>
+          <div class="matrix-row"><div><h3>Johnson Commercial Fitness</h3><p><a href="https://www.johnsonfitness.com/Commercial/Support">Website</a> · <a href="https://www.linkedin.com/showcase/johnson-commercial-fitness/">LinkedIn</a></p><p><a href="https://www.linkedin.com/in/ron-adams-32400114">Ron Adams</a></p></div><div><p>Distributor</p></div><div><p>Nationwide commercial account managers by geography with delivery, installation, used, refurbished, and maintenance services.</p></div><div><ul><li>Commercial Account Manager</li><li>Regional Commercial Manager</li><li>Account Manager</li></ul></div><div><div class="fit">9<small>Priority</small></div></div></div>
+          <div class="matrix-row"><div><h3>Hilldrup Workplace Solutions</h3><p><a href="https://www.hilldrup.com/workplace-solutions/office-moving/">Website</a></p><p><a href="https://www.hilldrup.com/wp-content/uploads/2023/10/HilldrupsCommercialServicesforGSA_updated-October-2023.pdf">Role Sheet</a></p></div><div><p>Commercial moving</p></div><div><p>Public role definitions include Commercial Project Manager and Commercial Installer, which map neatly to the target persona.</p></div><div><ul><li>Commercial Project Manager</li><li>Commercial Installer</li><li>Team Lead</li></ul></div><div><div class="fit">9<small>Priority</small></div></div></div>
+          <div class="matrix-row"><div><h3>HealthFitness</h3><p><a href="https://www.healthfitness.com/">Website</a> · <a href="https://www.linkedin.com/company/health-fitness-corporation">LinkedIn</a></p><p><a href="https://www.linkedin.com/in/nicole-hill-5239798b">Nicole Hill</a></p></div><div><p>Corporate wellness</p></div><div><p>Manages 360+ sites nationwide and explicitly handles equipment procurement and maintenance inside corporate fitness operations.</p></div><div><ul><li>Program Manager</li><li>Corporate Fitness Manager</li><li>Equipment Procurement Manager</li></ul></div><div><div class="fit">9<small>Priority</small></div></div></div>
+          <div class="matrix-row"><div><h3>360 Fitness Solutions</h3><p><a href="https://360fitnesssolutions.com/we-buy-gym-equipment/">Website</a></p></div><div><p>Trade-in and liquidation</p></div><div><p>One of the clearest public trade-in and liquidation plays in the market, with nationwide pickup and an explicit buyback posture.</p></div><div><ul><li>Trade-In Program Manager</li><li>Commercial Sales</li><li>Asset Recovery Manager</li></ul></div><div><div class="fit">10<small>Priority</small></div></div></div>
+          <div class="matrix-row"><div><h3>Suddath Workplace Solutions</h3><p><a href="https://suddath.com/office-moving/">Website</a> · <a href="https://www.linkedin.com/company/suddath-workplace-solutions">LinkedIn</a></p></div><div><p>Commercial moving</p></div><div><p>Largest commercial mover in North America with national office move coverage and strong project-management-led delivery.</p></div><div><ul><li>Chief Commercial Officer</li><li>Project Manager</li><li>Sales Executive</li></ul></div><div><div class="fit">8<small>Priority</small></div></div></div>
+          <div class="matrix-row"><div><h3>Advantage Sport & Fitness</h3><p><a href="https://advantagefitness.com/contact/">Website</a></p></div><div><p>Distributor</p></div><div><p>Large commercial fitness provider with visible consultants, designers, installation techs, and service personnel.</p></div><div><ul><li>Fitness Consultant</li><li>Installation Technician</li><li>Service Technician</li></ul></div><div><div class="fit">8<small>Priority</small></div></div></div>
+          <div class="matrix-row"><div><h3>Ardent Fitness</h3><p><a href="https://ardentfitness.com/corporate-fitness-centers/">Website</a> · <a href="https://www.linkedin.com/company/ardentfitness">LinkedIn</a></p></div><div><p>Distributor</p></div><div><p>Nationwide installation, multifamily fitness, and corporate fitness-center positioning make this a strong upstream source.</p></div><div><ul><li>Corporate Fitness Sales Manager</li><li>Project Manager</li><li>Installation Manager</li></ul></div><div><div class="fit">8<small>Priority</small></div></div></div>
+          <div class="matrix-row"><div><h3>Active Wellness</h3><p><a href="https://activewellness.com/management/">Website</a></p></div><div><p>Corporate wellness</p></div><div><p>Management operator for tenant and corporate fitness centers, which puts them close to refreshes and redesigns.</p></div><div><ul><li>Management Solutions Director</li><li>Corporate Fitness Manager</li><li>Program Manager</li></ul></div><div><div class="fit">8<small>Priority</small></div></div></div>
+          <div class="matrix-row"><div><h3>Corporate Fitness Works</h3><p><a href="https://corporatefitnessworks.com/">Website</a></p></div><div><p>Corporate wellness</p></div><div><p>Business-development-led national operator for workplace fitness centers with a direct public contact path.</p></div><div><ul><li>Business Development Manager</li><li>Program Manager</li><li>Corporate Fitness Director</li></ul></div><div><div class="fit">8<small>Priority</small></div></div></div>
+          <div class="matrix-row"><div><h3>Multi-Housing Fitness</h3><p><a href="https://multihousingfitness.com/about-us/">Website</a></p></div><div><p>Multifamily amenity</p></div><div><p>White-glove delivery and service for apartment fitness amenities gives them visibility into amenity upgrades and replacements.</p></div><div><ul><li>Regional Sales Manager</li><li>Installation Manager</li><li>Multifamily Account Manager</li></ul></div><div><div class="fit">8<small>Priority</small></div></div></div>
+          <div class="matrix-row"><div><h3>Direct Fitness Solutions</h3><p><a href="https://directfitnesssolutions.com/">Website</a></p></div><div><p>Distributor</p></div><div><p>Commercial design consultation and brand-led equipment programs make this a useful upstream source.</p></div><div><ul><li>Commercial Sales Manager</li><li>Design Consultant</li><li>Project Manager</li></ul></div><div><div class="fit">7<small>Priority</small></div></div></div>
+          <div class="matrix-row"><div><h3>Repetition Fitness</h3><p><a href="https://repetitionfitness.com/pages/corporate-wellness-facilities">Website</a></p></div><div><p>Corporate wellness supplier</p></div><div><p>Nationwide delivery and installation coordination around office gym and wellness facility builds.</p></div><div><ul><li>Corporate Wellness Sales Manager</li><li>Project Coordinator</li><li>Facility Design Consultant</li></ul></div><div><div class="fit">7<small>Priority</small></div></div></div>
+          <div class="matrix-row"><div><h3>G&G Fitness Equipment</h3><p><a href="https://ggfitness.com/pages/about-us">Website</a></p></div><div><p>Distributor</p></div><div><p>Commercial sales signals are public through state procurement docs and commercial financing language.</p></div><div><ul><li>Director of Commercial Sales</li><li>National Segment Manager</li><li>Commercial Sales Team</li></ul></div><div><div class="fit">7<small>Priority</small></div></div></div>
+          <div class="matrix-row"><div><h3>Fitness Design Group</h3><p><a href="https://fitnessdesigngroup.com/contact/">Website</a></p></div><div><p>Design firm</p></div><div><p>Project design partner that can see new facilities and refreshes before equipment is finalized or removed.</p></div><div><ul><li>Project Consultant</li><li>Design Consultant</li><li>Sales Manager</li></ul></div><div><div class="fit">7<small>Priority</small></div></div></div>
+          <div class="matrix-row"><div><h3>FitMovers123</h3><p><a href="https://fitmovers123.com/services/commercial-gym-installation">Website</a></p></div><div><p>Fitness logistics</p></div><div><p>Commercial installation specialist with direct contact paths and explicit corporate-wellness and multifamily positioning.</p></div><div><ul><li>Project Manager</li><li>Installation Manager</li><li>Commercial Consult Lead</li></ul></div><div><div class="fit">7<small>Priority</small></div></div></div>
+          <div class="matrix-row"><div><h3>BRG Office Movers</h3><p><a href="https://www.brgofficemovers.com/contact-us/">Website</a></p></div><div><p>Commercial moving</p></div><div><p>National office relocation network with direct quote routing and broad branch coverage across the U.S.</p></div><div><ul><li>Commercial Moving Specialist</li><li>Project Manager</li><li>Branch Manager</li></ul></div><div><div class="fit">7<small>Priority</small></div></div></div>
+          <div class="matrix-row"><div><h3>Corovan</h3><p><a href="https://corovan.com/facilities-support/">Website</a></p></div><div><p>Commercial moving</p></div><div><p>Facilities support and asset disposition make this a smart middleman category for office and amenity transitions.</p></div><div><ul><li>Project Manager</li><li>Facilities Support Manager</li></ul></div><div><div class="fit">7<small>Priority</small></div></div></div>
+          <div class="matrix-row"><div><h3>NR Moving & Installation</h3><p><a href="https://nrmovinginstallation.com/project-experience/">Website</a></p></div><div><p>Commercial moving</p></div><div><p>Nationwide decommissioning and closeout work is especially relevant for equipment extraction opportunities.</p></div><div><ul><li>Project Manager</li><li>Decommissioning Manager</li><li>Operations Manager</li></ul></div><div><div class="fit">7<small>Priority</small></div></div></div>
+          <div class="matrix-row"><div><h3>Johnson Commercial Solutions</h3><p><a href="https://johnsoncommercialsolutions.com/services/office-relocation/">Website</a></p></div><div><p>Commercial moving</p></div><div><p>Project-manager-led office relocation model with furniture installation and asset handling.</p></div><div><ul><li>Project Manager</li><li>Operations Manager</li><li>Account Executive</li></ul></div><div><div class="fit">7<small>Priority</small></div></div></div>
+          <div class="matrix-row"><div><h3>Freight Right</h3><p><a href="https://www.freightright.com/industries/gym-equipment-movers">Website</a></p></div><div><p>Fitness logistics</p></div><div><p>White glove gym equipment logistics with franchise and medical-facility relevance.</p></div><div><ul><li>Project Manager</li><li>Logistics Manager</li><li>White Glove Account Executive</li></ul></div><div><div class="fit">7<small>Priority</small></div></div></div>
+          <div class="matrix-row"><div><h3>EXOS</h3><p><a href="https://www.exos.com/">Website</a></p></div><div><p>Corporate wellness</p></div><div><p>Corporate performance and fitness operations footprint makes it useful for facility-side introductions and procurement influence.</p></div><div><ul><li>Operations Director</li><li>Site Manager</li><li>Corporate Fitness Director</li></ul></div><div><div class="fit">7<small>Priority</small></div></div></div>
+          <div class="matrix-row"><div><h3>RX Fitness Equipment</h3><p><a href="https://rxfitnessequipment.com/commercial-sales/">Website</a></p></div><div><p>Distributor</p></div><div><p>Commercial sales, design, and installation support across several facility types.</p></div><div><ul><li>Commercial Sales</li><li>Design Consultant</li><li>Installation Manager</li></ul></div><div><div class="fit">6<small>Priority</small></div></div></div>
+          <div class="matrix-row"><div><h3>Transmotion</h3><p><a href="https://www.transmotion.com/">Website</a></p></div><div><p>Fitness logistics</p></div><div><p>Relocation and installation specialist with direct fitness equipment focus.</p></div><div><ul><li>Operations Manager</li><li>Installation Manager</li><li>Relocation Coordinator</li></ul></div><div><div class="fit">6<small>Priority</small></div></div></div>
+          <div class="matrix-row"><div><h3>White Glove Installs</h3><p><a href="https://whitegloveinstalls.com/">Website</a></p></div><div><p>Fitness logistics</p></div><div><p>Commercial delivery, assembly, installation, and relocation specialist.</p></div><div><ul><li>Installation Manager</li><li>Commercial Sales</li><li>Relocation Coordinator</li></ul></div><div><div class="fit">6<small>Priority</small></div></div></div>
+          <div class="matrix-row"><div><h3>Business Moving Group</h3><p><a href="https://businessmoving.com/project-management/">Website</a></p></div><div><p>Commercial moving</p></div><div><p>Office and warehouse relocation project-management model that fits the middleman pattern well.</p></div><div><ul><li>Project Manager</li><li>Office Relocation Manager</li></ul></div><div><div class="fit">6<small>Priority</small></div></div></div>
+          <div class="matrix-row"><div><h3>Olympic Moving & Storage</h3><p><a href="https://www.olympicmovers.net/commercial-moving/">Website</a></p></div><div><p>Commercial moving</p></div><div><p>Nationwide-scale commercial moving partner with project management.</p></div><div><ul><li>Project Manager</li><li>Commercial Sales</li></ul></div><div><div class="fit">6<small>Priority</small></div></div></div>
+          <div class="matrix-row"><div><h3>Comm-Fit</h3><p><a href="https://comm-fit.com/">Website</a> · <a href="https://www.linkedin.com/company/commfitness">LinkedIn</a></p></div><div><p>Distributor</p></div><div><p>Smaller operator, but a useful reference for installation-led supplier roles and Texas regional reach.</p></div><div><ul><li>Commercial Sales</li><li>Installation Manager</li></ul></div><div><div class="fit">5<small>Priority</small></div></div></div>
+          <div class="matrix-row"><div><h3>Gym Provisions</h3><p><a href="https://www.gymprovisions.com/equipment-installation">Website</a></p></div><div><p>Fitness logistics</p></div><div><p>Commercial installation and relocation relevance, though lower national proof than top-tier targets.</p></div><div><ul><li>Installation Manager</li><li>Project Manager</li></ul></div><div><div class="fit">5<small>Priority</small></div></div></div>
+          <div class="matrix-row"><div><h3>Hotel Fitness</h3><p><a href="https://brigadoonfitness.com/hotel-fitness/">Website</a> · <a href="https://www.linkedin.com/company/brigadoon-fitness-inc">LinkedIn</a></p></div><div><p>Hospitality fitness distributor</p></div><div><p>Largest distributor of commercial fitness equipment to the hospitality industry in North America. 25+ years equipping hotel and resort fitness rooms across the U.S., Canada, Mexico, and the Caribbean. Sees refresh cycles before any downstream market does.</p></div><div><ul><li>Commercial Sales Representative</li><li>Territory Sales Manager</li><li>Trade-In Coordinator</li></ul></div><div><div class="fit">10<small>Priority</small></div></div></div>
+          <div class="matrix-row"><div><h3>WeBuyGymEquipment</h3><p><a href="https://webuygymequipment.com/us/">Website</a> · <a href="https://www.linkedin.com/company/webuygymequipment.com-limited">LinkedIn</a></p></div><div><p>Trade-in and liquidation</p></div><div><p>Global leader in commercial fitness equipment buyback. Official partner to Life Fitness, Technogym, Matrix, Precor, Freemotion, and Dyaco. Manages the full extraction, logistics, and payment process for large commercial buybacks nationwide.</p></div><div><ul><li>US Account Manager</li><li>Commercial Buyback Specialist</li><li>Regional Operations Manager</li></ul></div><div><div class="fit">10<small>Priority</small></div></div></div>
+          <div class="matrix-row"><div><h3>Gym-Worx</h3><p><a href="https://www.gym-worx.com/">Website</a></p></div><div><p>Hospitality fitness logistics</p></div><div><p>National hotel fitness center installation, maintenance, and repair network operating coast to coast. Closest to equipment swaps when hotel brands refresh or rebrand fitness spaces. Direct service and project management contact available.</p></div><div><ul><li>Installation Manager</li><li>Service Manager</li><li>Project Manager</li></ul></div><div><div class="fit">9<small>Priority</small></div></div></div>
+          <div class="matrix-row"><div><h3>Chipman Relocation and Logistics</h3><p><a href="https://www.chipmanrelo.com/">Website</a></p></div><div><p>Commercial moving and relocation</p></div><div><p>80 years of office and commercial decommissioning experience. Part of the United Van Lines network. Explicit decommission services for corporate facility transitions make this a strong middleman for amenity and office gym removals.</p></div><div><ul><li>Project Manager</li><li>Decommissioning Specialist</li><li>Commercial Sales</li></ul></div><div><div class="fit">8<small>Priority</small></div></div></div>
+          <div class="matrix-row"><div><h3>Buy and Sell Fitness</h3><p><a href="https://www.buyandsellfitness.com/">Website</a></p></div><div><p>Trade-in and liquidation</p></div><div><p>Bulk commercial gym equipment buyer with nationwide reach and active auction channels. Explicit buyback posture for equipment from closing or upgrading facilities. Accepts major brands including Cybex, Precor, and Life Fitness.</p></div><div><ul><li>Owner and Procurement Lead</li><li>Commercial Liquidation Specialist</li><li>Acquisition Manager</li></ul></div><div><div class="fit">8<small>Priority</small></div></div></div>
+          <div class="matrix-row"><div><h3>Kinema Fitness</h3><p><a href="https://kinemafitness.com/">Website</a></p></div><div><p>Corporate wellness operator</p></div><div><p>Privately-owned corporate fitness center management company operating 70+ locations across the country. Close to refresh and decommission decisions at corporate sites including major tech and consumer brand accounts.</p></div><div><ul><li>Business Development Director</li><li>Operations Director</li><li>Program Manager</li></ul></div><div><div class="fit">8<small>Priority</small></div></div></div>
+          <div class="matrix-row"><div><h3>NIFS</h3><p><a href="https://wellness.nifs.org/">Website</a></p></div><div><p>Corporate wellness operator</p></div><div><p>National corporate fitness management and staffing across 16 states based in Indianapolis. Manages equipment procurement, programming, and facility transitions for employer clients with a public contact path.</p></div><div><ul><li>Program Manager</li><li>Corporate Fitness Manager</li><li>Regional Manager</li></ul></div><div><div class="fit">7<small>Priority</small></div></div></div>
+          <div class="matrix-row"><div><h3>Pro Gym Supply</h3><p><a href="https://progymsupply.com/trade-in/">Website</a></p></div><div><p>Trade-in and liquidation</p></div><div><p>Active commercial trade-in and buyback program in the Northeast. Has a dedicated purchasing team for commercial equipment from closing, upgrading, or liquidating facilities. Northeast-focused but worth a direct call.</p></div><div><ul><li>Purchasing Specialist</li><li>Commercial Buyback Lead</li><li>Equipment Procurement</li></ul></div><div><div class="fit">7<small>Priority</small></div></div></div>
+          <div class="matrix-row"><div><h3>The Fitness Resource</h3><p><a href="https://thefitnessresource.com/">Website</a></p></div><div><p>Trade-in and liquidation</p></div><div><p>Certified remanufactured and pre-owned commercial fitness equipment from major brands. Has an explicit sell channel and a national service network. Good route for sourcing and relationship-building in the secondary commercial market.</p></div><div><ul><li>Commercial Sales</li><li>Equipment Acquisition Lead</li><li>Service Manager</li></ul></div><div><div class="fit">7<small>Priority</small></div></div></div>
+          <div class="matrix-row"><div><h3>Perez Move Management</h3><p><a href="https://www.perezmm.com/corporateRelocation.html">Website</a></p></div><div><p>Commercial moving</p></div><div><p>Project-managed corporate relocation model with individualized move plans.</p></div><div><ul><li>Move Manager</li><li>Project Manager</li></ul></div><div><div class="fit">5<small>Priority</small></div></div></div>
+        </div>
+        <p class="note">Use the CSV for sorting, segmentation, and enrichment. Where public LinkedIn person-level signals were available, they are included there as well.</p>
+      </div>
+    </section>
+
+    <section id="priority">
+      <div class="page">
+        <h2>Priority Contacts</h2>
+        <p class="lede">This file narrows the national list down to the contacts and contact routes with the strongest public support, including named people, public emails, phones, and region when available.</p>
+        <div class="source-grid">
+          <article class="source-card">
+            <h3>What is inside</h3>
+            <ul>
+              <li>Named contacts where public signals were strong enough to use</li>
+              <li>Public company emails and direct emails where clearly posted</li>
+              <li>Phone numbers and operating region</li>
+              <li>LinkedIn paths for faster manual enrichment</li>
+            </ul>
+          </article>
+          <article class="source-card">
+            <h3>Best use</h3>
+            <ul>
+              <li>Start with Priority 1 contacts first</li>
+              <li>Personalize outreach by segment and current need</li>
+              <li>Reference trade-ins, removals, refreshes, relocations, and extracted inventory</li>
+            </ul>
+          </article>
+          <article class="source-card">
+            <h3>Download</h3>
+            <ul>
+              <li><a href="priority-contacts.csv" download>Priority Contacts CSV</a></li>
+              <li><a href="leads.csv" download>Main Lead Map CSV</a></li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="channels" class="alt">
+      <div class="page">
+        <h2>Other Avenues</h2>
+        <p class="lede">Some of the best opportunities will show up outside direct company outreach. These are the side channels Borderline should monitor if it wants earlier visibility into closures, liquidations, and refresh cycles.</p>
+        <div class="source-grid">
+          <article class="source-card">
+            <h3>Trade-In and Buyback Pages</h3>
+            <ul>
+              <li>360 Fitness Solutions</li>
+              <li>Gym Store trade-in programs</li>
+              <li>PreOwnedGym and similar upgrade-credit funnels</li>
+            </ul>
+          </article>
+          <article class="source-card">
+            <h3>Auction and Liquidation Channels</h3>
+            <ul>
+              <li>Local liquidators and surplus resellers</li>
+              <li>HiBid, Proxibid, AuctionZip, and regional auction houses</li>
+              <li>Search terms like gym liquidation, fitness center closeout, and office gym auction</li>
+            </ul>
+          </article>
+          <article class="source-card">
+            <h3>Informal Signal Sources</h3>
+            <ul>
+              <li>Facebook Marketplace and Craigslist for small and mid-size operators</li>
+              <li>Reddit and reseller communities as signal channels, not primary contact databases</li>
+              <li>Local broker and move-manager referrals where office gyms are being decommissioned</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="sources">
+      <div class="page">
+        <h2>Source Notes</h2>
+        <p class="lede">This list was built from public company pages, public LinkedIn company and profile snippets, public procurement PDFs, public contact pages, and a second-pass manual enrichment for direct outreach routes. It is a strong sourcing map, but it is not yet a fully enriched people database.</p>
+        <div class="source-grid">
+          <article class="source-card">
+            <h3>Best next enrichment step</h3>
+            <ul>
+              <li>Run the Priority Contacts file through LinkedIn Sales Navigator, Apollo, or Clay</li>
+              <li>Prioritize people with titles from the Tier 1 and Tier 2 stack</li>
+              <li>Append more direct phones, verified emails, and territory detail where available</li>
+            </ul>
+          </article>
+          <article class="source-card">
+            <h3>What is already here</h3>
+            <ul>
+              <li>Segmented company list</li>
+              <li>Priority score</li>
+              <li>Best title targets</li>
+              <li>Public contact route</li>
+              <li>LinkedIn company and selected person signals</li>
+            </ul>
+          </article>
+          <article class="source-card">
+            <h3>How to use it</h3>
+            <ul>
+              <li>Start with fit score 8 to 10</li>
+              <li>Split outreach by segment rather than one generic message</li>
+              <li>Ask about trade-ins, decommissions, refresh cycles, and extraction support</li>
+            </ul>
+          </article>
+        </div>
+        <a class="download" href="leads.csv" download>Download CSV</a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
