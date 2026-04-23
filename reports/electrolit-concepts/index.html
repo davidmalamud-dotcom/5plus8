@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Electrolit Performance Creative Concepts</title>
+  <style>
+:root {
+  --red: #e10600;
+  --black: #000;
+  --dark: #191919;
+  --mid: #666;
+  --line: #ddd;
+  --line-alt: #dedede;
+  --light: #f4f4f4;
+  --bg: #f5f5f5;
+  --white: #fff;
+  --hero-shade: rgba(0, 0, 0, 0.9);
+  --hero-soft: rgba(0, 0, 0, 0.58);
+  --shadow: 0 18px 42px rgba(0, 0, 0, 0.08);
+  --font: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  color: var(--dark);
+  background: var(--bg);
+  text-rendering: optimizeLegibility;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+}
+
+.wrap {
+  width: min(1180px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+.progress-bar {
+  position: fixed;
+  inset: 0 auto auto 0;
+  z-index: 200;
+  width: 100%;
+  height: 3px;
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+  background: var(--red);
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 120;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--line);
+}
+
+.topbar__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 74px;
+}
+
+.topbar__brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.topbar__brand strong {
+  display: block;
+  font-size: 0.96rem;
+  font-weight: 900;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.topbar__mark {
+  width: 12px;
+  height: 12px;
+  background: var(--red);
+}
+
+.topbar__nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.topbar__nav a {
+  padding: 10px 12px;
+  border: 1px solid transparent;
+  font-size: 0.76rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 180ms ease, border-color 180ms ease, background-color 180ms ease;
+}
+
+.topbar__nav a:hover,
+.topbar__nav a.is-active {
+  color: var(--red);
+  border-color: var(--line);
+  background: var(--white);
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 16px;
+  color: var(--mid);
+  font-size: 0.76rem;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 24px;
+  height: 2px;
+  background: var(--red);
+}
+
+.hero {
+  position: relative;
+  min-height: calc(100vh - 74px);
+  display: grid;
+  align-items: end;
+  padding: 76px 0 50px;
+  color: var(--white);
+  overflow: clip;
+  background:
+    linear-gradient(90deg, rgba(0, 0, 0, 0.97), rgba(0, 0, 0, 0.88)),
+    linear-gradient(140deg, rgba(225, 6, 0, 0.18), rgba(255, 255, 255, 0) 45%);
+}
+
+.hero__backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.hero__backdrop img {
+  position: absolute;
+  inset: 0 0 0 auto;
+  width: min(50vw, 760px);
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.26;
+  mix-blend-mode: screen;
+}
+
+.hero__shade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, var(--hero-shade) 0%, rgba(0, 0, 0, 0.9) 38%, rgba(0, 0, 0, 0.5) 72%, rgba(0, 0, 0, 0.2) 100%),
+    linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.26) 100%);
+}
+
+.hero__grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  gap: 46px;
+  align-items: end;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+h1 {
+  max-width: 900px;
+  font-size: clamp(2.9rem, 6vw, 5.8rem);
+  line-height: 0.9;
+  letter-spacing: -0.05em;
+}
+
+h2 {
+  font-size: clamp(2rem, 3vw, 3.2rem);
+  line-height: 0.94;
+  letter-spacing: -0.04em;
+}
+
+h3 {
+  font-size: 1.08rem;
+  letter-spacing: -0.02em;
+}
+
+.hero__lede,
+.lead,
+.section p,
+.feature-band__content p,
+.short-card p,
+.support-card p,
+.criterion p,
+.quote-block p,
+.closing__right p {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--mid);
+}
+
+.hero__lede {
+  max-width: 720px;
+  margin: 24px 0 32px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1.06rem;
+}
+
+.hero__meta {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  border-left: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.stat {
+  padding: 16px 18px;
+  border-right: 1px solid rgba(255, 255, 255, 0.14);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.stat__value {
+  display: block;
+  color: var(--white);
+  font-size: 2rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.stat__label {
+  display: block;
+  margin-top: 8px;
+  color: rgba(255, 255, 255, 0.74);
+  font-size: 0.76rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.hero__aside {
+  justify-self: end;
+  width: min(100%, 380px);
+}
+
+.hero-note {
+  padding: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.hero-note h2 {
+  font-size: clamp(1.3rem, 2.2vw, 2rem);
+  color: var(--white);
+}
+
+.hero-list,
+.plain-list {
+  margin: 18px 0 0;
+  padding-left: 18px;
+}
+
+.hero-list li {
+  margin-top: 10px;
+  color: rgba(255, 255, 255, 0.76);
+}
+
+.plain-list li {
+  margin-top: 10px;
+  color: var(--mid);
+}
+
+.section,
+.feature-band {
+  position: relative;
+  border-top: 1px solid var(--line);
+}
+
+.section {
+  padding: 58px 0;
+  background: var(--white);
+}
+
+.section.alt {
+  background: var(--light);
+}
+
+.section__head {
+  max-width: 880px;
+  margin-bottom: 28px;
+}
+
+.intro-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 28px;
+  align-items: start;
+}
+
+.intro-grid__copy p,
+.feature-band__content p,
+.closing__right p {
+  max-width: 700px;
+}
+
+.quote-block {
+  padding: 28px;
+  border-left: 4px solid var(--red);
+  background: var(--light);
+}
+
+.quote-block p {
+  margin: 0;
+  color: var(--dark);
+  font-size: 1.16rem;
+  line-height: 1.45;
+}
+
+.criteria-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0;
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+  background: var(--white);
+}
+
+.criterion {
+  min-height: 210px;
+  padding: 22px 20px 20px;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.criterion__index,
+.short-card span {
+  display: block;
+  margin-bottom: 16px;
+  color: var(--red);
+  font-size: 0.76rem;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.advantage-band {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 30px;
+  margin-top: 24px;
+  padding: 24px 0 0;
+  border-top: 1px solid var(--line);
+}
+
+.advantage-band__copy p {
+  margin-top: 0;
+  color: var(--dark);
+  font-weight: 700;
+}
+
+.matrix {
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: var(--white);
+}
+
+.matrix__row {
+  display: grid;
+  grid-template-columns: 1.3fr 0.95fr 0.35fr;
+  gap: 18px;
+  align-items: center;
+  min-height: 66px;
+  padding: 14px 18px;
+  border-top: 1px solid var(--line-alt);
+}
+
+.matrix__row:first-child {
+  border-top: 0;
+}
+
+.matrix__row strong,
+.matrix__row span,
+.matrix__row em {
+  font-size: 0.92rem;
+}
+
+.matrix__row strong,
+.matrix__row--head span {
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.matrix__row--head {
+  min-height: 52px;
+  background: var(--light);
+}
+
+.matrix__row--head span {
+  color: var(--mid);
+  font-size: 0.74rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+}
+
+.matrix__row em {
+  justify-self: start;
+  color: var(--red);
+  font-style: normal;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.feature-band {
+  padding: 0;
+  background: var(--white);
+}
+
+.feature-band--dark {
+  background: var(--black);
+  color: var(--white);
+}
+
+.feature-band--light {
+  background: var(--light);
+}
+
+.feature-band__grid {
+  display: grid;
+  grid-template-columns: 0.95fr 1.05fr;
+  gap: 0;
+  align-items: stretch;
+  min-height: 82vh;
+}
+
+.feature-band__grid--reverse {
+  grid-template-columns: 1.05fr 0.95fr;
+}
+
+.feature-band__content,
+.feature-band__media {
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-band__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 58px 56px;
+}
+
+.feature-band__media img {
+  width: 100%;
+  height: 100%;
+  min-height: 520px;
+  object-fit: cover;
+}
+
+.feature-band--dark .eyebrow,
+.feature-band--dark .lead,
+.feature-band--dark p,
+.feature-band--dark li {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.feature-band--dark .eyebrow::before {
+  background: var(--red);
+}
+
+.lead {
+  margin: 20px 0 18px;
+  color: var(--dark);
+  font-size: 1.08rem;
+  font-weight: 700;
+}
+
+.support-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.support-grid--full {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.support-card {
+  border-top: 1px solid var(--line);
+  padding-top: 14px;
+}
+
+.support-card img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  margin-bottom: 14px;
+}
+
+.support-card h3 {
+  margin-bottom: 10px;
+}
+
+.shortlist-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+}
+
+.short-card {
+  min-height: 240px;
+  padding: 22px 18px;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: var(--white);
+}
+
+.short-card p {
+  margin-top: 12px;
+}
+
+.closing {
+  display: grid;
+  grid-template-columns: 0.95fr 1.05fr;
+  gap: 28px;
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+
+.footer-note {
+  max-width: 760px;
+  margin: 24px 0 0;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  color: var(--mid);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 700ms ease,
+    transform 700ms ease;
+  will-change: opacity, transform;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+[data-parallax] {
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal,
+  [data-parallax],
+  .progress-bar,
+  .topbar__nav a {
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
+@media (max-width: 1100px) {
+  .hero__grid,
+  .intro-grid,
+  .advantage-band,
+  .feature-band__grid,
+  .feature-band__grid--reverse,
+  .closing {
+    grid-template-columns: 1fr;
+  }
+
+  .criteria-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .support-grid,
+  .support-grid--full {
+    grid-template-columns: 1fr;
+  }
+
+  .shortlist-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .feature-band__media {
+    min-height: 420px;
+  }
+
+  .hero__aside {
+    justify-self: start;
+  }
+}
+
+@media (max-width: 760px) {
+  .wrap {
+    width: min(100%, calc(100% - 24px));
+  }
+
+  .topbar__inner {
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+    padding: 14px 0;
+  }
+
+  .hero {
+    min-height: auto;
+    padding: 54px 0 34px;
+  }
+
+  .hero__backdrop img {
+    width: 100%;
+    opacity: 0.18;
+  }
+
+  .hero__meta,
+  .criteria-grid,
+  .shortlist-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .matrix__row,
+  .matrix__row--head {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .feature-band__content {
+    padding: 34px 0;
+  }
+
+  .section {
+    padding: 44px 0;
+  }
+}
+
+</style>
+</head>
+<body>
+  <div class="progress-bar" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <div class="wrap topbar__inner">
+      <div class="topbar__brand">
+        <span class="topbar__mark"></span>
+        <div>
+          <p class="eyebrow">Electrolit</p>
+          <strong>Performance Creative Concepts</strong>
+        </div>
+      </div>
+
+      <nav class="topbar__nav" aria-label="Section navigation">
+        <a href="#overview">Overview</a>
+        <a href="#evaluation">Evaluation</a>
+        <a href="#concepts">Concepts</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="overview">
+      <div class="wrap hero__grid">
+        <div class="hero__content reveal">
+          <p class="eyebrow">Creative Presentation</p>
+          <h1>10 concept routes designed to make Electrolit powders impossible to ignore.</h1>
+          <p class="hero__lede">
+            A concept presentation for Electrolit powders across paid social, built to balance
+            scroll-stopping impact, science credibility, and flexibility across static, motion,
+            and short-form video.
+          </p>
+
+          <div class="hero__meta">
+            <div class="stat">
+              <span class="stat__value">10</span>
+              <span class="stat__label">concept routes presented</span>
+            </div>
+            <div class="stat">
+              <span class="stat__value">3</span>
+              <span class="stat__label">core creative goals</span>
+            </div>
+            <div class="stat">
+              <span class="stat__value">3</span>
+              <span class="stat__label">primary output formats</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero__aside reveal" data-parallax data-parallax-speed="0.12">
+          <div class="hero-note">
+            <p class="eyebrow">Creative Brief</p>
+            <h2>Create performance creative that stops the scroll, lands the science, and still feels ownable to Electrolit.</h2>
+            <ul class="hero-list">
+              <li>Built for Meta-first paid social environments</li>
+              <li>Strong enough to work across static, motion, and short-form video</li>
+              <li>Distinct from generic sports hydration and generic wellness creative</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero__backdrop" aria-hidden="true">
+        <div class="hero__shade"></div>
+        <img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%201200%20900%22%3E%0A%3Cdefs%3E%0A%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20x2%3D%221%22%20y1%3D%220%22%20y2%3D%221%22%3E%0A%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%230e0e10%22/%3E%0A%3Cstop%20offset%3D%2255%25%22%20stop-color%3D%22%231d1d22%22/%3E%0A%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23e10600%22/%3E%0A%3C/linearGradient%3E%0A%3C/defs%3E%0A%3Crect%20width%3D%221200%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Crect%20x%3D%2240%22%20y%3D%2240%22%20width%3D%221120%22%20height%3D%22820%22%20fill%3D%22none%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.25%29%22/%3E%0A%3Ctext%20x%3D%2290%22%20y%3D%22150%22%20fill%3D%22%23ffffff%22%20font-family%3D%22Helvetica%2C%20Arial%2C%20sans-serif%22%20font-size%3D%2234%22%20font-weight%3D%22700%22%20letter-spacing%3D%226%22%3EELECTROLIT%3C/text%3E%0A%3Ctext%20x%3D%2290%22%20y%3D%22430%22%20fill%3D%22%23ffffff%22%20font-family%3D%22Helvetica%2C%20Arial%2C%20sans-serif%22%20font-size%3D%2272%22%20font-weight%3D%22800%22%3EKeep%20It%20in%20Your%20Back%20Pocket%3C/text%3E%0A%3Ctext%20x%3D%2290%22%20y%3D%22500%22%20fill%3D%22rgba%28255%2C255%2C255%2C.78%29%22%20font-family%3D%22Helvetica%2C%20Arial%2C%20sans-serif%22%20font-size%3D%2228%22%3ECreative%20concept%20reference%3C/text%3E%0A%3C/svg%3E" alt="" data-parallax data-parallax-speed="0.18">
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap intro-grid">
+        <div class="intro-grid__copy reveal">
+          <p class="eyebrow">Executive Read</p>
+          <h2>The strongest ideas all do the same thing in different ways.</h2>
+          <p>
+            The most compelling routes do more than create attention. They translate Electrolit’s
+            product truth into a creative system, either by making the science more vivid, making
+            the hydration benefit more immediate, or turning portability into something memorable.
+          </p>
+        </div>
+
+        <div class="quote-block reveal">
+          <p>
+            The opportunity is to create a set of territories that can produce distinctive
+            high-performing assets without becoming repetitive or generic.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section alt" id="evaluation">
+      <div class="wrap">
+        <div class="section__head reveal">
+          <p class="eyebrow">Evaluation Framework</p>
+          <h2>Every route was measured against the same five standards.</h2>
+        </div>
+
+        <div class="criteria-grid">
+          <article class="criterion reveal">
+            <span class="criterion__index">01</span>
+            <h3>Scroll-Stopping Power</h3>
+            <p>Can the idea win attention quickly in-feed without needing extra setup?</p>
+          </article>
+          <article class="criterion reveal">
+            <span class="criterion__index">02</span>
+            <h3>Science Credibility</h3>
+            <p>Does it give the 5-ion formula and hydration story a real place to live?</p>
+          </article>
+          <article class="criterion reveal">
+            <span class="criterion__index">03</span>
+            <h3>Brand Fit</h3>
+            <p>Does it feel like Electrolit rather than borrowed category styling?</p>
+          </article>
+          <article class="criterion reveal">
+            <span class="criterion__index">04</span>
+            <h3>Audience Breadth</h3>
+            <p>Can the route flex across broad use moments and still feel relevant?</p>
+          </article>
+          <article class="criterion reveal">
+            <span class="criterion__index">05</span>
+            <h3>Scalability</h3>
+            <p>Can it create multiple executions across formats without losing energy?</p>
+          </article>
+        </div>
+
+        <div class="advantage-band reveal">
+          <div class="advantage-band__label">
+            <p class="eyebrow">Electrolit Advantage</p>
+            <h3>What the creative should keep leveraging</h3>
+          </div>
+          <div class="advantage-band__copy">
+            <p>Electrolit can uniquely combine scientific credibility with bold flavor energy.</p>
+            <ul class="plain-list">
+              <li>The 5-ion formula, especially magnesium and calcium, gives the work real scientific footing.</li>
+              <li>Flavor cues create room for vibrant art direction that still feels product-connected.</li>
+              <li>Pharmaceutical heritage gives the brand permission to speak with more authority than most competitors.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="feature-band feature-band--dark" id="concepts">
+      <div class="wrap feature-band__grid">
+        <div class="feature-band__media reveal" data-parallax data-parallax-speed="0.08">
+          <img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%201200%20900%22%3E%0A%3Cdefs%3E%0A%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20x2%3D%221%22%20y1%3D%220%22%20y2%3D%221%22%3E%0A%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%230e0e10%22/%3E%0A%3Cstop%20offset%3D%2255%25%22%20stop-color%3D%22%231d1d22%22/%3E%0A%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23e10600%22/%3E%0A%3C/linearGradient%3E%0A%3C/defs%3E%0A%3Crect%20width%3D%221200%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Crect%20x%3D%2240%22%20y%3D%2240%22%20width%3D%221120%22%20height%3D%22820%22%20fill%3D%22none%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.25%29%22/%3E%0A%3Ctext%20x%3D%2290%22%20y%3D%22150%22%20fill%3D%22%23ffffff%22%20font-family%3D%22Helvetica%2C%20Arial%2C%20sans-serif%22%20font-size%3D%2234%22%20font-weight%3D%22700%22%20letter-spacing%3D%226%22%3EELECTROLIT%3C/text%3E%0A%3Ctext%20x%3D%2290%22%20y%3D%22430%22%20fill%3D%22%23ffffff%22%20font-family%3D%22Helvetica%2C%20Arial%2C%20sans-serif%22%20font-size%3D%2272%22%20font-weight%3D%22800%22%3EKeep%20It%20in%20Your%20Back%20Pocket%3C/text%3E%0A%3Ctext%20x%3D%2290%22%20y%3D%22500%22%20fill%3D%22rgba%28255%2C255%2C255%2C.78%29%22%20font-family%3D%22Helvetica%2C%20Arial%2C%20sans-serif%22%20font-size%3D%2228%22%3ECreative%20concept%20reference%3C/text%3E%0A%3C/svg%3E" alt="Pocket-inspired portability reference">
+        </div>
+        <div class="feature-band__content reveal">
+          <p class="eyebrow">Concept 01</p>
+          <h2>Keep It in Your Back Pocket</h2>
+          <p class="lead">
+            Portability becomes both the product story and the creative hook.
+          </p>
+          <p>
+            This concept turns the powder format into an ownable idea: hydration you can carry,
+            and knowledge you can keep close. It gives Electrolit a simple, memorable platform
+            that can flex from product utility into education.
+          </p>
+          <ul class="plain-list">
+            <li>An ownable phrase rooted in a real product truth</li>
+            <li>Strong enough for static, motion, carousel, and creator formats</li>
+            <li>Practical and informative without feeling overly instructional</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="feature-band">
+      <div class="wrap feature-band__grid feature-band__grid--reverse">
+        <div class="feature-band__content reveal">
+          <p class="eyebrow">Concept 02</p>
+          <h2>The Science of Hydration</h2>
+          <p class="lead">
+            Science becomes a visual world, not just a claim.
+          </p>
+          <p>
+            Instead of talking about the formula in a literal way, this route builds an art direction
+            around it: structure, pattern, molecule-inspired compositions, and controlled energy.
+            The result feels elevated, legible, and distinctly Electrolit.
+          </p>
+          <ul class="plain-list">
+            <li>The clearest home for the 5-ion story</li>
+            <li>Separates Electrolit from both wellness-soft and sports-loud creative</li>
+            <li>Creates a complete design system rather than a single campaign line</li>
+          </ul>
+        </div>
+        <div class="feature-band__media reveal" data-parallax data-parallax-speed="0.1">
+          <img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%201200%20900%22%3E%0A%3Cdefs%3E%0A%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20x2%3D%221%22%20y1%3D%220%22%20y2%3D%221%22%3E%0A%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%230e0e10%22/%3E%0A%3Cstop%20offset%3D%2255%25%22%20stop-color%3D%22%231d1d22%22/%3E%0A%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23e10600%22/%3E%0A%3C/linearGradient%3E%0A%3C/defs%3E%0A%3Crect%20width%3D%221200%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Crect%20x%3D%2240%22%20y%3D%2240%22%20width%3D%221120%22%20height%3D%22820%22%20fill%3D%22none%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.25%29%22/%3E%0A%3Ctext%20x%3D%2290%22%20y%3D%22150%22%20fill%3D%22%23ffffff%22%20font-family%3D%22Helvetica%2C%20Arial%2C%20sans-serif%22%20font-size%3D%2234%22%20font-weight%3D%22700%22%20letter-spacing%3D%226%22%3EELECTROLIT%3C/text%3E%0A%3Ctext%20x%3D%2290%22%20y%3D%22430%22%20fill%3D%22%23ffffff%22%20font-family%3D%22Helvetica%2C%20Arial%2C%20sans-serif%22%20font-size%3D%2272%22%20font-weight%3D%22800%22%3EThe%20Science%20of%20Hydration%3C/text%3E%0A%3Ctext%20x%3D%2290%22%20y%3D%22500%22%20fill%3D%22rgba%28255%2C255%2C255%2C.78%29%22%20font-family%3D%22Helvetica%2C%20Arial%2C%20sans-serif%22%20font-size%3D%2228%22%3ECreative%20concept%20reference%3C/text%3E%0A%3C/svg%3E" alt="Scientific art direction reference">
+        </div>
+      </div>
+    </section>
+
+    <section class="feature-band feature-band--light">
+      <div class="wrap feature-band__grid">
+        <div class="feature-band__media reveal" data-parallax data-parallax-speed="0.06">
+          <img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%201200%20900%22%3E%0A%3Cdefs%3E%0A%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20x2%3D%221%22%20y1%3D%220%22%20y2%3D%221%22%3E%0A%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%230e0e10%22/%3E%0A%3Cstop%20offset%3D%2255%25%22%20stop-color%3D%22%231d1d22%22/%3E%0A%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23e10600%22/%3E%0A%3C/linearGradient%3E%0A%3C/defs%3E%0A%3Crect%20width%3D%221200%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Crect%20x%3D%2240%22%20y%3D%2240%22%20width%3D%221120%22%20height%3D%22820%22%20fill%3D%22none%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.25%29%22/%3E%0A%3Ctext%20x%3D%2290%22%20y%3D%22150%22%20fill%3D%22%23ffffff%22%20font-family%3D%22Helvetica%2C%20Arial%2C%20sans-serif%22%20font-size%3D%2234%22%20font-weight%3D%22700%22%20letter-spacing%3D%226%22%3EELECTROLIT%3C/text%3E%0A%3Ctext%20x%3D%2290%22%20y%3D%22430%22%20fill%3D%22%23ffffff%22%20font-family%3D%22Helvetica%2C%20Arial%2C%20sans-serif%22%20font-size%3D%2272%22%20font-weight%3D%22800%22%3EReturn%20to%20Form%3C/text%3E%0A%3Ctext%20x%3D%2290%22%20y%3D%22500%22%20fill%3D%22rgba%28255%2C255%2C255%2C.78%29%22%20font-family%3D%22Helvetica%2C%20Arial%2C%20sans-serif%22%20font-size%3D%2228%22%3ECreative%20concept%20reference%3C/text%3E%0A%3C/svg%3E" alt="Return to Form hydration reference">
+        </div>
+        <div class="feature-band__content reveal">
+          <p class="eyebrow">Concept 03</p>
+          <h2>Return to Form</h2>
+          <p class="lead">
+            Hydration is framed as restoration, vitality, and visible renewal.
+          </p>
+          <p>
+            This route translates the benefit into a more emotional image system: depleted becomes
+            restored, dull becomes vivid, out-of-form comes back to life. It gives Electrolit a more
+            expressive lane without losing the hydration message.
+          </p>
+          <ul class="plain-list">
+            <li>Strong visual contrast between depletion and recovery</li>
+            <li>Elegant enough for still imagery and dramatic enough for motion</li>
+            <li>Emotionally resonant while staying benefit-led</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="feature-band feature-band--dark">
+      <div class="wrap feature-band__grid feature-band__grid--reverse">
+        <div class="feature-band__content reveal">
+          <p class="eyebrow">Concept 06</p>
+          <h2>Before and After</h2>
+          <p class="lead">
+            The hydration benefit is captured in one fast, legible visual shift.
+          </p>
+          <p>
+            This concept turns the product effect into instant contrast: flat to energized,
+            muted to vivid, depleted to switched on. It is built for placements where the idea
+            has to register immediately.
+          </p>
+          <ul class="plain-list">
+            <li>Fast to understand in-feed</li>
+            <li>High-contrast by design, which supports paid social performance</li>
+            <li>Flexible across different moments, moods, and use cases</li>
+          </ul>
+        </div>
+        <div class="feature-band__media reveal" data-parallax data-parallax-speed="0.12">
+          <img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%201200%20900%22%3E%0A%3Cdefs%3E%0A%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20x2%3D%221%22%20y1%3D%220%22%20y2%3D%221%22%3E%0A%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%230e0e10%22/%3E%0A%3Cstop%20offset%3D%2255%25%22%20stop-color%3D%22%231d1d22%22/%3E%0A%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23e10600%22/%3E%0A%3C/linearGradient%3E%0A%3C/defs%3E%0A%3Crect%20width%3D%221200%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Crect%20x%3D%2240%22%20y%3D%2240%22%20width%3D%221120%22%20height%3D%22820%22%20fill%3D%22none%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.25%29%22/%3E%0A%3Ctext%20x%3D%2290%22%20y%3D%22150%22%20fill%3D%22%23ffffff%22%20font-family%3D%22Helvetica%2C%20Arial%2C%20sans-serif%22%20font-size%3D%2234%22%20font-weight%3D%22700%22%20letter-spacing%3D%226%22%3EELECTROLIT%3C/text%3E%0A%3Ctext%20x%3D%2290%22%20y%3D%22430%22%20fill%3D%22%23ffffff%22%20font-family%3D%22Helvetica%2C%20Arial%2C%20sans-serif%22%20font-size%3D%2272%22%20font-weight%3D%22800%22%3EBefore%20and%20After%3C/text%3E%0A%3Ctext%20x%3D%2290%22%20y%3D%22500%22%20fill%3D%22rgba%28255%2C255%2C255%2C.78%29%22%20font-family%3D%22Helvetica%2C%20Arial%2C%20sans-serif%22%20font-size%3D%2228%22%3ECreative%20concept%20reference%3C/text%3E%0A%3C/svg%3E" alt="Before and after contrast reference">
+        </div>
+      </div>
+    </section>
+
+    <section class="feature-band feature-band--light">
+      <div class="wrap feature-band__grid">
+        <div class="feature-band__media reveal" data-parallax data-parallax-speed="0.07">
+          <img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%201200%20900%22%3E%0A%3Cdefs%3E%0A%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20x2%3D%221%22%20y1%3D%220%22%20y2%3D%221%22%3E%0A%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%230e0e10%22/%3E%0A%3Cstop%20offset%3D%2255%25%22%20stop-color%3D%22%231d1d22%22/%3E%0A%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23e10600%22/%3E%0A%3C/linearGradient%3E%0A%3C/defs%3E%0A%3Crect%20width%3D%221200%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Crect%20x%3D%2240%22%20y%3D%2240%22%20width%3D%221120%22%20height%3D%22820%22%20fill%3D%22none%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.25%29%22/%3E%0A%3Ctext%20x%3D%2290%22%20y%3D%22150%22%20fill%3D%22%23ffffff%22%20font-family%3D%22Helvetica%2C%20Arial%2C%20sans-serif%22%20font-size%3D%2234%22%20font-weight%3D%22700%22%20letter-spacing%3D%226%22%3EELECTROLIT%3C/text%3E%0A%3Ctext%20x%3D%2290%22%20y%3D%22430%22%20fill%3D%22%23ffffff%22%20font-family%3D%22Helvetica%2C%20Arial%2C%20sans-serif%22%20font-size%3D%2272%22%20font-weight%3D%22800%22%3EFor%20Every%20Moment%3C/text%3E%0A%3Ctext%20x%3D%2290%22%20y%3D%22500%22%20fill%3D%22rgba%28255%2C255%2C255%2C.78%29%22%20font-family%3D%22Helvetica%2C%20Arial%2C%20sans-serif%22%20font-size%3D%2228%22%3ECreative%20concept%20reference%3C/text%3E%0A%3C/svg%3E" alt="For Every Moment reference">
+        </div>
+        <div class="feature-band__content reveal">
+          <p class="eyebrow">Concept 04</p>
+          <h2>For Every Moment</h2>
+          <p class="lead">
+            Hydration adapts to the occasion, the need state, and the person.
+          </p>
+          <p>
+            This concept turns Electrolit into a flexible lifestyle system. A modular character
+            changes outfit, environment, and activity to show how the product can move across
+            different moments while still feeling cohesive.
+          </p>
+          <ul class="plain-list">
+            <li>Playful and immediately legible</li>
+            <li>Easy to extend across flavors, audiences, and scenarios</li>
+            <li>Creates a broad platform for high-volume social execution</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="feature-band feature-band--dark">
+      <div class="wrap feature-band__grid feature-band__grid--reverse">
+        <div class="feature-band__content reveal">
+          <p class="eyebrow">Concept 05</p>
+          <h2>Proven Over Time</h2>
+          <p class="lead">
+            The brand story becomes a proof point, not just a backdrop.
+          </p>
+          <p>
+            This route frames Electrolit as a product built on science and sustained by credibility.
+            By moving through the brand’s history and scientific foundation, it positions the product
+            as established, trustworthy, and built to last.
+          </p>
+          <ul class="plain-list">
+            <li>Strongest route for heritage and credibility storytelling</li>
+            <li>Useful when the message needs more authority than hype</li>
+            <li>Well suited to timeline, stop-motion, and documentary-style execution</li>
+          </ul>
+        </div>
+        <div class="feature-band__media reveal" data-parallax data-parallax-speed="0.09">
+          <img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%201200%20900%22%3E%0A%3Cdefs%3E%0A%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20x2%3D%221%22%20y1%3D%220%22%20y2%3D%221%22%3E%0A%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%230e0e10%22/%3E%0A%3Cstop%20offset%3D%2255%25%22%20stop-color%3D%22%231d1d22%22/%3E%0A%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23e10600%22/%3E%0A%3C/linearGradient%3E%0A%3C/defs%3E%0A%3Crect%20width%3D%221200%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Crect%20x%3D%2240%22%20y%3D%2240%22%20width%3D%221120%22%20height%3D%22820%22%20fill%3D%22none%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.25%29%22/%3E%0A%3Ctext%20x%3D%2290%22%20y%3D%22150%22%20fill%3D%22%23ffffff%22%20font-family%3D%22Helvetica%2C%20Arial%2C%20sans-serif%22%20font-size%3D%2234%22%20font-weight%3D%22700%22%20letter-spacing%3D%226%22%3EELECTROLIT%3C/text%3E%0A%3Ctext%20x%3D%2290%22%20y%3D%22430%22%20fill%3D%22%23ffffff%22%20font-family%3D%22Helvetica%2C%20Arial%2C%20sans-serif%22%20font-size%3D%2272%22%20font-weight%3D%22800%22%3EProven%20Over%20Time%3C/text%3E%0A%3Ctext%20x%3D%2290%22%20y%3D%22500%22%20fill%3D%22rgba%28255%2C255%2C255%2C.78%29%22%20font-family%3D%22Helvetica%2C%20Arial%2C%20sans-serif%22%20font-size%3D%2228%22%3ECreative%20concept%20reference%3C/text%3E%0A%3C/svg%3E" alt="Proven Over Time reference">
+        </div>
+      </div>
+    </section>
+
+    <section class="feature-band feature-band--light">
+      <div class="wrap feature-band__grid">
+        <div class="feature-band__media reveal" data-parallax data-parallax-speed="0.06">
+          <img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%201200%20900%22%3E%0A%3Cdefs%3E%0A%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20x2%3D%221%22%20y1%3D%220%22%20y2%3D%221%22%3E%0A%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%230e0e10%22/%3E%0A%3Cstop%20offset%3D%2255%25%22%20stop-color%3D%22%231d1d22%22/%3E%0A%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23e10600%22/%3E%0A%3C/linearGradient%3E%0A%3C/defs%3E%0A%3Crect%20width%3D%221200%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Crect%20x%3D%2240%22%20y%3D%2240%22%20width%3D%221120%22%20height%3D%22820%22%20fill%3D%22none%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.25%29%22/%3E%0A%3Ctext%20x%3D%2290%22%20y%3D%22150%22%20fill%3D%22%23ffffff%22%20font-family%3D%22Helvetica%2C%20Arial%2C%20sans-serif%22%20font-size%3D%2234%22%20font-weight%3D%22700%22%20letter-spacing%3D%226%22%3EELECTROLIT%3C/text%3E%0A%3Ctext%20x%3D%2290%22%20y%3D%22430%22%20fill%3D%22%23ffffff%22%20font-family%3D%22Helvetica%2C%20Arial%2C%20sans-serif%22%20font-size%3D%2272%22%20font-weight%3D%22800%22%3EKeeps%20You%20on%20Beat%3C/text%3E%0A%3Ctext%20x%3D%2290%22%20y%3D%22500%22%20fill%3D%22rgba%28255%2C255%2C255%2C.78%29%22%20font-family%3D%22Helvetica%2C%20Arial%2C%20sans-serif%22%20font-size%3D%2228%22%3ECreative%20concept%20reference%3C/text%3E%0A%3C/svg%3E" alt="Keeps You on Beat reference">
+        </div>
+        <div class="feature-band__content reveal">
+          <p class="eyebrow">Concept 07</p>
+          <h2>Keeps You on Beat</h2>
+          <p class="lead">
+            Hydration is expressed as rhythm, balance, and internal alignment.
+          </p>
+          <p>
+            Inspired by cymatics and vibration, this concept visualizes Electrolit as a force
+            that brings the body back into sync. It gives the science story a more artistic and
+            sensory expression.
+          </p>
+          <ul class="plain-list">
+            <li>Distinctive visual language with strong motion potential</li>
+            <li>Connects science to feeling rather than just information</li>
+            <li>Well suited to music-led, movement-led, and abstract executions</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="feature-band feature-band--dark">
+      <div class="wrap feature-band__grid feature-band__grid--reverse">
+        <div class="feature-band__content reveal">
+          <p class="eyebrow">Concept 08</p>
+          <h2>Hydration in Motion</h2>
+          <p class="lead">
+            One body, many moments, with hydration shown through continuous movement.
+          </p>
+          <p>
+            This route uses repeated motion within a single frame to show the product at work.
+            Instead of describing hydration, it visualizes its effect through flow, energy, and
+            uninterrupted movement.
+          </p>
+          <ul class="plain-list">
+            <li>Movement itself becomes the proof point</li>
+            <li>Useful for sports, lifestyle, and hybrid executions</li>
+            <li>Strong visual rhythm across stills, GIFs, and short-form video</li>
+          </ul>
+        </div>
+        <div class="feature-band__media reveal" data-parallax data-parallax-speed="0.1">
+          <img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%201200%20900%22%3E%0A%3Cdefs%3E%0A%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20x2%3D%221%22%20y1%3D%220%22%20y2%3D%221%22%3E%0A%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%230e0e10%22/%3E%0A%3Cstop%20offset%3D%2255%25%22%20stop-color%3D%22%231d1d22%22/%3E%0A%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23e10600%22/%3E%0A%3C/linearGradient%3E%0A%3C/defs%3E%0A%3Crect%20width%3D%221200%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Crect%20x%3D%2240%22%20y%3D%2240%22%20width%3D%221120%22%20height%3D%22820%22%20fill%3D%22none%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.25%29%22/%3E%0A%3Ctext%20x%3D%2290%22%20y%3D%22150%22%20fill%3D%22%23ffffff%22%20font-family%3D%22Helvetica%2C%20Arial%2C%20sans-serif%22%20font-size%3D%2234%22%20font-weight%3D%22700%22%20letter-spacing%3D%226%22%3EELECTROLIT%3C/text%3E%0A%3Ctext%20x%3D%2290%22%20y%3D%22430%22%20fill%3D%22%23ffffff%22%20font-family%3D%22Helvetica%2C%20Arial%2C%20sans-serif%22%20font-size%3D%2272%22%20font-weight%3D%22800%22%3EHydration%20in%20Motion%3C/text%3E%0A%3Ctext%20x%3D%2290%22%20y%3D%22500%22%20fill%3D%22rgba%28255%2C255%2C255%2C.78%29%22%20font-family%3D%22Helvetica%2C%20Arial%2C%20sans-serif%22%20font-size%3D%2228%22%3ECreative%20concept%20reference%3C/text%3E%0A%3C/svg%3E" alt="Hydration in Motion reference">
+        </div>
+      </div>
+    </section>
+
+    <section class="feature-band feature-band--light">
+      <div class="wrap feature-band__grid">
+        <div class="feature-band__media reveal" data-parallax data-parallax-speed="0.08">
+          <img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%201200%20900%22%3E%0A%3Cdefs%3E%0A%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20x2%3D%221%22%20y1%3D%220%22%20y2%3D%221%22%3E%0A%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%230e0e10%22/%3E%0A%3Cstop%20offset%3D%2255%25%22%20stop-color%3D%22%231d1d22%22/%3E%0A%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23e10600%22/%3E%0A%3C/linearGradient%3E%0A%3C/defs%3E%0A%3Crect%20width%3D%221200%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Crect%20x%3D%2240%22%20y%3D%2240%22%20width%3D%221120%22%20height%3D%22820%22%20fill%3D%22none%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.25%29%22/%3E%0A%3Ctext%20x%3D%2290%22%20y%3D%22150%22%20fill%3D%22%23ffffff%22%20font-family%3D%22Helvetica%2C%20Arial%2C%20sans-serif%22%20font-size%3D%2234%22%20font-weight%3D%22700%22%20letter-spacing%3D%226%22%3EELECTROLIT%3C/text%3E%0A%3Ctext%20x%3D%2290%22%20y%3D%22430%22%20fill%3D%22%23ffffff%22%20font-family%3D%22Helvetica%2C%20Arial%2C%20sans-serif%22%20font-size%3D%2272%22%20font-weight%3D%22800%22%3EScience%20Meets%20Hydration%3C/text%3E%0A%3Ctext%20x%3D%2290%22%20y%3D%22500%22%20fill%3D%22rgba%28255%2C255%2C255%2C.78%29%22%20font-family%3D%22Helvetica%2C%20Arial%2C%20sans-serif%22%20font-size%3D%2228%22%3ECreative%20concept%20reference%3C/text%3E%0A%3C/svg%3E" alt="Science Meets Hydration reference">
+        </div>
+        <div class="feature-band__content reveal">
+          <p class="eyebrow">Concept 09</p>
+          <h2>Science Meets Hydration</h2>
+          <p class="lead">
+            Lab cues move directly into active lifestyle imagery.
+          </p>
+          <p>
+            This concept closes the gap between scientific credibility and everyday performance.
+            By placing beakers and lab language inside real activity moments, it makes the science
+            visible without losing energy or pace.
+          </p>
+          <ul class="plain-list">
+            <li>Makes the scientific story instantly recognizable</li>
+            <li>Creates bold contrast inside familiar sports and lifestyle scenes</li>
+            <li>Balances authority with visual punch</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="feature-band feature-band--dark">
+      <div class="wrap feature-band__grid feature-band__grid--reverse">
+        <div class="feature-band__content reveal">
+          <p class="eyebrow">Concept 10</p>
+          <h2>Dr. Frida</h2>
+          <p class="lead">
+            A recurring personality gives the science story charm, confidence, and edge.
+          </p>
+          <p>
+            This route introduces a character who can deliver hydration facts with attitude and
+            social-native presence. It gives Electrolit a distinctive voice and a repeatable format
+            for education-led content.
+          </p>
+          <ul class="plain-list">
+            <li>Character-led storytelling with strong creator energy</li>
+            <li>Easy to serialize across social content</li>
+            <li>Turns education into something more memorable and entertaining</li>
+          </ul>
+        </div>
+        <div class="feature-band__media reveal" data-parallax data-parallax-speed="0.1">
+          <img src="data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%201200%20900%22%3E%0A%3Cdefs%3E%0A%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20x2%3D%221%22%20y1%3D%220%22%20y2%3D%221%22%3E%0A%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%230e0e10%22/%3E%0A%3Cstop%20offset%3D%2255%25%22%20stop-color%3D%22%231d1d22%22/%3E%0A%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%23e10600%22/%3E%0A%3C/linearGradient%3E%0A%3C/defs%3E%0A%3Crect%20width%3D%221200%22%20height%3D%22900%22%20fill%3D%22url%28%23g%29%22/%3E%0A%3Crect%20x%3D%2240%22%20y%3D%2240%22%20width%3D%221120%22%20height%3D%22820%22%20fill%3D%22none%22%20stroke%3D%22rgba%28255%2C255%2C255%2C.25%29%22/%3E%0A%3Ctext%20x%3D%2290%22%20y%3D%22150%22%20fill%3D%22%23ffffff%22%20font-family%3D%22Helvetica%2C%20Arial%2C%20sans-serif%22%20font-size%3D%2234%22%20font-weight%3D%22700%22%20letter-spacing%3D%226%22%3EELECTROLIT%3C/text%3E%0A%3Ctext%20x%3D%2290%22%20y%3D%22430%22%20fill%3D%22%23ffffff%22%20font-family%3D%22Helvetica%2C%20Arial%2C%20sans-serif%22%20font-size%3D%2272%22%20font-weight%3D%22800%22%3EDr.%20Frida%3C/text%3E%0A%3Ctext%20x%3D%2290%22%20y%3D%22500%22%20fill%3D%22rgba%28255%2C255%2C255%2C.78%29%22%20font-family%3D%22Helvetica%2C%20Arial%2C%20sans-serif%22%20font-size%3D%2228%22%3ECreative%20concept%20reference%3C/text%3E%0A%3C/svg%3E" alt="Dr. Frida reference">
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="section__head reveal">
+          <p class="eyebrow">Next Steps</p>
+          <h2>Select three directions to expand into execution.</h2>
+          <p>
+            The next phase can focus on building out the three concepts that feel most aligned
+            with the brand, the audience, and the kind of story Electrolit wants to tell.
+          </p>
+        </div>
+        <p class="footer-note reveal">
+          From there, each selected direction can be developed into a fuller creative system
+          across static, motion, and short-form video, with the next stage focused on how each
+          concept behaves in execution rather than how it reads in summary.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+const links = [...document.querySelectorAll(".topbar__nav a")];
+const sections = links
+  .map((link) => document.querySelector(link.getAttribute("href")))
+  .filter(Boolean);
+
+const navObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      links.forEach((link) => {
+        link.classList.toggle(
+          "is-active",
+          link.getAttribute("href") === `#${entry.target.id}`
+        );
+      });
+    });
+  },
+  {
+    rootMargin: "-30% 0px -55% 0px",
+    threshold: 0.1,
+  }
+);
+
+sections.forEach((section) => navObserver.observe(section));
+
+const revealItems = [...document.querySelectorAll(".reveal")];
+
+const revealObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add("is-visible");
+      revealObserver.unobserve(entry.target);
+    });
+  },
+  {
+    rootMargin: "0px 0px -12% 0px",
+    threshold: 0.12,
+  }
+);
+
+revealItems.forEach((item) => revealObserver.observe(item));
+
+const parallaxNodes = [...document.querySelectorAll("[data-parallax]")];
+const progressBar = document.querySelector(".progress-bar");
+const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+if (!reducedMotion) {
+  let ticking = false;
+
+  const updateMotion = () => {
+    const scrollY = window.scrollY;
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = maxScroll > 0 ? scrollY / maxScroll : 0;
+
+    if (progressBar) {
+      progressBar.style.transform = `scaleX(${progress})`;
+    }
+
+    parallaxNodes.forEach((node) => {
+      const speed = Number(node.dataset.parallaxSpeed || "0.1");
+      const rect = node.getBoundingClientRect();
+      const offset = (window.innerHeight * 0.5 - rect.top) * speed;
+      node.style.transform = `translate3d(0, ${offset}px, 0)`;
+    });
+
+    ticking = false;
+  };
+
+  const onScroll = () => {
+    if (ticking) return;
+    window.requestAnimationFrame(updateMotion);
+    ticking = true;
+  };
+
+  updateMotion();
+  window.addEventListener("scroll", onScroll, { passive: true });
+  window.addEventListener("resize", onScroll);
+} else if (progressBar) {
+  progressBar.style.transform = "scaleX(1)";
+}
+
+</script>
+</body>
+</html>
